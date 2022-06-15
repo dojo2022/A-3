@@ -13,7 +13,7 @@ public class UserDAO {
 	// insert
 	public List<User> insert(User param){
 		Connection conn = null;
-		List<User> memoList = new ArrayList<User>();//ArrayList <インスタンスの型名> 変数名 = new ArrayList<インスタンスの型名>;
+		List<User> userList = new ArrayList<User>();//ArrayList <インスタンスの型名> 変数名 = new ArrayList<インスタンスの型名>;
 
 		try {
 			// JDBCドライバを読み込む
@@ -49,5 +49,5 @@ public class UserDAO {
 
 			// 結果を返す
 			return userList;
-
+		}
 	}
