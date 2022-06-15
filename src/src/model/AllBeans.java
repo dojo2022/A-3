@@ -42,35 +42,35 @@ public class AllBeans {
 	//引数のないコンストラクタ
 	public AllBeans() {
 		super();
-		this.category_id = category_id;
-		this.category_name = category_name;
-		this.icon_id = icon_id;
-		this.icon_path = icon_path;
-		this.item_id = item_id;
-		this.item_name = item_name;
-		this.item_favorite = item_favorite;
-		this.item_remain = item_remain;
-		this.item_lostday = item_lostday;
-		this.page_id = page_id;
-		this.item_alert = item_alert;
-		this.item_alertday = item_alertday;
-		this.memo_id = memo_id;
-		this.memo_item = memo_item;
-		this.memo_check = memo_check;
-		this.page_title = page_title;
-		this.stock_id = stock_id;
-		this.stock_name = stock_name;
-		this.stock_buy = stock_buy;
-		this.stock_limit = stock_limit;
-		this.stock_alert = stock_alert;
-		this.stock_alertday1 = stock_alertday1;
-		this.stock_alertday2 = stock_alertday2;
-		this.stock_alertday3 = stock_alertday3;
-		this.stock_alertday4 = stock_alertday4;
-		this.user_page_id = user_page_id;
-		this.user_id = user_id;
-		this.user_pw = user_pw;
-		this.user_name = user_name;
+		this.category_id = "";
+		this.category_name = "";
+		this.icon_id = "";
+		this.icon_path = "";
+		this.item_id = "";
+		this.item_name = "";
+		this.item_favorite = "";
+		this.item_remain = "";
+		this.item_lostday = "";
+		this.page_id = "";
+		this.item_alert = "";
+		this.item_alertday = "";
+		this.memo_id = "";
+		this.memo_item = "";
+		this.memo_check = "";
+		this.page_title = "";
+		this.stock_id = "";
+		this.stock_name = "";
+		this.stock_buy = "";
+		this.stock_limit = "";
+		this.stock_alert = "";
+		this.stock_alertday1 = "";
+		this.stock_alertday2 = "";
+		this.stock_alertday3 = "";
+		this.stock_alertday4 = "";
+		this.user_page_id = "";
+		this.user_id = "";
+		this.user_pw = "";
+		this.user_name = "";
 	}
 
 	//セッタとゲッタ
