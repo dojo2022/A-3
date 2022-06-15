@@ -1,14 +1,14 @@
 package model;
 import java.io.Serializable;
 
-public class UPJoin implements Serializable{
+public class UPjoin implements Serializable{
 
 	private String user_page_id;
 	private String user_id;
 	private String page_id;
 
 	//引数なしコンストラクタ
-	public UPJoin() {
+	public UPjoin() {
 		super();
 		this.user_page_id ="";
 		this.user_id ="";
