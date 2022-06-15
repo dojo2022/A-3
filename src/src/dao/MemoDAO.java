@@ -54,7 +54,45 @@ public class MemoDAO {
 
 
 	// select
+	public List<Memo> select(int page_id){
+		Connection conn = null;
+		List<Memo> memoList = new ArrayList<Memo>();//ArrayList <インスタンスの型名> 変数名 = new ArrayList<インスタンスの型名>;
 
+		try {
+			// JDBCドライバを読み込む
+			Class.forName("org.h2.Driver");
+
+			// データベースに接続する
+			conn = DriverManager.getConnection("jdbc:h2:file:C:/dojo6Data/dojo6Data", "sa", "");
+
+
+
+
+		}
+			catch (SQLException e) {
+				e.printStackTrace();
+				memoList = null;
+			}
+			catch (ClassNotFoundException e) {
+				e.printStackTrace();
+				memoList = null;
+			}
+			finally {
+				// データベースを切断
+				if (conn != null) {
+					try {
+						conn.close();
+					}
+					catch (SQLException e) {
+						e.printStackTrace();
+						memoList = null;
+					}
+				}
+			}
+
+			// 結果を返す
+			return memoList;
+	}
 
 	// update
 
