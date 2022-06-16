@@ -7,7 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-<h1>繋がってるよ</h1>
+<h1>ログイン繋がってるよ</h1>
 
 </body>
 </html>

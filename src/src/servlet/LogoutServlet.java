@@ -25,7 +25,7 @@ public class LogoutServlet extends HttpServlet {
 				session.invalidate();
 
 				// ログインページにリダイレクトする
-				response.sendRedirect("/simpleBC/LoginServlet");
+				response.sendRedirect("./LoginServlet");
 	}
 
 }
