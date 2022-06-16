@@ -8,6 +8,7 @@ public class User implements Serializable {
 	private String user_pw; // パスワード
 	private String user_name; // ニックネーム
 	private String icon_id; // アイコン画像ID
+	private	 String user_flag;//フラグ
 
 	//引数がないコンストラクタ
 	public User() {
@@ -16,6 +17,8 @@ public class User implements Serializable {
 		this.user_pw = "";
 		this.user_name = "";
 		this.icon_id = "";
+		this.user_flag = "";
+
 	}
 
 	public String getUser_id() {
@@ -49,5 +52,14 @@ public class User implements Serializable {
 	public void setIcon_id(String icon_id) {
 		this.icon_id = icon_id;
 	}
+
+	public String getUser_flag() {
+		return user_flag;
+	}
+
+	public void setUser_flag(String user_flag) {
+		this.user_flag = user_flag;
+	}
+
 
 }

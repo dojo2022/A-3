@@ -22,6 +22,7 @@ public class AllBeans {
 	private String memo_check;
 	//Page(ページ)
 	private String page_title;
+	private String page_flag;
 	//Stock(在庫)
 	private String stock_id;
 	private String stock_name;
@@ -38,6 +39,7 @@ public class AllBeans {
 	private String user_id; //ユーザID
 	private String user_pw; // パスワード
 	private String user_name; // ニックネーム
+	private	 String user_flag;//フラグ
 
 	//引数のないコンストラクタ
 	public AllBeans() {
@@ -58,6 +60,7 @@ public class AllBeans {
 		this.memo_item = "";
 		this.memo_check = "";
 		this.page_title = "";
+		this.page_flag = "";
 		this.stock_id = "";
 		this.stock_name = "";
 		this.stock_buy = "";
@@ -71,6 +74,7 @@ public class AllBeans {
 		this.user_id = "";
 		this.user_pw = "";
 		this.user_name = "";
+		this.user_flag = "";
 	}
 
 	//セッタとゲッタ
@@ -305,6 +309,23 @@ public class AllBeans {
 	public void setUser_name(String user_name) {
 		this.user_name = user_name;
 	}
+
+	public String getPage_flag() {
+		return page_flag;
+	}
+
+	public void setPage_flag(String page_flag) {
+		this.page_flag = page_flag;
+	}
+
+	public String getUser_flag() {
+		return user_flag;
+	}
+
+	public void setUser_flag(String user_flag) {
+		this.user_flag = user_flag;
+	}
+
 
 
 }
