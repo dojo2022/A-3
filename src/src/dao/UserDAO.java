@@ -12,8 +12,8 @@ import model.AllBeans;
 
 public class UserDAO {
 
-// insert
-	public boolean insert(AllBeans param){
+	// insert
+	public boolean insert(AllBeans param) {
 		Connection conn = null;
 		boolean result = false;
 
@@ -24,12 +24,15 @@ public class UserDAO {
 			// データベースに接続する
 			conn = DriverManager.getConnection("jdbc:h2:file:C:/dojo6Data/dojo6Data", "sa", "");
 
-
-			// SELECT文を準備する
+			// usertableのINSERT文を準備する
 			String sql = "";//SQL文記述
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 
-			// SELECT文を実行し、結果表を取得する
+			//pagetableのINSERT文を準備する
+
+			//UPjoinのINSERT文を準備する
+
+			// INSERT文を実行し、結果表を取得する
 			ResultSet rs = pStmt.executeQuery();
 
 			// SQL文を実行し成功したらtrueを返す
@@ -37,33 +40,32 @@ public class UserDAO {
 				result = true;
 			}
 
-		}
-			catch (SQLException e) {
-				e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
 
-			}
-			catch (ClassNotFoundException e) {
-				e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
 
-			}
-			finally {
-				// データベースを切断
-				if (conn != null) {
-					try {
-						conn.close();
-					}
-					catch (SQLException e) {
-						e.printStackTrace();
+			//ロールバックするためのExceptionを作る？？
 
-					}
+		} finally {
+			// データベースを切断
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+
 				}
 			}
+		}
 
-			// 結果を返す
-			return result;
+		// 結果を返す
+		return result;
 	}
-//select
-	public List<AllBeans> select(AllBeans param){
+
+	//select
+	public List<AllBeans> select(AllBeans param) {
 		Connection conn = null;
 		List<AllBeans> userList = new ArrayList<AllBeans>();
 
@@ -72,48 +74,46 @@ public class UserDAO {
 			Class.forName("org.h2.Driver");
 
 			// データベースに接続する
-			conn = DriverManager.getConnection("jdbc:h2:file:C:/pleiades/workspace/data/simpleBC", "sa", "");
-
-
-			// SQL文を準備する
+			conn = DriverManager.getConnection("jdbc:h2:file:C:/dojo6Data/dojo6Data", "sa", "");
+			// SELECT文を完成させる
+			// USERtableのためのSQLを準備する
 			String sql = "";//SQL文を記述
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 
+			// PagetableのためのSQLを準備する
 
-			// SQL文を完成させる
-
+			// UPjointableのためのSQLを準備する
 
 			// SQL文を実行し、結果表を取得する
 			ResultSet rs = pStmt.executeQuery();
 
-		}
-			catch (SQLException e) {
-				e.printStackTrace();
-				userList = null;
-			}
-			catch (ClassNotFoundException e) {
-				e.printStackTrace();
-				userList = null;
-			}
-			finally {
-				// データベースを切断
-				if (conn != null) {
-					try {
-						conn.close();
-					}
-					catch (SQLException e) {
-						e.printStackTrace();
-						userList = null;
-					}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			userList = null;
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+			userList = null;
+
+			//ロールバックするためのExceptionを作る？？
+
+		} finally {
+			// データベースを切断
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+					userList = null;
 				}
 			}
-
-			// 結果を返す
-			return userList;
 		}
 
-//update
-	public boolean update(AllBeans param){
+		// 結果を返す
+		return userList;
+	}
+
+	//update
+	public boolean update(AllBeans param) {
 		Connection conn = null;
 		boolean result = false;
 
@@ -124,13 +124,11 @@ public class UserDAO {
 			// データベースに接続する
 			conn = DriverManager.getConnection("jdbc:h2:file:C:/dojo6Data/dojo6Data", "sa", "");
 
-
-			//// SELECT文を準備する
+			//// UPDATE文を準備する
 			String sql = "";//SQL文記述
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 
-
-			// SELECT文を実行し、結果表を取得する
+			// UPDATE文を実行し、結果表を取得する
 			ResultSet rs = pStmt.executeQuery();
 
 			// SQL文を実行し成功したらtrueを返す
@@ -138,35 +136,33 @@ public class UserDAO {
 				result = true;
 			}
 
-		}
-			catch (SQLException e) {
-				e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
 
-			}
-			catch (ClassNotFoundException e) {
-				e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
 
-			}
-			finally {
-				// データベースを切断
-				if (conn != null) {
-					try {
-						conn.close();
-					}
-					catch (SQLException e) {
-						e.printStackTrace();
+			//ロールバックするためのExceptionを作る？？
 
-					}
+		} finally {
+			// データベースを切断
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+
 				}
 			}
-
-			// 結果を返す
-			return result;
-
 		}
 
-//dereteFlag
-	public boolean dereteFlag(AllBeans param){
+		// 結果を返す
+		return result;
+
+	}
+
+	//deleteFlag
+	public boolean deleteFlag(AllBeans param) {
 		Connection conn = null;
 		boolean result = false;
 
@@ -177,13 +173,11 @@ public class UserDAO {
 			// データベースに接続する
 			conn = DriverManager.getConnection("jdbc:h2:file:C:/dojo6Data/dojo6Data", "sa", "");
 
-
-			//// SELECT文を準備する
+			//// UPDATE文を準備する
 			String sql = "";//SQL文記述
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 
-
-			// SELECT文を実行し、結果表を取得する
+			// UPDATE文を実行し、結果表を取得する
 			ResultSet rs = pStmt.executeQuery();
 
 			// SQL文を実行し成功したらtrueを返す
@@ -191,35 +185,28 @@ public class UserDAO {
 				result = true;
 			}
 
-		}
-			catch (SQLException e) {
-				e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
 
-			}
-			catch (ClassNotFoundException e) {
-				e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+			//ロールバックするためのExceptionを作る
 
-			}
-			finally {
-				// データベースを切断
-				if (conn != null) {
-					try {
-						conn.close();
-					}
-					catch (SQLException e) {
-						e.printStackTrace();
+		} finally {
+			// データベースを切断
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
 
-					}
 				}
 			}
-
-			// 結果を返す
-			return result;
-
 		}
 
+		// 結果を返す
+		return result;
 
-
-
+	}
 
 }
