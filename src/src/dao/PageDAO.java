@@ -12,9 +12,9 @@ import model.AllBeans;
 public class PageDAO {
 
 	//Insert
-	public List<AllBeans> insert(AllBeans param) {
+	public boolean insert(AllBeans param) {
 		Connection conn = null;
-		List<AllBeans> AllBeansList = new ArrayList<AllBeans>();
+		boolean result = false;
 		try {
 			// JDBCドライバを読み込む
 			Class.forName("org.h2.Driver");
@@ -24,10 +24,8 @@ public class PageDAO {
 
 		} catch (SQLException e) {
 			e.printStackTrace();
-			AllBeansList = null;
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
-			AllBeansList = null;
 		} finally {
 			// データベースを切断
 			if (conn != null) {
@@ -35,12 +33,45 @@ public class PageDAO {
 					conn.close();
 				} catch (SQLException e) {
 					e.printStackTrace();
-					AllBeansList = null;
 				}
 			}
 		}
 		// 結果を返す
-		return AllBeansList;
+		return result;
+	}
+
+	//update
+	public boolean update(AllBeans param) {
+		Connection conn = null;
+		boolean result = false;
+
+		try {
+			// JDBCドライバを読み込む
+			Class.forName("org.h2.Driver");
+
+			// データベースに接続する
+			conn = DriverManager.getConnection("jdbc:h2:file:C:/dojo6Data/dojo6Data", "sa", "");
+
+		}
+		catch (SQLException e) {
+			e.printStackTrace();
+		}
+		catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+		finally {
+			// データベースを切断
+			if (conn != null) {
+				try {
+					conn.close();
+				}
+				catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		// 結果を返す
+		return result;
 	}
 
 	//select
