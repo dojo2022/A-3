@@ -65,7 +65,7 @@ public class MemoDAO {
 	}
 
 	// update
-	public boolean update(Memo param) {
+	public boolean update(String memo_item, String memo_check, int memo_id) {
 		Connection conn = null;
 		boolean result = false; //結果を表す変数（初期値は失敗）
 
@@ -80,9 +80,9 @@ public class MemoDAO {
 			String sql = "update MEMO set memo_item = ?, memo_check = ? WHERE memo_id = ?";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 
-			pStmt.setString(1, param.getMemo_item());
-			pStmt.setString(2, param.getMemo_check());
-			pStmt.setString(3, param.getMemo_id());
+			pStmt.setString(1,memo_item);
+			pStmt.setString(2,memo_check);
+			pStmt.setInt(3,memo_id);
 
 			// SQL文を実行する
 			if (pStmt.executeUpdate() == 1) {
