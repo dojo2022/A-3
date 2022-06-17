@@ -3,6 +3,7 @@ package dao;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -21,10 +22,26 @@ public class StockDAO {
 			// データベースに接続する
 			conn = DriverManager.getConnection("jdbc:h2:file:C:/dojo6Data/dojo6Data", "sa", "");
 
+			//項目IDをselect ⇒　在庫をinsertする？
+			//一覧の在庫追加のフォームの中に<input type="hidden" name="itemId" value=""${e.itemId}$>で値を引き渡す
+
+			// SQL文を準備する
+			String sql = "INSERT INTO Stock (stock_name, stock_buy, stock_limit,item_id) VALUES (?, ?, ?, ?)";
+			PreparedStatement pStmt = conn.prepareStatement(sql);
+
+			pStmt.setString(1, param.getStock_name());
+			pStmt.setString(2, param.getStock_buy());
+			pStmt.setString(3, param.getStock_limit());
+			pStmt.setString(4, param.getItem_id());
 
 
+			// SQL文を実行する
+			if (pStmt.executeUpdate() == 1) {
+				result = true;
+			}
 
-		}
+
+			}
 			catch (SQLException e) {
 				e.printStackTrace();
 
@@ -62,8 +79,15 @@ public class StockDAO {
 
 				// データベースに接続する
 				conn = DriverManager.getConnection("jdbc:h2:file:C:/dojo6Data/dojo6Data", "sa", "");
+				// SQL文を準備する
+				String sql = "INSERT INTO Stock (stock_name, stock_buy, stock_limit,item_id) VALUES (?, ?, ?, ?)";
+				PreparedStatement pStmt = conn.prepareStatement(sql);
 
 
+				// SQL文を実行し、結果表を取得する
+				ResultSet rs = pStmt.executeQuery();
+
+				// 結果表をコレクションにコピーする
 
 
 			}
@@ -104,14 +128,13 @@ public class StockDAO {
 				// データベースに接続する
 				conn = DriverManager.getConnection("jdbc:h2:file:C:/dojo6Data/dojo6Data", "sa", "");
 				// SQL文を準備する
-				String sql = "";
+				String sql = "UPDATE Stock SET stock_buy=?, stock_limit=?, stock_alert=? WHERE stock_id=?";
 				PreparedStatement pStmt = conn.prepareStatement(sql);
 
-				// SQL文を完成させる
-
-
-
-
+				pStmt.setString(1, param.getStock_buy());
+				pStmt.setString(2, param.getStock_limit());
+				pStmt.setString(3, param.getStock_alert());
+				pStmt.setString(4, param.getStock_id());
 
 				// SQL文を実行する
 				if (pStmt.executeUpdate() == 1) {
@@ -153,14 +176,11 @@ public class StockDAO {
 				// データベースに接続する
 				conn = DriverManager.getConnection("jdbc:h2:file:C:/dojo6Data/dojo6Data", "sa", "");
 				// SQL文を準備する
-				String sql = "";
+				String sql = "DELETE FROM Stock WHERE stock_id=?";
 				PreparedStatement pStmt = conn.prepareStatement(sql);
 
 				// SQL文を完成させる
-
-
-
-
+				pStmt.setString(1, param.getStock_id());
 
 				// SQL文を実行する
 				if (pStmt.executeUpdate() == 1) {
