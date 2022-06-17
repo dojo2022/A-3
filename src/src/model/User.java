@@ -12,15 +12,11 @@ public class User implements Serializable {
 
 	//引数がないコンストラクタ
 	public User() {
-		super();
-		this.user_id = "";
-		this.user_pw = "";
-		this.user_name = "";
-		this.icon_id = "";
-		this.user_flag = "";
+
 
 	}
 
+	//ゲッターセッター
 	public String getUser_id() {
 		return user_id;
 	}

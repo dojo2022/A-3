@@ -10,10 +10,7 @@ private String page_id;
 
 //引数なしコンストラクタ
 public Memo() {
-	this.memo_id = "";
-	this.memo_item= "";
-	this.memo_check = "";
-	this.page_id = "";
+
 }
 
 //setter getter

@@ -8,9 +8,7 @@ public class Category implements Serializable{
 
 	//引数なしコンストラクタ
 	public Category() {
-		super();
-		this.category_id = "";
-		this.category_name = "";
+
 	}
 
 

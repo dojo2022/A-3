@@ -10,12 +10,10 @@ public class Page implements Serializable {
 
 	//引数がないコンストラクタ
 	public Page() {
-		super();
-		this.page_id = "";
-		this.page_title = "";
-		this.page_flag = "";
+
 	}
 
+	//ゲッターセッター
 	public String getPage_flag() {
 		return page_flag;
 	}

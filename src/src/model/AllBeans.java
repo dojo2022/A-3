@@ -43,38 +43,7 @@ public class AllBeans {
 
 	//引数のないコンストラクタ
 	public AllBeans() {
-		super();
-		this.category_id = "";
-		this.category_name = "";
-		this.icon_id = "";
-		this.icon_path = "";
-		this.item_id = "";
-		this.item_name = "";
-		this.item_favorite = "";
-		this.item_remain = "";
-		this.item_lostday = "";
-		this.page_id = "";
-		this.item_alert = "";
-		this.item_alertday = "";
-		this.memo_id = "";
-		this.memo_item = "";
-		this.memo_check = "";
-		this.page_title = "";
-		this.page_flag = "";
-		this.stock_id = "";
-		this.stock_name = "";
-		this.stock_buy = "";
-		this.stock_limit = "";
-		this.stock_alert = "";
-		this.stock_alertday1 = "";
-		this.stock_alertday2 = "";
-		this.stock_alertday3 = "";
-		this.stock_alertday4 = "";
-		this.user_page_id = "";
-		this.user_id = "";
-		this.user_pw = "";
-		this.user_name = "";
-		this.user_flag = "";
+
 	}
 
 	//セッタとゲッタ

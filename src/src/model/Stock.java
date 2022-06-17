@@ -15,22 +15,12 @@ public class Stock implements Serializable {
 	private String stock_alertday4;
 	private String item_id;
 
-
+//引数無コンストラクタ
 	public Stock() {
-		super();
-		this.stock_id = "";
-		this.stock_name = "";
-		this.stock_buy = "";
-		this.stock_limit = "";
-		this.stock_alert = "";
-		this.stock_alertday1 = "";
-		this.stock_alertday2 = "";
-		this.stock_alertday3 = "";
-		this.stock_alertday4 = "";
-		this.item_id = "";
+
 	}
 
-
+//ゲッターセッター
 	public String getStock_id() {
 		return stock_id;
 	}

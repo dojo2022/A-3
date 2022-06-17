@@ -8,9 +8,7 @@ public class Icon implements Serializable{
 
 	//引数無しコンストラクタ
 	public Icon() {
-		super();
-		this.icon_id = "";
-		this.icon_path = "";
+
 	}
 
 

@@ -9,10 +9,7 @@ public class UPjoin implements Serializable{
 
 	//引数なしコンストラクタ
 	public UPjoin() {
-		super();
-		this.user_page_id ="";
-		this.user_id ="";
-		this.page_id ="";
+
 	}
 
 

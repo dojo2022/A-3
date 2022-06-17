@@ -13,21 +13,12 @@ public class Item implements Serializable {
 	private String item_alert;
 	private String item_alertday;
 
-
+//引数無しコンストラクタ
 	public Item() {
-		super();
-		this.item_id = "";
-		this.item_name = "";
-		this.item_favorite = "";
-		this.item_remain = "";
-		this.item_lostday = "";
-		this.category_id = "";
-		this.page_id = "";
-		this.item_alert = "";
-		this.item_alertday = "";
+
 	}
 
-
+//ゲッターセッター
 	public String getItem_id() {
 		return item_id;
 	}
