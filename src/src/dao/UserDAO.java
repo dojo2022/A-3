@@ -166,7 +166,7 @@ public class UserDAO {
 		}
 
 //dereteFlag
-	public boolean dereteFrag(AllBeans param){
+	public boolean dereteFlag(AllBeans param){
 		Connection conn = null;
 		boolean result = false;
 
