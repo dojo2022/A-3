@@ -9,51 +9,7 @@ import java.util.List;
 import model.Memo;
 
 public class MemoDAO {
-
-	// insert
-	public List<Memo> insert(int page_id){
-		Connection conn = null;
-		List<Memo> memoList = new ArrayList<Memo>();//ArrayList <インスタンスの型名> 変数名 = new ArrayList<インスタンスの型名>;
-
-		try {
-			// JDBCドライバを読み込む
-			Class.forName("org.h2.Driver");
-
-			// データベースに接続する
-			conn = DriverManager.getConnection("jdbc:h2:file:C:/dojo6Data/dojo6Data", "sa", "");
-
-
-
-
-		}
-			catch (SQLException e) {
-				e.printStackTrace();
-				memoList = null;
-			}
-			catch (ClassNotFoundException e) {
-				e.printStackTrace();
-				memoList = null;
-			}
-			finally {
-				// データベースを切断
-				if (conn != null) {
-					try {
-						conn.close();
-					}
-					catch (SQLException e) {
-						e.printStackTrace();
-						memoList = null;
-					}
-				}
-			}
-
-			// 結果を返す
-			return memoList;
-
-	}
-
-
-	// select
+	//select
 	public List<Memo> select(int page_id){
 		Connection conn = null;
 		List<Memo> memoList = new ArrayList<Memo>();//ArrayList <インスタンスの型名> 変数名 = new ArrayList<インスタンスの型名>;
@@ -95,9 +51,9 @@ public class MemoDAO {
 	}
 
 	// update
-	public List<Memo> update(Memo param){
+	public boolean update(Memo param){
 		Connection conn = null;
-		List<Memo> memoList = new ArrayList<Memo>();//ArrayList <インスタンスの型名> 変数名 = new ArrayList<インスタンスの型名>;
+		boolean result = false; //結果を表す変数（初期値は失敗）
 
 		try {
 			// JDBCドライバを読み込む
@@ -112,11 +68,9 @@ public class MemoDAO {
 		}
 			catch (SQLException e) {
 				e.printStackTrace();
-				memoList = null;
 			}
 			catch (ClassNotFoundException e) {
 				e.printStackTrace();
-				memoList = null;
 			}
 			finally {
 				// データベースを切断
@@ -126,55 +80,11 @@ public class MemoDAO {
 					}
 					catch (SQLException e) {
 						e.printStackTrace();
-						memoList = null;
 					}
 				}
 			}
 
 			// 結果を返す
-			return memoList;
+			return result;
 	}
-
-	//delete
-	public List<Memo> delete(int page_id){
-		Connection conn = null;
-		List<Memo> memoList = new ArrayList<Memo>();//ArrayList <インスタンスの型名> 変数名 = new ArrayList<インスタンスの型名>;
-
-		try {
-			// JDBCドライバを読み込む
-			Class.forName("org.h2.Driver");
-
-			// データベースに接続する
-			conn = DriverManager.getConnection("jdbc:h2:file:C:/dojo6Data/dojo6Data", "sa", "");
-
-
-
-
-		}
-			catch (SQLException e) {
-				e.printStackTrace();
-				memoList = null;
-			}
-			catch (ClassNotFoundException e) {
-				e.printStackTrace();
-				memoList = null;
-			}
-			finally {
-				// データベースを切断
-				if (conn != null) {
-					try {
-						conn.close();
-					}
-					catch (SQLException e) {
-						e.printStackTrace();
-						memoList = null;
-					}
-				}
-			}
-
-			// 結果を返す
-			return memoList;
-
-	}
-
 }
