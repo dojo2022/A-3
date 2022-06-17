@@ -4,18 +4,13 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
-
-import model.Memo;
 
 public class ItemDAO {
 
 	//insert
-	public List<Memo> insert(int page_id){
+	public boolean insert(int page_id){
 		Connection conn = null;
 		boolean result = false;
-		List<Memo> memoList = new ArrayList<Memo>();//ArrayList <インスタンスの型名> 変数名 = new ArrayList<インスタンスの型名>;
 
 		try {
 			// JDBCドライバを読み込む
@@ -40,11 +35,9 @@ public class ItemDAO {
 		}
 			catch (SQLException e) {
 				e.printStackTrace();
-				memoList = null;
 			}
 			catch (ClassNotFoundException e) {
 				e.printStackTrace();
-				memoList = null;
 			}
 			finally {
 				// データベースを切断
@@ -54,13 +47,12 @@ public class ItemDAO {
 					}
 					catch (SQLException e) {
 						e.printStackTrace();
-						memoList = null;
 					}
 				}
 			}
 
 			// 結果を返す
-			return memoList;
+			return result;
 
 	}
 
