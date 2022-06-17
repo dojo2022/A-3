@@ -65,7 +65,7 @@ public class UserDAO {
 //select
 	public List<AllBeans> select(AllBeans param){
 		Connection conn = null;
-		List<AllBeans> cardList = new ArrayList<AllBeans>();
+		List<AllBeans> userList = new ArrayList<AllBeans>();
 
 		try {
 			// JDBCドライバを読み込む
@@ -89,11 +89,11 @@ public class UserDAO {
 		}
 			catch (SQLException e) {
 				e.printStackTrace();
-				cardList = null;
+				userList = null;
 			}
 			catch (ClassNotFoundException e) {
 				e.printStackTrace();
-				cardList = null;
+				userList = null;
 			}
 			finally {
 				// データベースを切断
@@ -103,13 +103,13 @@ public class UserDAO {
 					}
 					catch (SQLException e) {
 						e.printStackTrace();
-						cardList = null;
+						userList = null;
 					}
 				}
 			}
 
 			// 結果を返す
-			return cardList;
+			return userList;
 		}
 
 //update
