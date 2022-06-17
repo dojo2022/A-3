@@ -8,7 +8,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import model.AllBeans;
-import model.Stock;
 public class StockDAO {
 
 	//insert
@@ -53,9 +52,9 @@ public class StockDAO {
 	}
 
 	// select
-		public List<Stock> select(String page_id){
+		public List<AllBeans> select(String page_id){
 			Connection conn = null;
-			List<Stock> stockList = new ArrayList<Stock>();//ArrayList <インスタンスの型名> 変数名 = new ArrayList<インスタンスの型名>;
+			List<AllBeans> stockList = new ArrayList<AllBeans>();//ArrayList <インスタンスの型名> 変数名 = new ArrayList<インスタンスの型名>;
 
 			try {
 				// JDBCドライバを読み込む
@@ -105,19 +104,19 @@ public class StockDAO {
 				// データベースに接続する
 				conn = DriverManager.getConnection("jdbc:h2:file:C:/dojo6Data/dojo6Data", "sa", "");
 				// SQL文を準備する
-							String sql = "";
-							PreparedStatement pStmt = conn.prepareStatement(sql);
+				String sql = "";
+				PreparedStatement pStmt = conn.prepareStatement(sql);
 
-							// SQL文を完成させる
+				// SQL文を完成させる
 
 
 
 
 
 				// SQL文を実行する
-							if (pStmt.executeUpdate() == 1) {
-								result = true;
-							}
+				if (pStmt.executeUpdate() == 1) {
+					result = true;
+				}
 			}
 				catch (SQLException e) {
 					e.printStackTrace();
@@ -154,19 +153,19 @@ public class StockDAO {
 				// データベースに接続する
 				conn = DriverManager.getConnection("jdbc:h2:file:C:/dojo6Data/dojo6Data", "sa", "");
 				// SQL文を準備する
-							String sql = "";
-							PreparedStatement pStmt = conn.prepareStatement(sql);
+				String sql = "";
+				PreparedStatement pStmt = conn.prepareStatement(sql);
 
-							// SQL文を完成させる
+				// SQL文を完成させる
 
 
 
 
 
 				// SQL文を実行する
-							if (pStmt.executeUpdate() == 1) {
-								result = true;
-							}
+				if (pStmt.executeUpdate() == 1) {
+					result = true;
+				}
 			}
 				catch (SQLException e) {
 					e.printStackTrace();
