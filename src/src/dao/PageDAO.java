@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import model.AllBeans;
+import model.Page;
 
 public class PageDAO {
 
@@ -21,6 +22,20 @@ public class PageDAO {
 
 			// データベースに接続する
 			conn = DriverManager.getConnection("jdbc:h2:file:C:/dojo6Data/dojo6Data", "sa", "");
+			// SQL文を準備する
+			String sql = "";
+			PreparedStatement pStmt = conn.prepareStatement(sql);
+
+			// SQL文を完成させる
+			//①	INSERT	page	page_title
+			//②	INSERT	UPjoin	user_id、page_id
+			//③	INSERT	memo	page_id
+
+
+			// SQL文を実行する
+			if (pStmt.executeUpdate() == 1) {
+				result = true;
+			}
 
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -40,8 +55,9 @@ public class PageDAO {
 		return result;
 	}
 
+
 	//update
-	public boolean update(AllBeans param) {
+	public boolean update(Page param) {
 		Connection conn = null;
 		boolean result = false;
 
@@ -51,6 +67,19 @@ public class PageDAO {
 
 			// データベースに接続する
 			conn = DriverManager.getConnection("jdbc:h2:file:C:/dojo6Data/dojo6Data", "sa", "");
+			// SQL文を準備する
+						String sql = "";
+						PreparedStatement pStmt = conn.prepareStatement(sql);
+
+			// SQL文を完成させる
+
+
+
+
+			// SQL文を実行する
+			if (pStmt.executeUpdate() == 1) {
+				result = true;
+			}
 
 		}
 		catch (SQLException e) {
@@ -118,7 +147,7 @@ public class PageDAO {
 				Class.forName("org.h2.Driver");
 
 				// データベースに接続する
-				conn = DriverManager.getConnection("jdbc:h2:file:C:/pleiades/workspace/data/simpleBC", "sa", "");
+				conn = DriverManager.getConnection("jdbc:h2:file:C:/dojo6Data/dojo6Data", "sa", "");
 
 				// SQL文を準備する改造する
 				String sql = "";
