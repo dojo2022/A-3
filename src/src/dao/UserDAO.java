@@ -25,21 +25,43 @@ public class UserDAO {
 			conn = DriverManager.getConnection("jdbc:h2:file:C:/dojo6Data/dojo6Data", "sa", "");
 
 			// usertableのINSERT文を準備する
-			String sql = "";//SQL文記述
-			PreparedStatement pStmt = conn.prepareStatement(sql);
+			String sql1 = "INSERT INTO user (user_id,user_pw,user_name) VALUES ('?','?','?')";//INSERT INTO テーブル名（列名A,列名B,…） VALUES（値A,値B,…）
+			PreparedStatement pStmt1 = conn.prepareStatement(sql1);
+
+			pStmt1.setString(1, param.getUser_id());
+			pStmt1.setString(2, param.getUser_pw());
+			pStmt1.setString(3, param.getUser_name());
 
 			//pagetableのINSERT文を準備する
+			//"INSERT INTO user (page_id,page_title,page_flag) VALUES ('?','?','?')";
+
+			String sql2 = "INSERT INTO user () VALUES ('?','?','?')";//INSERT INTO テーブル名（列名A,列名B,…） VALUES（値A,値B,…）
+			PreparedStatement pStmt2 = conn.prepareStatement(sql2);
+
+			pStmt1.setString(1, param.getUser_id());
+			pStmt1.setString(2, param.getUser_pw());
+			pStmt1.setString(3, param.getUser_name());
 
 			//UPjoinのINSERT文を準備する
 
-			// INSERT文を実行し、結果表を取得する
-			ResultSet rs = pStmt.executeQuery();
+			/// INSSERT文を準備する
+			String sql = "";//SQL文記述
+			PreparedStatement pStmt = conn.prepareStatement(sql);
 
-			// SQL文を実行し成功したらtrueを返す
-			if (pStmt.executeUpdate() == 1) {
+
+			int ans = 0;
+			conn.beginRequest();//調べておいてね～～
+			ans += pStmt1.executeUpdate();
+			ans += pStmt2.executeUpdate();
+			ans += pStmt3.executeUpdate();
+
+			if(ans == 3) {
+				conn.commit();
 				result = true;
+			}else {
+				conn.rollback();
+				result = false;
 			}
-
 		} catch (SQLException e) {
 			e.printStackTrace();
 
@@ -78,6 +100,7 @@ public class UserDAO {
 			// SELECT文を完成させる
 			// USERtableのためのSQLを準備する
 			String sql = "";//SQL文を記述
+
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 
 			// PagetableのためのSQLを準備する
