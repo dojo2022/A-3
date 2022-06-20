@@ -24,7 +24,7 @@ public class MemoDAO {
 			conn = DriverManager.getConnection("jdbc:h2:file:C:/dojo6Data/dojo6Data", "sa", "");
 
 			// memoのselectSQL文を準備する
-			String sql = "SELECT * FROM Memo WHERE page_id = ?";
+			String sql = "SELECT * FROM memo WHERE page_id = ?";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 
 			pStmt.setString(1, page_id);
