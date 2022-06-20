@@ -3,33 +3,29 @@ import java.io.Serializable;
 
 
 public class Icon implements Serializable{
-	private String icon_id;
-	private String icon_path;
+	private String iconId;
+	private String iconPath;
 
 	//引数無しコンストラクタ
 	public Icon() {
 
 	}
 
-
-	//ゲッターセッター
-	public String getIcon_id() {
-		return icon_id;
+	//ゲッターとセッター
+	public String getIconId() {
+		return iconId;
 	}
 
-	public void setIcon_id(String icon_id) {
-		this.icon_id = icon_id;
+	public void setIconId(String iconId) {
+		this.iconId = iconId;
 	}
 
-	public String getIcon_path() {
-		return icon_path;
+	public String getIconPath() {
+		return iconPath;
 	}
 
-	public void setIcon_path(String icon_path) {
-		this.icon_path = icon_path;
+	public void setIconPath(String iconPath) {
+		this.iconPath = iconPath;
 	}
-
-
-
 
 }
