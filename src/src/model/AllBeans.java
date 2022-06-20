@@ -1,300 +1,425 @@
 package model;
 
 public class AllBeans {
-	//Category(分類)
-	private String category_id;
-	private String category_name;
 	//Icon(アイコン画像)
-	private String icon_id;
-	private String icon_path;
-	//Item(項目)
-	private String item_id;
-	private String item_name;
-	private String item_favorite;
-	private String item_remain;
-	private String item_lostday;
-	private String page_id;
-	private String item_alert;
-	private String item_alertday;
-	//Memo(メモ)
-	private String memo_id;
-	private String memo_item;
-	private String memo_check;
+	private String iconId;
+	private String iconPath;
+	//User(ユーザ)
+	private String userId; //ユーザID
+	private String userPw; // パスワード
+	private String userName; // ニックネーム
+	private	 String userFlag;//フラグ
 	//Page(ページ)
-	private String page_title;
-	private String page_flag;
-	//Stock(在庫)
-	private String stock_id;
-	private String stock_name;
-	private String stock_buy;
-	private String stock_limit;
-	private String stock_alert;
-	private String stock_alertday1;
-	private String stock_alertday2;
-	private String stock_alertday3;
-	private String stock_alertday4;
+	private String pageId;
+	private String pageTitle;
+	private String pageFlag;
+	//Memo(メモ)
+	private String memoId;
+	private String memoItem;
+	private String memoCheck;
 	//UPjoin(中間テーブル)
-	private String user_page_id;
-	//User
-	private String user_id; //ユーザID
-	private String user_pw; // パスワード
-	private String user_name; // ニックネーム
-	private	 String user_flag;//フラグ
+	private String userPageId;
+	//Category(分類)
+	private String categoryId;
+	private String categoryName;
+	//Item(項目)
+	private String itemId;
+	private String itemName;
+	private String itemFavorite;
+	private String itemRemain;
+	private String itemLostday;
+	private String itemAlert;
+	private String itemAlertday;
+	//Stock(在庫)
+	private String stockId;
+	private String stockName;
+	private String stockBuy;
+	private String stockLimit;
+	private String stockAlert;
+	private String stockAlertday1;
+	private String stockAlertday2;
+	private String stockAlertday3;
+	private String stockAlertday4;
+
+
 
 	//引数のないコンストラクタ
 	public AllBeans() {
-
 	}
 
 	//セッタとゲッタ
-	public String getCategory_id() {
-		return category_id;
+
+
+
+	public String getIconId() {
+		return iconId;
 	}
 
-	public void setCategory_id(String category_id) {
-		this.category_id = category_id;
+
+
+	public void setIconId(String iconId) {
+		this.iconId = iconId;
 	}
 
-	public String getCategory_name() {
-		return category_name;
+
+
+	public String getIconPath() {
+		return iconPath;
 	}
 
-	public void setCategory_name(String category_name) {
-		this.category_name = category_name;
+
+
+	public void setIconPath(String iconPath) {
+		this.iconPath = iconPath;
 	}
 
-	public String getIcon_id() {
-		return icon_id;
+
+
+	public String getUserId() {
+		return userId;
 	}
 
-	public void setIcon_id(String icon_id) {
-		this.icon_id = icon_id;
+
+
+	public void setUserId(String userId) {
+		this.userId = userId;
 	}
 
-	public String getIcon_path() {
-		return icon_path;
+
+
+	public String getUserPw() {
+		return userPw;
 	}
 
-	public void setIcon_path(String icon_path) {
-		this.icon_path = icon_path;
+
+
+	public void setUserPw(String userPw) {
+		this.userPw = userPw;
 	}
 
-	public String getItem_id() {
-		return item_id;
+
+
+	public String getUserName() {
+		return userName;
 	}
 
-	public void setItem_id(String item_id) {
-		this.item_id = item_id;
+
+
+	public void setUserName(String userName) {
+		this.userName = userName;
 	}
 
-	public String getItem_name() {
-		return item_name;
+
+
+	public String getUserFlag() {
+		return userFlag;
 	}
 
-	public void setItem_name(String item_name) {
-		this.item_name = item_name;
+
+
+	public void setUserFlag(String userFlag) {
+		this.userFlag = userFlag;
 	}
 
-	public String getItem_favorite() {
-		return item_favorite;
+
+
+	public String getPageId() {
+		return pageId;
 	}
 
-	public void setItem_favorite(String item_favorite) {
-		this.item_favorite = item_favorite;
+
+
+	public void setPageId(String pageId) {
+		this.pageId = pageId;
 	}
 
-	public String getItem_remain() {
-		return item_remain;
+
+
+	public String getPageTitle() {
+		return pageTitle;
 	}
 
-	public void setItem_remain(String item_remain) {
-		this.item_remain = item_remain;
+
+
+	public void setPageTitle(String pageTitle) {
+		this.pageTitle = pageTitle;
 	}
 
-	public String getItem_lostday() {
-		return item_lostday;
+
+
+	public String getPageFlag() {
+		return pageFlag;
 	}
 
-	public void setItem_lostday(String item_lostday) {
-		this.item_lostday = item_lostday;
+
+
+	public void setPageFlag(String pageFlag) {
+		this.pageFlag = pageFlag;
 	}
 
-	public String getPage_id() {
-		return page_id;
+
+
+	public String getMemoId() {
+		return memoId;
 	}
 
-	public void setPage_id(String page_id) {
-		this.page_id = page_id;
+
+
+	public void setMemoId(String memoId) {
+		this.memoId = memoId;
 	}
 
-	public String getItem_alert() {
-		return item_alert;
+
+
+	public String getMemoItem() {
+		return memoItem;
 	}
 
-	public void setItem_alert(String item_alert) {
-		this.item_alert = item_alert;
+
+
+	public void setMemoItem(String memoItem) {
+		this.memoItem = memoItem;
 	}
 
-	public String getItem_alertday() {
-		return item_alertday;
+
+
+	public String getMemoCheck() {
+		return memoCheck;
 	}
 
-	public void setItem_alertday(String item_alertday) {
-		this.item_alertday = item_alertday;
+
+
+	public void setMemoCheck(String memoCheck) {
+		this.memoCheck = memoCheck;
 	}
 
-	public String getMemo_id() {
-		return memo_id;
+
+
+	public String getUserPageId() {
+		return userPageId;
 	}
 
-	public void setMemo_id(String memo_id) {
-		this.memo_id = memo_id;
+
+
+	public void setUserPageId(String userPageId) {
+		this.userPageId = userPageId;
 	}
 
-	public String getMemo_item() {
-		return memo_item;
+
+
+	public String getCategoryId() {
+		return categoryId;
 	}
 
-	public void setMemo_item(String memo_item) {
-		this.memo_item = memo_item;
+
+
+	public void setCategoryId(String categoryId) {
+		this.categoryId = categoryId;
 	}
 
-	public String getMemo_check() {
-		return memo_check;
+
+
+	public String getCategoryName() {
+		return categoryName;
 	}
 
-	public void setMemo_check(String memo_check) {
-		this.memo_check = memo_check;
+
+
+	public void setCategoryName(String categoryName) {
+		this.categoryName = categoryName;
 	}
 
-	public String getPage_title() {
-		return page_title;
+
+
+	public String getItemId() {
+		return itemId;
 	}
 
-	public void setPage_title(String page_title) {
-		this.page_title = page_title;
+
+
+	public void setItemId(String itemId) {
+		this.itemId = itemId;
 	}
 
-	public String getStock_id() {
-		return stock_id;
+
+
+	public String getItemName() {
+		return itemName;
 	}
 
-	public void setStock_id(String stock_id) {
-		this.stock_id = stock_id;
+
+
+	public void setItemName(String itemName) {
+		this.itemName = itemName;
 	}
 
-	public String getStock_name() {
-		return stock_name;
+
+
+	public String getItemFavorite() {
+		return itemFavorite;
 	}
 
-	public void setStock_name(String stock_name) {
-		this.stock_name = stock_name;
+
+
+	public void setItemFavorite(String itemFavorite) {
+		this.itemFavorite = itemFavorite;
 	}
 
-	public String getStock_buy() {
-		return stock_buy;
+
+
+	public String getItemRemain() {
+		return itemRemain;
 	}
 
-	public void setStock_buy(String stock_buy) {
-		this.stock_buy = stock_buy;
+
+
+	public void setItemRemain(String itemRemain) {
+		this.itemRemain = itemRemain;
 	}
 
-	public String getStock_limit() {
-		return stock_limit;
+
+
+	public String getItemLostday() {
+		return itemLostday;
 	}
 
-	public void setStock_limit(String stock_limit) {
-		this.stock_limit = stock_limit;
+
+
+	public void setItemLostday(String itemLostday) {
+		this.itemLostday = itemLostday;
 	}
 
-	public String getStock_alert() {
-		return stock_alert;
+
+
+	public String getItemAlert() {
+		return itemAlert;
 	}
 
-	public void setStock_alert(String stock_alert) {
-		this.stock_alert = stock_alert;
+
+
+	public void setItemAlert(String itemAlert) {
+		this.itemAlert = itemAlert;
 	}
 
-	public String getStock_alertday1() {
-		return stock_alertday1;
+
+
+	public String getItemAlertday() {
+		return itemAlertday;
 	}
 
-	public void setStock_alertday1(String stock_alertday1) {
-		this.stock_alertday1 = stock_alertday1;
+
+
+	public void setItemAlertday(String itemAlertday) {
+		this.itemAlertday = itemAlertday;
 	}
 
-	public String getStock_alertday2() {
-		return stock_alertday2;
+
+
+	public String getStockId() {
+		return stockId;
 	}
 
-	public void setStock_alertday2(String stock_alertday2) {
-		this.stock_alertday2 = stock_alertday2;
+
+
+	public void setStockId(String stockId) {
+		this.stockId = stockId;
 	}
 
-	public String getStock_alertday3() {
-		return stock_alertday3;
+
+
+	public String getStockName() {
+		return stockName;
 	}
 
-	public void setStock_alertday3(String stock_alertday3) {
-		this.stock_alertday3 = stock_alertday3;
+
+
+	public void setStockName(String stockName) {
+		this.stockName = stockName;
 	}
 
-	public String getStock_alertday4() {
-		return stock_alertday4;
+
+
+	public String getStockBuy() {
+		return stockBuy;
 	}
 
-	public void setStock_alertday4(String stock_alertday4) {
-		this.stock_alertday4 = stock_alertday4;
+
+
+	public void setStockBuy(String stockBuy) {
+		this.stockBuy = stockBuy;
 	}
 
-	public String getUser_page_id() {
-		return user_page_id;
+
+
+	public String getStockLimit() {
+		return stockLimit;
 	}
 
-	public void setUser_page_id(String user_page_id) {
-		this.user_page_id = user_page_id;
+
+
+	public void setStockLimit(String stockLimit) {
+		this.stockLimit = stockLimit;
 	}
 
-	public String getUser_id() {
-		return user_id;
+
+
+	public String getStockAlert() {
+		return stockAlert;
 	}
 
-	public void setUser_id(String user_id) {
-		this.user_id = user_id;
+
+
+	public void setStockAlert(String stockAlert) {
+		this.stockAlert = stockAlert;
 	}
 
-	public String getUser_pw() {
-		return user_pw;
+
+
+	public String getStockAlertday1() {
+		return stockAlertday1;
 	}
 
-	public void setUser_pw(String user_pw) {
-		this.user_pw = user_pw;
+
+
+	public void setStockAlertday1(String stockAlertday1) {
+		this.stockAlertday1 = stockAlertday1;
 	}
 
-	public String getUser_name() {
-		return user_name;
+
+
+	public String getStockAlertday2() {
+		return stockAlertday2;
 	}
 
-	public void setUser_name(String user_name) {
-		this.user_name = user_name;
+
+
+	public void setStockAlertday2(String stockAlertday2) {
+		this.stockAlertday2 = stockAlertday2;
 	}
 
-	public String getPage_flag() {
-		return page_flag;
+
+
+	public String getStockAlertday3() {
+		return stockAlertday3;
 	}
 
-	public void setPage_flag(String page_flag) {
-		this.page_flag = page_flag;
+
+
+	public void setStockAlertday3(String stockAlertday3) {
+		this.stockAlertday3 = stockAlertday3;
 	}
 
-	public String getUser_flag() {
-		return user_flag;
+
+
+	public String getStockAlertday4() {
+		return stockAlertday4;
 	}
 
-	public void setUser_flag(String user_flag) {
-		this.user_flag = user_flag;
-	}
 
+
+	public void setStockAlertday4(String stockAlertday4) {
+		this.stockAlertday4 = stockAlertday4;
+	}
 
 
 }
