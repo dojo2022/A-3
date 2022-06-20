@@ -8,7 +8,7 @@
 </head>
 <body>
 	<div class="login">
-		<img src="/syokuzaikanri/img/logo.png" alt="ロゴ">
+		<img src="/syokuzaikanri/img/pokezo_logo.png" alt="ロゴ">
 		<form id="login_form" method="POST" action="/syokuzaikanri/LoginServlet">
 			<table>
 	            <tr>
