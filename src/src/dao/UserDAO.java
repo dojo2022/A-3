@@ -319,7 +319,7 @@ public class UserDAO {
 	}
 
 	//deleteFlag
-	public boolean deleteFlag(String userFlag, String userId) {
+	public boolean deleteFlag(String userId) {
 		Connection conn = null;
 		boolean result = false;
 

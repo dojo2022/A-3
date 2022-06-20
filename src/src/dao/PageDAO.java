@@ -4,10 +4,6 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.util.ArrayList;
-
-import model.AllBeans;
-import model.Page;
 
 public class PageDAO {
 
@@ -37,11 +33,11 @@ public class PageDAO {
 			pStmt2.setString(1, userId);
 			pStmt2.setString(2, pageId);
 
-			//③	INSERT	memo	page_id
+			//③	INSERT	memo	page_idまだ思考中
 			String sql3 = "INSERT INTO Memo (page_id) VALUES ('?')";//INSERT INTO テーブル名（列名A,列名B,…） VALUES（値A,値B,…）
 			PreparedStatement pStmt3 = conn.prepareStatement(sql3);
 			// SQL文を完成させる
-			pStmt3.setString(1, pageId);
+			pStmt3.setString(1, pageId);//jnsert文memodao
 
 			int ans = 0;
 			conn.setAutoCommit(false);//＝オートコミットを切る
@@ -77,9 +73,8 @@ public class PageDAO {
 		return result;
 	}
 
-
 	//update
-	public boolean update(Page param) {
+	public boolean update(String pageTitle, String pageId) {
 		Connection conn = null;
 		boolean result = false;
 
@@ -89,34 +84,29 @@ public class PageDAO {
 
 			// データベースに接続する
 			conn = DriverManager.getConnection("jdbc:h2:file:C:/dojo6Data/dojo6Data", "sa", "");
+
 			// SQL文を準備する
-						String sql = "";
-						PreparedStatement pStmt = conn.prepareStatement(sql);
+			String sql = "UPDATE Page SET page_title='?' WHERE page_id=? ";
+			PreparedStatement pStmt = conn.prepareStatement(sql);
 
 			// SQL文を完成させる
-
-
-
-
+			pStmt.setString(1, pageTitle);
+			pStmt.setString(2, pageId);
 			// SQL文を実行する
 			if (pStmt.executeUpdate() == 1) {
 				result = true;
 			}
 
-		}
-		catch (SQLException e) {
+		} catch (SQLException e) {
 			e.printStackTrace();
-		}
-		catch (ClassNotFoundException e) {
+		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
-		}
-		finally {
+		} finally {
 			// データベースを切断
 			if (conn != null) {
 				try {
 					conn.close();
-				}
-				catch (SQLException e) {
+				} catch (SQLException e) {
 					e.printStackTrace();
 				}
 			}
@@ -125,44 +115,11 @@ public class PageDAO {
 		return result;
 	}
 
-	//select
-	public ArrayList<AllBeans> select(AllBeans param) {
-		Connection conn = null;
-		ArrayList<AllBeans> AllBeansList = new ArrayList<AllBeans>();//ArrayList <インスタンスの型名> 変数名 = new ArrayList<インスタンスの型名>;
-
-		try {
-			// JDBCドライバを読み込む
-			Class.forName("org.h2.Driver");
-
-			// データベースに接続する
-			conn = DriverManager.getConnection("jdbc:h2:file:C:/dojo6Data/dojo6Data", "sa", "");
-
-		} catch (SQLException e) {
-			e.printStackTrace();
-			AllBeansList = null;
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-			AllBeansList = null;
-		} finally {
-			// データベースを切断
-			if (conn != null) {
-				try {
-					conn.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
-					AllBeansList = null;
-				}
-			}
-		}
-
-		// 結果を返す
-		return AllBeansList;
-	}
-
-	//deleteFlagでupdateしてデータを持ってこさせないようにする
-	public boolean deleteFlag(String pageId) {
+	/* 使わないかも
+		//select
+		public ArrayList<Page> select(String pageId) {
 			Connection conn = null;
-			boolean result = false;
+			ArrayList<Page> PageList = new ArrayList<Page>();//ArrayList <インスタンスの型名> 変数名 = new ArrayList<インスタンスの型名>;
 
 			try {
 				// JDBCドライバを読み込む
@@ -171,37 +128,89 @@ public class PageDAO {
 				// データベースに接続する
 				conn = DriverManager.getConnection("jdbc:h2:file:C:/dojo6Data/dojo6Data", "sa", "");
 
-				// SQL文を準備する改造する
-				String sql = "";
+				// usertableにUPjointableとpagetableをくっつけたもののためのSQLを準備する
+				String sql = "SELECT *  FROM Page WHERE page_id=?";
 				PreparedStatement pStmt = conn.prepareStatement(sql);
 
-				// SQL文を完成させる
+				pStmt.setString(1,pageId);
 
+				// SQL文を実行し、結果表を取得する
+				ResultSet rs = pStmt.executeQuery();
 
-				// SQL文を実行する
-						if (pStmt.executeUpdate() == 1) {
-							result = true;
-						}
+				// 結果表をコレクションにコピーする
+
+				while (rs.next()) { //rsインスタンスの内容を全て取り出す
+
+					Page page = new Page();
+					page.setPageId(rs.getString("PageId"));
+					page.setPageTitle(rs.getString("pageTitle"));
+
+					PageList.add(page);
 					}
-					catch (SQLException e) {
+
+
+
+			} catch (SQLException e) {
+				e.printStackTrace();
+				PageList = null;
+			} catch (ClassNotFoundException e) {
+				e.printStackTrace();
+				PageList = null;
+			} finally {
+				// データベースを切断
+				if (conn != null) {
+					try {
+						conn.close();
+					} catch (SQLException e) {
 						e.printStackTrace();
+						PageList = null;
 					}
-					catch (ClassNotFoundException e) {
-						e.printStackTrace();
-					}
-					finally {
-						// データベースを切断
-						if (conn != null) {
-							try {
-								conn.close();
-							}
-							catch (SQLException e) {
-								e.printStackTrace();
-							}
-						}
-					}
+				}
+			}
 
-					// 結果を返す
-					return result;
+			// 結果を返す
+			return PageList;
+		}
+	*/
+	//deleteFlagでupdateしてデータを持ってこさせないようにする
+	public boolean deleteFlag(String pageId) {
+		Connection conn = null;
+		boolean result = false;
+
+		try {
+			// JDBCドライバを読み込む
+			Class.forName("org.h2.Driver");
+
+			// データベースに接続する
+			conn = DriverManager.getConnection("jdbc:h2:file:C:/dojo6Data/dojo6Data", "sa", "");
+
+			// SQL文を準備する改造する
+			String sql = "UPDATE Page SET page_flag='0' where page_id=?;";
+			PreparedStatement pStmt = conn.prepareStatement(sql);
+
+			// SQL文を完成させる
+			pStmt.setString(1, pageId);
+
+			// SQL文を実行する
+			if (pStmt.executeUpdate() == 1) {
+				result = true;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} finally {
+			// データベースを切断
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+
+		// 結果を返す
+		return result;
 	}
 }
