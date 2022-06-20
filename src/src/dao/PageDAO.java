@@ -13,7 +13,7 @@ import model.Page;
 public class PageDAO {
 
 	//Insert
-	public boolean insert(AllBeans param) {
+	public boolean insert(String page_title, String page_flag, String user_id, String page_id) {
 		Connection conn = null;
 		boolean result = false;
 		try {
@@ -22,23 +22,47 @@ public class PageDAO {
 
 			// データベースに接続する
 			conn = DriverManager.getConnection("jdbc:h2:file:C:/dojo6Data/dojo6Data", "sa", "");
-			// SQL文を準備する
-			String sql = "";
-			PreparedStatement pStmt = conn.prepareStatement(sql);
 
 			// SQL文を完成させる
 			//①	INSERT	page	page_title
+			// PageテーブルのINSERT文を準備する
+			String sql1 = "INSERT INTO page (page_title , page_flag) VALUES ('?','1')";//INSERT INTO テーブル名（列名A,列名B,…） VALUES（値A,値B,…）
+			PreparedStatement pStmt1 = conn.prepareStatement(sql1);
+			// SQL文を完成させる
+			pStmt1.setString(1, page_title);
+			pStmt1.setString(2, page_flag);
+
 			//②	INSERT	UPjoin	user_id、page_id
+			String sql2 = "INSERT INTO UPjoin (user_id , page_id) VALUES ('?','?')";//INSERT INTO テーブル名（列名A,列名B,…） VALUES（値A,値B,…）
+			PreparedStatement pStmt2 = conn.prepareStatement(sql2);
+			// SQL文を完成させる
+			pStmt2.setString(1, user_id);
+			pStmt2.setString(2, page_id);
 			//③	INSERT	memo	page_id
+			String sql3 = "INSERT INTO UPjoin () VALUES ()";//INSERT INTO テーブル名（列名A,列名B,…） VALUES（値A,値B,…）
+			PreparedStatement pStmt3 = conn.prepareStatement(sql3);
+			// SQL文を完成させる
+			pStmt2.setString(1,);
+			pStmt2.setString(2,);
 
+			int ans = 0;
+			conn.setAutoCommit(false);//＝オートコミットを切る
+			ans += pStmt1.executeUpdate();
+			ans += pStmt2.executeUpdate();
+			ans += pStmt3.executeUpdate();
 
-			// SQL文を実行する
-			if (pStmt.executeUpdate() == 1) {
+			if (ans == 3) {
+				conn.commit(); //全部のsql文ができていれば成功
 				result = true;
 			}
 
 		} catch (SQLException e) {
-			e.printStackTrace();
+			//try catch 文を書く
+			try {
+				conn.rollback();//sql文が一つでもできていなければロールバックする
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		} finally {
