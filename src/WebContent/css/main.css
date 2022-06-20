@@ -45,10 +45,11 @@ img {
 	display: flex;/*フレックスボックス*/
 	align-items: center;/*上下の中央ぞろえ*/
 	justify-content: space-between;/*両端以外の空白を均等に配置*/
+	height: 75px;
 }
 
 .item2 img{
- width: px200;
+ width: 175px;
 }
 
 .item3 {
@@ -74,14 +75,14 @@ img {
 }
 
 .item5 img {
-	width: 50px;
+	width:50px;
 }
 
 
 /*ここから　grid */
 .grid_test {
     display: grid;
-     height: 100vh;      /* グリッドコンテナを作る */
+     height: 500px;      /* グリッドコンテナを作る */
     grid-template-columns:0.5fr 5fr 2fr;      /* 縦向きのグリッドラインを決める */
     grid-template-rows:20fr 30fr;         /* 横向きのグリッドラインを決める */
 }
@@ -174,13 +175,9 @@ input[name="tab_item"] {
 }
 /* id="footer" */
 #footer {
- /* background-image: url(../images/footer-bg.png);*/
   background-repeat: repeat-x;
-  border-bottom-width: 2px;	/* 茶色でドットの下線を付ける */
-   border-bottom-style: dotted;
-  border-bottom-color: #354259;
-  margin-top: 30px;
-  padding: 20px 0px 20px 0px;
+  margin-top: 0;
+  padding: 0px;
   font-size: smaller;
   color: black;
 }

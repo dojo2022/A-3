@@ -19,7 +19,7 @@
 <!-- <hr> 水平に線を引くためのタグ -->
 <div id="nav">
 
-<div class="item1"></div>
+<div class="item1">ham</div>
 <div class="item2"><img src="img/pokezo_logo.png"></div>
 <div class="item3">日付</div>
 <div class="item4">ニックネーム</div>
@@ -54,21 +54,21 @@
 
 		<!-- ここから内容 -->
 			<div class="tab_content" id="all_content">
-				AAAの内容がここに入ります
+				<%@ include file="tab_list.jsp" %>
 			</div>
 
 			<div class="tab_content" id="aaa_content">
-				BBBの内容がここに入ります
+				<%@ include file="tab_category.jsp" %>
 			</div>
 
 			<div class="tab_content" id="bbb_content">
-				CCCの内容がここに入ります
+				<%@ include file="tab_favorite.jsp" %>
 			</div>
 			<div class="tab_content" id="ccc_content">
-				DDDの内容がここに入ります
+				<%@ include file="tab_regist.jsp" %>
 			</div>
 			<div class="tab_content" id="ddd_content">
-				EEEの内容がここに入ります
+				<%@ include file="tab_edit.jsp" %>
 			</div>
 	</div>
 </div>
