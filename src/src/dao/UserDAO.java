@@ -12,7 +12,7 @@ import model.AllBeans;
 public class UserDAO {
 
 	// insert
-	public boolean insert(AllBeans param) {
+	public boolean insert(String user_id,String user_pw,String user_name,String page_title,int page_id,String memo_item,boolean memo_check) {
 		Connection conn = null;
 		boolean result = false;
 
@@ -27,36 +27,32 @@ public class UserDAO {
 			String sql1 = "INSERT INTO user (user_id,user_pw,user_name) VALUES ('?','?','?')";//INSERT INTO テーブル名（列名A,列名B,…） VALUES（値A,値B,…）
 			PreparedStatement pStmt1 = conn.prepareStatement(sql1);
 
-			pStmt1.setString(1, param.getUser_id());
-			pStmt1.setString(2, param.getUser_pw());
-			pStmt1.setString(3, param.getUser_name());
+			pStmt1.setString(1,user_id);
+			pStmt1.setString(2,user_pw);
+			pStmt1.setString(3,user_name);
 
 			//pagetableのINSERT文を準備する
 			//INSERT INTO テーブル名（列名A,列名B,…） VALUES（値A,値B,…）
-			String sql2 = "INSERT INTO page (page_id,page_title,page_flag) VALUES ('?','?','?')";
+			String sql2 = "INSERT INTO page (page_title) VALUES ('?')";
 			PreparedStatement pStmt2 = conn.prepareStatement(sql2);
 
-			pStmt2.setString(1, param.getPage_id());
-			pStmt2.setString(2, param.getPage_title());
-			pStmt2.setString(3, param.getPage_flag());
+			pStmt2.setString(1,page_title);
 
 			//UPjoinのINSERT文を準備する
 			//INSERT INTO テーブル名（列名A,列名B,…） VALUES（値A,値B,…）
-			String sql3 = "INSERT INTO UPjoin (user_page_id,user_id,page_id) VALUES ('?','?','?')";
+			String sql3 = "INSERT INTO UPjoin (user_id,page_id) VALUES ('?','?')";
 			PreparedStatement pStmt3 = conn.prepareStatement(sql3);
 
-			pStmt3.setString(1, param.getUser_page_id());
-			pStmt3.setString(2, param.getUser_id());
-			pStmt3.setString(3, param.getPage_id());
+			pStmt3.setString(1,user_id);
+			pStmt3.setInt(2,page_id);//Intで大丈夫？？
 
 			//MemoのINSERT文を準備する
 			//INSERT INTO テーブル名（列名A,列名B,…） VALUES（値A,値B,…）
-			String sql4 = "INSERT INTO memo (memo_id,memo_item,memo_check) VALUES ('?','?','?')";
+			String sql4 = "INSERT INTO memo (memo_item,memo_check) VALUES ('?','?')";
 			PreparedStatement pStmt4 = conn.prepareStatement(sql4);
 
-			pStmt4.setString(1, param.getMemo_id());//いらないかもオートインクリメントなら
-			pStmt4.setString(2, param.getMemo_item());
-			pStmt4.setString(3, param.getMemo_check());
+			pStmt4.setString(1,memo_item);
+			pStmt4.setBoolean(2,memo_check);
 
 			int ans = 0;
 			conn.setAutoCommit(false);//＝オートコミットを切る
@@ -111,7 +107,7 @@ public class UserDAO {
 			conn = DriverManager.getConnection("jdbc:h2:file:C:/dojo6Data/dojo6Data", "sa", "");
 
 			// SELECT文を完成させる
-			String sql = "select count(*) from user where user_id = ? and user_pw = ?";
+			String sql = "select count(*) from user where user_id = '?' and user_pw = '?'";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 
 			pStmt.setString(1, user_id);
@@ -150,9 +146,10 @@ public class UserDAO {
 	}
 
 	//select  アカウント編集系
-	public ArrayList<AllBeans> select(AllBeans param) {
+	//（ハンバーガーメニューにも使えるのでは？）
+	public ArrayList<AllBeans> select(String user_id) {
 		Connection conn = null;
-		ArrayList<AllBeans> userList = new ArrayList<AllBeans>();
+		ArrayList<AllBeans> userList = new ArrayList<AllBeans>();//ArrayListの名前変えないと？
 
 		try {
 			// JDBCドライバを読み込む
@@ -164,9 +161,10 @@ public class UserDAO {
 
 			//トランザクションする必要あり？
 
-			// USERtableにicontableをくっつけたもののためのSQLを準備する
-			String sql1 = "SELECT *  FROM user LEFT OUTER JOIN icon ON user.icon_id = icon.icon_id WHERE user_id=?";
+			// usertableにicontableをくっつけたもののためのSQLを準備する
+			String sql1 = "SELECT *  FROM user LEFT OUTER JOIN icon ON user.icon_id = icon.icon_id WHERE user_id='?'";
 			PreparedStatement pStmt1 = conn.prepareStatement(sql1);
+			pStmt1.setString(1,user_id);
 
 			// SQL文を実行し、結果表を取得する
 			ResultSet rs = pStmt1.executeQuery();
@@ -175,9 +173,11 @@ public class UserDAO {
 			// 結果表をコレクションにコピーする あとで改造
 			while (rs.next()) { //rsインスタンスの内容を全て取り出す
 				AllBeans all = new AllBeans();
-				all.setMemo_id(rs.getString("memo_id"));
-				all.setMemo_item(rs.getString("memo_item"));
-				all.setMemo_check(rs.getString("memo_check"));
+				all.setUser_id(rs.getString("user_id"));
+				all.setUser_pw(rs.getString("user_pw"));
+				all.setUser_name(rs.getString("user_name"));
+				all.setIcon_id(rs.getString("icon_id"));
+				all.setIcon_path(rs.getString("icon_path"));
 
 				userList.add(all);
 			}
@@ -205,6 +205,66 @@ public class UserDAO {
 		return userList;
 	}
 
+	//ページ用ハンバーガーに使うデータを取ってくる
+	public ArrayList<AllBeans> phselect(String user_id) {
+		Connection conn = null;
+		ArrayList<AllBeans> phList = new ArrayList<AllBeans>();
+
+		try {
+			// JDBCドライバを読み込む
+			Class.forName("org.h2.Driver");
+
+			// データベースに接続する
+			conn = DriverManager.getConnection("jdbc:h2:file:C:/dojo6Data/dojo6Data", "sa", "");
+			// SELECT文を完成させる
+
+			//トランザクションする必要あり？
+
+			// usertableにUPjointableとpagetableをくっつけたもののためのSQLを準備する
+			String sql1 = "SELECT *  FROM user LEFT OUTER JOIN UPjoin ON user.user_id = UPjoin.user_id LEFT OUTER JOIN page ON UPjoin.page_id = page.page_id WHERE user.user_id='?'";
+			PreparedStatement pStmt1 = conn.prepareStatement(sql1);
+			pStmt1.setString(1,user_id);
+
+			// SQL文を実行し、結果表を取得する
+			ResultSet rs = pStmt1.executeQuery();
+
+
+			// 結果表をコレクションにコピーする
+			while (rs.next()) { //rsインスタンスの内容を全て取り出す
+				AllBeans all = new AllBeans();
+				all.setUser_pw(rs.getString("user_page_id"));
+				all.setUser_id(rs.getString("user_id"));
+				all.setPage_id(rs.getString("page_id"));
+				all.setPage_title(rs.getString("page_title"));
+
+
+				phList.add(all);
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+			phList = null;
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+			phList = null;
+
+		} finally {
+			// データベースを切断
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+					phList = null;
+				}
+			}
+		}
+
+		// 結果を返す
+		return phList;
+	}
+
+
 	//update
 	public boolean update(String user_pw, String user_name, String icon_id, String user_id) {
 		Connection conn = null;
@@ -218,12 +278,12 @@ public class UserDAO {
 			conn = DriverManager.getConnection("jdbc:h2:file:C:/dojo6Data/dojo6Data", "sa", "");
 
 			//// UserUPDATE文を準備する
-			String sql = "UPDATE user SET user_pw=?,user_name=?,icon_id=? where user_id=?";
+			String sql = "UPDATE user SET user_pw='?',user_name='?',icon_id='?' where user_id='?'";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 
 			pStmt.setString(1, user_pw);
 			pStmt.setString(2, user_name);
-			pStmt.setString(3, icon_id);///いらないかも
+			pStmt.setString(3, icon_id);
 			pStmt.setString(4, user_id);
 
 			// SQL文を実行し成功したらtrueを返す
