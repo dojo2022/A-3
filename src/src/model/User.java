@@ -4,11 +4,11 @@ import java.io.Serializable;
 
 public class User implements Serializable {
 
-	private String user_id; //ユーザID
-	private String user_pw; // パスワード
-	private String user_name; // ニックネーム
-	private String icon_id; // アイコン画像ID
-	private	 String user_flag;//フラグ
+	private String userId; //ユーザID
+	private String userPw; // パスワード
+	private String userName; // ニックネーム
+	private String iconId; // アイコン画像ID
+	private	 String userFlag;//フラグ
 
 	//引数がないコンストラクタ
 	public User() {
@@ -16,46 +16,46 @@ public class User implements Serializable {
 
 	}
 
-	//ゲッターセッター
-	public String getUser_id() {
-		return user_id;
+	public String getUserId() {
+		return userId;
 	}
 
-	public void setUser_id(String user_id) {
-		this.user_id = user_id;
+	public void setUserId(String userId) {
+		this.userId = userId;
 	}
 
-	public String getUser_pw() {
-		return user_pw;
+	public String getUserPw() {
+		return userPw;
 	}
 
-	public void setUser_pw(String user_pw) {
-		this.user_pw = user_pw;
+	public void setUserPw(String userPw) {
+		this.userPw = userPw;
 	}
 
-	public String getUser_name() {
-		return user_name;
+	public String getUserName() {
+		return userName;
 	}
 
-	public void setUser_name(String user_name) {
-		this.user_name = user_name;
+	public void setUserName(String userName) {
+		this.userName = userName;
 	}
 
-	public String getIcon_id() {
-		return icon_id;
+	public String getIconId() {
+		return iconId;
 	}
 
-	public void setIcon_id(String icon_id) {
-		this.icon_id = icon_id;
+	public void setIconId(String iconId) {
+		this.iconId = iconId;
 	}
 
-	public String getUser_flag() {
-		return user_flag;
+	public String getUserFlag() {
+		return userFlag;
 	}
 
-	public void setUser_flag(String user_flag) {
-		this.user_flag = user_flag;
+	public void setUserFlag(String userFlag) {
+		this.userFlag = userFlag;
 	}
+
 
 
 }
