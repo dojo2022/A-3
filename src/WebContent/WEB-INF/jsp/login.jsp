@@ -5,11 +5,12 @@
 <head>
 	<meta charset="UTF-8">
 	<title>ポケ蔵～POKEZO～</title>
+	<script type="text/javascript" src="/syokuzaikanri/javaScript/login.js"></script>
 </head>
 <body>
 	<div class="login">
 		<img src="/syokuzaikanri/img/pokezo_logo.png" alt="ロゴ">
-		<form id="login_form" method="POST" action="/syokuzaikanri/LoginServlet">
+		<form id="loginForm" method="POST" action="/syokuzaikanri/LoginServlet">
 			<table>
 	            <tr>
 	              <td>
@@ -18,7 +19,8 @@
 	            </tr>
 	            <tr>
 	              <td>
-	                <input type="password" name="userPw" placeholder="パスワード">
+	              <input type="password" name="userPw" id="inputUserPw" placeholder="パスワード"><br>
+					<label for="inputCheckbox"><input id="inputCheckbox" type="checkbox" name="pwView" value="1"> パスワードを表示する</label>
 	              </td>
 	            <tr>
 	            <tr>
@@ -46,3 +48,5 @@
 	</div>
 </body>
 </html>
+
+
