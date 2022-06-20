@@ -83,7 +83,7 @@ public class StockDAO {
 				// データベースに接続する
 				conn = DriverManager.getConnection("jdbc:h2:file:C:/dojo6Data/dojo6Data", "sa", "");
 				// SQL文を準備する
-				String sql = "SELECT * FROM item  LEFT JOIN stock ON item.item_id = stock.item_id LEFT JOIN category ON  item.category_id = category.category_id WHERE item.page_id = ?";
+				String sql = "SELECT * FROM Item  LEFT JOIN stock ON Item.item_id = Stock.item_id LEFT JOIN Category ON  Item.category_id = Category.category_id WHERE Item.page_id = ?";
 				PreparedStatement pStmt = conn.prepareStatement(sql);
 
 				pStmt.setString(1, pageId);
@@ -208,7 +208,7 @@ public class StockDAO {
 				// データベースに接続する
 				conn = DriverManager.getConnection("jdbc:h2:file:C:/dojo6Data/dojo6Data", "sa", "");
 				// SQL文を準備する
-				String sql = "DELETE FROM stock WHERE stock_id=?";
+				String sql = "DELETE FROM Stock WHERE stock_id=?";
 				PreparedStatement pStmt = conn.prepareStatement(sql);
 
 				// SQL文を完成させる
