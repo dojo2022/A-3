@@ -1,4 +1,5 @@
 @charset "UTF-8";
+
 /* bodyタグ */
 body {
   margin: 2em 0 0 0;		/* マージンなし（後で個別に設定） */
@@ -21,18 +22,6 @@ body {
   outline: 1px solid #ff0000;
 }*/
 
-
-
-/* h2タグを付けたページの見出し */
-h2 {
-  font-size: 18px;
-  color: #534340;
-  border-bottom-width: 2px;	/* 茶色でドットの下線を付ける */
-  border-bottom-style: dotted;
-  border-bottom-color: #534340;
-  margin-top: 20px 0px 20px 0px;
-  padding-top: 10px 10px 10px 10px;
-}
 
 /* 画像 */
 img {
@@ -181,4 +170,3 @@ input[name="tab_item"] {
   font-size: smaller;
   color: black;
 }
-

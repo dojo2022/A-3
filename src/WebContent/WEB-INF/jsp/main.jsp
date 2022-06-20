@@ -6,8 +6,8 @@
 <meta charset="UTF-8">
 <title>メインページ | ポケ蔵</title>
 <link rel="stylesheet" type="text/css" href="css/main.css">
-
 <script type="text/javascript" src="js/tabStyle.js"></script>
+<meta  name=”viewport” content=”width=device-width,initial-scale=1.0″>
 </head>
 
 
