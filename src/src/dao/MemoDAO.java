@@ -6,15 +6,14 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.List;
 
 import model.Memo;
 
 public class MemoDAO {
 	//select
-	public List<Memo> select(String pageId) {
+	public ArrayList<Memo> select(String pageId) {
 		Connection conn = null;
-		List<Memo> memoList = new ArrayList<Memo>();//ArrayList <インスタンスの型名> 変数名 = new ArrayList<インスタンスの型名>;
+		ArrayList<Memo> memoList = new ArrayList<Memo>();//ArrayList <インスタンスの型名> 変数名 = new ArrayList<インスタンスの型名>;
 
 		try {
 			// JDBCドライバを読み込む
