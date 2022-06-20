@@ -95,7 +95,7 @@ public class UserDAO {
 
 	//select ログインするためのメソッド
 	// ログインできるならtrueを返す
-	public boolean isLoginOK(String userId, String userPw) {
+	public boolean Login(String userId, String userPw) {
 		Connection conn = null;
 		boolean loginResult = false;
 
