@@ -9,11 +9,8 @@ public class Page implements Serializable {
 	private String pageFlag;// ページタイトル
 
 	//引数がないコンストラクタ
-	public Page(String pageId, String pageTitle, String pageFlag) {
-		super();
-		this.pageId = pageId;
-		this.pageTitle = pageTitle;
-		this.pageFlag = pageFlag;
+	public Page() {
+
 
 	}
 
