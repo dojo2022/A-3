@@ -5,7 +5,6 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.List;
 
 import model.AllBeans;
 import model.Page;
@@ -42,8 +41,7 @@ public class PageDAO {
 			String sql3 = "INSERT INTO UPjoin () VALUES ()";//INSERT INTO テーブル名（列名A,列名B,…） VALUES（値A,値B,…）
 			PreparedStatement pStmt3 = conn.prepareStatement(sql3);
 			// SQL文を完成させる
-			pStmt2.setString(1,);
-			pStmt2.setString(2,);
+
 
 			int ans = 0;
 			conn.setAutoCommit(false);//＝オートコミットを切る
@@ -128,9 +126,9 @@ public class PageDAO {
 	}
 
 	//select
-	public List<AllBeans> select(AllBeans param) {
+	public ArrayList<AllBeans> select(AllBeans param) {
 		Connection conn = null;
-		List<AllBeans> AllBeansList = new ArrayList<AllBeans>();//ArrayList <インスタンスの型名> 変数名 = new ArrayList<インスタンスの型名>;
+		ArrayList<AllBeans> AllBeansList = new ArrayList<AllBeans>();//ArrayList <インスタンスの型名> 変数名 = new ArrayList<インスタンスの型名>;
 
 		try {
 			// JDBCドライバを読み込む
