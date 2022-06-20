@@ -13,7 +13,7 @@ import model.Page;
 public class PageDAO {
 
 	//Insert
-	public boolean insert(String page_title, String page_flag, String user_id, String page_id) {
+	public boolean insert(String pageTitle, String pageFlag, String userId, String pageId) {
 		Connection conn = null;
 		boolean result = false;
 		try {
@@ -29,15 +29,15 @@ public class PageDAO {
 			String sql1 = "INSERT INTO page (page_title , page_flag) VALUES ('?','1')";//INSERT INTO テーブル名（列名A,列名B,…） VALUES（値A,値B,…）
 			PreparedStatement pStmt1 = conn.prepareStatement(sql1);
 			// SQL文を完成させる
-			pStmt1.setString(1, page_title);
-			pStmt1.setString(2, page_flag);
+			pStmt1.setString(1, pageTitle);
+			pStmt1.setString(2, pageFlag);
 
 			//②	INSERT	UPjoin	user_id、page_id
 			String sql2 = "INSERT INTO UPjoin (user_id , page_id) VALUES ('?','?')";//INSERT INTO テーブル名（列名A,列名B,…） VALUES（値A,値B,…）
 			PreparedStatement pStmt2 = conn.prepareStatement(sql2);
 			// SQL文を完成させる
-			pStmt2.setString(1, user_id);
-			pStmt2.setString(2, page_id);
+			pStmt2.setString(1, userId);
+			pStmt2.setString(2, pageId);
 			//③	INSERT	memo	page_id
 			String sql3 = "INSERT INTO UPjoin () VALUES ()";//INSERT INTO テーブル名（列名A,列名B,…） VALUES（値A,値B,…）
 			PreparedStatement pStmt3 = conn.prepareStatement(sql3);
@@ -162,7 +162,7 @@ public class PageDAO {
 	}
 
 	//deleteFlagでupdateしてデータを持ってこさせないようにする
-	public boolean deleteFlag(String page_id) {
+	public boolean deleteFlag(String pageId) {
 			Connection conn = null;
 			boolean result = false;
 
