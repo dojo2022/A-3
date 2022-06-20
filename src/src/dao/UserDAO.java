@@ -54,7 +54,7 @@ public class UserDAO {
 			String sql4 = "INSERT INTO memo (memo_id,memo_item,memo_check) VALUES ('?','?','?')";
 			PreparedStatement pStmt4 = conn.prepareStatement(sql4);
 
-			pStmt4.setString(1, param.getMemo_id());
+			pStmt4.setString(1, param.getMemo_id());//いらないかもオートインクリメントなら
 			pStmt4.setString(2, param.getMemo_item());
 			pStmt4.setString(3, param.getMemo_check());
 
@@ -165,12 +165,13 @@ public class UserDAO {
 			//トランザクションする必要あり？
 
 			// USERtableにicontableをくっつけたもののためのSQLを準備する
-			String sql1 = "SELECT *  FROM user LEFT OUTER JOIN icon ON user.icon_id = icon.icon_id ";
+			String sql1 = "SELECT *  FROM user LEFT OUTER JOIN icon ON user.icon_id = icon.icon_id WHERE user_id=?";
 			PreparedStatement pStmt1 = conn.prepareStatement(sql1);
 
 			// SQL文を実行し、結果表を取得する
 			ResultSet rs = pStmt1.executeQuery();
 
+			//まだ未完成 変更をしていないところ
 			// 結果表をコレクションにコピーする あとで改造
 			while (rs.next()) { //rsインスタンスの内容を全て取り出す
 				AllBeans all = new AllBeans();
@@ -269,12 +270,12 @@ public class UserDAO {
 			// データベースに接続する
 			conn = DriverManager.getConnection("jdbc:h2:file:C:/dojo6Data/dojo6Data", "sa", "");
 
+
 			//// Userのuserflag UPDATE文を準備する
-			String sql = "UPDATE user SET user_flag=0 where user_id=?;";//SQL文記述
+			String sql = "UPDATE user SET user_flag='0' where user_id=?;";//SQL文記述
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 
-			pStmt.setString(1, user_flag); //いらないかも？
-			pStmt.setString(2, user_id);
+			pStmt.setString(1, user_id);
 
 			// SQL文を実行し成功したらtrueを返す
 			if (pStmt.executeUpdate() == 1) {
