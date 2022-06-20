@@ -4,124 +4,103 @@ import java.io.Serializable;
 
 public class Stock implements Serializable {
 
-	private String stock_id;
-	private String stock_name;
-	private String stock_buy;
-	private String stock_limit;
-	private String stock_alert;
-	private String stock_alertday1;
-	private String stock_alertday2;
-	private String stock_alertday3;
-	private String stock_alertday4;
-	private String item_id;
+	private String stockId;
+	private String stockName;
+	private String stockBuy;
+	private String stockLimit;
+	private String stockAlert;
+	private String stockAlertday1;
+	private String stockAlertday2;
+	private String stockAlertday3;
+	private String stockAlertday4;
+	private String itemId;
 
-//引数無コンストラクタ
+	//引数無コンストラクタ
+
 	public Stock() {
 
 	}
 
-//ゲッターセッター
-	public String getStock_id() {
-		return stock_id;
+	//ゲッターセッター
+	public String getStockId() {
+		return stockId;
 	}
 
-
-	public void setStock_id(String stock_id) {
-		this.stock_id = stock_id;
+	public void setStockId(String stockId) {
+		this.stockId = stockId;
 	}
 
-
-	public String getStock_name() {
-		return stock_name;
+	public String getStockName() {
+		return stockName;
 	}
 
-
-	public void setStock_name(String stock_name) {
-		this.stock_name = stock_name;
+	public void setStockName(String stockName) {
+		this.stockName = stockName;
 	}
 
-
-	public String getStock_buy() {
-		return stock_buy;
+	public String getStockBuy() {
+		return stockBuy;
 	}
 
-
-	public void setStock_buy(String stock_buy) {
-		this.stock_buy = stock_buy;
+	public void setStockBuy(String stockBuy) {
+		this.stockBuy = stockBuy;
 	}
 
-
-	public String getStock_limit() {
-		return stock_limit;
+	public String getStockLimit() {
+		return stockLimit;
 	}
 
-
-	public void setStock_limit(String stock_limit) {
-		this.stock_limit = stock_limit;
+	public void setStockLimit(String stockLimit) {
+		this.stockLimit = stockLimit;
 	}
 
-
-	public String getStock_alert() {
-		return stock_alert;
+	public String getStockAlert() {
+		return stockAlert;
 	}
 
-
-	public void setStock_alert(String stock_alert) {
-		this.stock_alert = stock_alert;
+	public void setStockAlert(String stockAlert) {
+		this.stockAlert = stockAlert;
 	}
 
-
-	public String getStock_alertday1() {
-		return stock_alertday1;
+	public String getStockAlertday1() {
+		return stockAlertday1;
 	}
 
-
-	public void setStock_alertday1(String stock_alertday1) {
-		this.stock_alertday1 = stock_alertday1;
+	public void setStockAlertday1(String stockAlertday1) {
+		this.stockAlertday1 = stockAlertday1;
 	}
 
-
-	public String getStock_alertday2() {
-		return stock_alertday2;
+	public String getStockAlertday2() {
+		return stockAlertday2;
 	}
 
-
-	public void setStock_alertday2(String stock_alertday2) {
-		this.stock_alertday2 = stock_alertday2;
+	public void setStockAlertday2(String stockAlertday2) {
+		this.stockAlertday2 = stockAlertday2;
 	}
 
-
-	public String getStock_alertday3() {
-		return stock_alertday3;
+	public String getStockAlertday3() {
+		return stockAlertday3;
 	}
 
-
-	public void setStock_alertday3(String stock_alertday3) {
-		this.stock_alertday3 = stock_alertday3;
+	public void setStockAlertday3(String stockAlertday3) {
+		this.stockAlertday3 = stockAlertday3;
 	}
 
-
-	public String getStock_alertday4() {
-		return stock_alertday4;
+	public String getStockAlertday4() {
+		return stockAlertday4;
 	}
 
-
-	public void setStock_alertday4(String stock_alertday4) {
-		this.stock_alertday4 = stock_alertday4;
+	public void setStockAlertday4(String stockAlertday4) {
+		this.stockAlertday4 = stockAlertday4;
 	}
 
-
-	public String getItem_id() {
-		return item_id;
+	public String getItemId() {
+		return itemId;
 	}
 
-
-	public void setItem_id(String item_id) {
-		this.item_id = item_id;
+	public void setItemId(String itemId) {
+		this.itemId = itemId;
 	}
-
-
-
 
 
 }
