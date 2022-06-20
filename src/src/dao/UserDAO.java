@@ -12,7 +12,7 @@ import model.AllBeans;
 public class UserDAO {
 
 	// insert
-	public boolean insert(String user_id,String user_pw,String user_name,String page_title,int page_id,String memo_item,boolean memo_check) {
+	public boolean insert(String userId,String userPw,String userName,String pageTitle,String pageId,String memoItem,String memoCheck) {
 		Connection conn = null;
 		boolean result = false;
 
@@ -27,32 +27,32 @@ public class UserDAO {
 			String sql1 = "INSERT INTO user (user_id,user_pw,user_name) VALUES ('?','?','?')";//INSERT INTO テーブル名（列名A,列名B,…） VALUES（値A,値B,…）
 			PreparedStatement pStmt1 = conn.prepareStatement(sql1);
 
-			pStmt1.setString(1,user_id);
-			pStmt1.setString(2,user_pw);
-			pStmt1.setString(3,user_name);
+			pStmt1.setString(1,userId);
+			pStmt1.setString(2,userPw);
+			pStmt1.setString(3,userName);
 
 			//pagetableのINSERT文を準備する
 			//INSERT INTO テーブル名（列名A,列名B,…） VALUES（値A,値B,…）
 			String sql2 = "INSERT INTO page (page_title) VALUES ('?')";
 			PreparedStatement pStmt2 = conn.prepareStatement(sql2);
 
-			pStmt2.setString(1,page_title);
+			pStmt2.setString(1,pageTitle);
 
 			//UPjoinのINSERT文を準備する
 			//INSERT INTO テーブル名（列名A,列名B,…） VALUES（値A,値B,…）
 			String sql3 = "INSERT INTO UPjoin (user_id,page_id) VALUES ('?','?')";
 			PreparedStatement pStmt3 = conn.prepareStatement(sql3);
 
-			pStmt3.setString(1,user_id);
-			pStmt3.setInt(2,page_id);//Intで大丈夫？？
+			pStmt3.setString(1,userId);
+			pStmt3.setString(2,pageId);//Intで大丈夫？？
 
 			//MemoのINSERT文を準備する
 			//INSERT INTO テーブル名（列名A,列名B,…） VALUES（値A,値B,…）
 			String sql4 = "INSERT INTO memo (memo_item,memo_check) VALUES ('?','?')";
 			PreparedStatement pStmt4 = conn.prepareStatement(sql4);
 
-			pStmt4.setString(1,memo_item);
-			pStmt4.setBoolean(2,memo_check);
+			pStmt4.setString(1,memoItem);
+			pStmt4.setString(2,memoCheck);
 
 			int ans = 0;
 			conn.setAutoCommit(false);//＝オートコミットを切る
@@ -95,7 +95,7 @@ public class UserDAO {
 
 	//select ログインするためのメソッド
 	// ログインできるならtrueを返す
-	public boolean isLoginOK(String user_id, String user_pw) {
+	public boolean isLoginOK(String userId, String userPw) {
 		Connection conn = null;
 		boolean loginResult = false;
 
@@ -110,8 +110,8 @@ public class UserDAO {
 			String sql = "select count(*) from user where user_id = '?' and user_pw = '?'";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 
-			pStmt.setString(1, user_id);
-			pStmt.setString(2, user_pw);
+			pStmt.setString(1, userId);
+			pStmt.setString(2, userPw);
 
 			// SELECT文を実行し、結果表を取得する
 			ResultSet rs = pStmt.executeQuery();
@@ -147,7 +147,7 @@ public class UserDAO {
 
 	//select  アカウント編集系
 	//（ハンバーガーメニューにも使えるのでは？）
-	public ArrayList<AllBeans> select(String user_id) {
+	public ArrayList<AllBeans> select(String userId) {
 		Connection conn = null;
 		ArrayList<AllBeans> userList = new ArrayList<AllBeans>();//ArrayListの名前変えないと？
 
@@ -164,7 +164,7 @@ public class UserDAO {
 			// usertableにicontableをくっつけたもののためのSQLを準備する
 			String sql1 = "SELECT *  FROM user LEFT OUTER JOIN icon ON user.icon_id = icon.icon_id WHERE user_id='?'";
 			PreparedStatement pStmt1 = conn.prepareStatement(sql1);
-			pStmt1.setString(1,user_id);
+			pStmt1.setString(1,userId);
 
 			// SQL文を実行し、結果表を取得する
 			ResultSet rs = pStmt1.executeQuery();
@@ -173,11 +173,11 @@ public class UserDAO {
 			// 結果表をコレクションにコピーする あとで改造
 			while (rs.next()) { //rsインスタンスの内容を全て取り出す
 				AllBeans all = new AllBeans();
-				all.setUser_id(rs.getString("user_id"));
-				all.setUser_pw(rs.getString("user_pw"));
-				all.setUser_name(rs.getString("user_name"));
-				all.setIcon_id(rs.getString("icon_id"));
-				all.setIcon_path(rs.getString("icon_path"));
+				all.setUserId(rs.getString("userId"));
+				all.setUserPw(rs.getString("userPw"));
+				all.setUserName(rs.getString("userName"));
+				all.setIconId(rs.getString("iconId"));
+				all.setIconPath(rs.getString("iconPath"));
 
 				userList.add(all);
 			}
@@ -206,7 +206,7 @@ public class UserDAO {
 	}
 
 	//ページ用ハンバーガーに使うデータを取ってくる
-	public ArrayList<AllBeans> phselect(String user_id) {
+	public ArrayList<AllBeans> phselect(String userId) {
 		Connection conn = null;
 		ArrayList<AllBeans> phList = new ArrayList<AllBeans>();
 
@@ -223,7 +223,7 @@ public class UserDAO {
 			// usertableにUPjointableとpagetableをくっつけたもののためのSQLを準備する
 			String sql1 = "SELECT *  FROM user LEFT OUTER JOIN UPjoin ON user.user_id = UPjoin.user_id LEFT OUTER JOIN page ON UPjoin.page_id = page.page_id WHERE user.user_id='?'";
 			PreparedStatement pStmt1 = conn.prepareStatement(sql1);
-			pStmt1.setString(1,user_id);
+			pStmt1.setString(1,userId);
 
 			// SQL文を実行し、結果表を取得する
 			ResultSet rs = pStmt1.executeQuery();
@@ -232,10 +232,10 @@ public class UserDAO {
 			// 結果表をコレクションにコピーする
 			while (rs.next()) { //rsインスタンスの内容を全て取り出す
 				AllBeans all = new AllBeans();
-				all.setUser_pw(rs.getString("user_page_id"));
-				all.setUser_id(rs.getString("user_id"));
-				all.setPage_id(rs.getString("page_id"));
-				all.setPage_title(rs.getString("page_title"));
+				all.setUserPw(rs.getString("userPageId"));
+				all.setUserId(rs.getString("userId"));
+				all.setPageId(rs.getString("pageId"));
+				all.setPageTitle(rs.getString("pageTitle"));
 
 
 				phList.add(all);
@@ -266,7 +266,7 @@ public class UserDAO {
 
 
 	//update
-	public boolean update(String user_pw, String user_name, String icon_id, String user_id) {
+	public boolean update(String userPw, String userName, String iconId, String userId) {
 		Connection conn = null;
 		boolean result = false;
 
@@ -281,10 +281,10 @@ public class UserDAO {
 			String sql = "UPDATE user SET user_pw='?',user_name='?',icon_id='?' where user_id='?'";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 
-			pStmt.setString(1, user_pw);
-			pStmt.setString(2, user_name);
-			pStmt.setString(3, icon_id);
-			pStmt.setString(4, user_id);
+			pStmt.setString(1, userPw);
+			pStmt.setString(2, userName);
+			pStmt.setString(3, iconId);
+			pStmt.setString(4, userId);
 
 			// SQL文を実行し成功したらtrueを返す
 			if (pStmt.executeUpdate() == 1) {
@@ -319,7 +319,7 @@ public class UserDAO {
 	}
 
 	//deleteFlag
-	public boolean deleteFlag(String user_flag, String user_id) {
+	public boolean deleteFlag(String userFlag, String userId) {
 		Connection conn = null;
 		boolean result = false;
 
@@ -335,7 +335,7 @@ public class UserDAO {
 			String sql = "UPDATE user SET user_flag='0' where user_id=?;";//SQL文記述
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 
-			pStmt.setString(1, user_id);
+			pStmt.setString(1, userId);
 
 			// SQL文を実行し成功したらtrueを返す
 			if (pStmt.executeUpdate() == 1) {
