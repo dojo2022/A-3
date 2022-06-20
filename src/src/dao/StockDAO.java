@@ -11,7 +11,7 @@ import model.AllBeans;
 public class StockDAO {
 
 	//insert
-	public boolean insert(AllBeans param){
+	public boolean insert(String stockName, String stockBuy, String stockLimit, String itemId, String stockAlertday1, String stockAlertday2, String stockAlertday3, String stockAlertday4){
 		Connection conn = null;
 		boolean result = false;
 		try {
@@ -25,13 +25,17 @@ public class StockDAO {
 			//一覧の在庫追加のフォームの中に<input type="hidden" name="itemId" value=""${e.itemId}$>で値を引き渡す
 
 			// SQL文を準備する
-			String sql = "INSERT INTO Stock (stock_name, stock_buy, stock_limit,item_id) VALUES (?, ?, ?, ?)";
+			String sql = "INSERT INTO Stock (stock_name, stock_buy, stock_limit,item_id, stock_alertday1, stock_alertday2, stock_alertday3, stock_alertday4) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 
-			pStmt.setString(1, param.getStock_name());
-			pStmt.setString(2, param.getStock_buy());
-			pStmt.setString(3, param.getStock_limit());
-			pStmt.setString(4, param.getItem_id());
+			pStmt.setString(1, stockName);
+			pStmt.setString(2, stockBuy);
+			pStmt.setString(3, stockLimit);
+			pStmt.setString(4, itemId);
+			pStmt.setString(5, stockAlertday1);
+			pStmt.setString(6, stockAlertday2);
+			pStmt.setString(7, stockAlertday3);
+			pStmt.setString(8, stockAlertday4);
 
 
 			// SQL文を実行する
@@ -68,7 +72,7 @@ public class StockDAO {
 	}
 
 	// select
-		public ArrayList<AllBeans> select(String page_id){
+		public ArrayList<AllBeans> select(String pageId){
 			Connection conn = null;
 			ArrayList<AllBeans> stockList = new ArrayList<AllBeans>();//ArrayList <インスタンスの型名> 変数名 = new ArrayList<インスタンスの型名>;
 
@@ -82,7 +86,7 @@ public class StockDAO {
 				String sql = "SELECT * FROM item  LEFT JOIN stock ON item.item_id = stock.item_id LEFT JOIN category ON  item.category_id = category.category_id WHERE item.page_id = ?";
 				PreparedStatement pStmt = conn.prepareStatement(sql);
 
-				pStmt.setString(1, page_id);
+				pStmt.setString(1, pageId);
 
 
 				// SQL文を実行し、結果表を取得する
@@ -91,25 +95,25 @@ public class StockDAO {
 				// 結果表をコレクションにコピーする
 				while (rs.next()) {
 					AllBeans main = new AllBeans();
-					main.setItem_id(rs.getString("item_id"));
-					main.setItem_name(rs.getString("item_name"));
-					main.setItem_favorite(rs.getString("item_favorite"));
-					main.setItem_remain(rs.getString("item_remain"));
-					main.setItem_lostday(rs.getString("item_lostday"));
-					main.setCategory_id(rs.getString("category_id"));
-					main.setPage_id(rs.getString("page_id"));
-					main.setItem_alert(rs.getString("item_alert"));
-					main.setItem_alertday(rs.getString("item_alertday"));
-					main.setStock_id(rs.getString("stock_id"));
-					main.setStock_name(rs.getString("stock_name"));
-					main.setStock_buy(rs.getString("stock_buy"));
-					main.setStock_limit(rs.getString("stock_limit"));
-					main.setStock_alert(rs.getString("stock_alert"));
-					main.setStock_alertday1(rs.getString("stock_alertday1"));
-					main.setStock_alertday2(rs.getString("stock_alertday2"));
-					main.setStock_alertday3(rs.getString("stock_alertday3"));
-					main.setStock_alertday4(rs.getString("stock_alertday4"));
-					main.setCategory_name(rs.getString("category_name"));
+					main.setItem_id(rs.getString("itemId"));
+					main.setItem_name(rs.getString("itemName"));
+					main.setItem_favorite(rs.getString("itemFavorite"));
+					main.setItem_remain(rs.getString("itemRemain"));
+					main.setItem_lostday(rs.getString("itemLostday"));
+					main.setCategory_id(rs.getString("categoryId"));
+					main.setPage_id(rs.getString("pageId"));
+					main.setItem_alert(rs.getString("itemAlert"));
+					main.setItem_alertday(rs.getString("itemAlertday"));
+					main.setStock_id(rs.getString("stockId"));
+					main.setStock_name(rs.getString("stockName"));
+					main.setStock_buy(rs.getString("stockBuy"));
+					main.setStock_limit(rs.getString("stockLimit"));
+					main.setStock_alert(rs.getString("stockAlert"));
+					main.setStock_alertday1(rs.getString("stockAlertday1"));
+					main.setStock_alertday2(rs.getString("stockAlertday2"));
+					main.setStock_alertday3(rs.getString("stockAlertday3"));
+					main.setStock_alertday4(rs.getString("stockAlertday4"));
+					main.setCategory_name(rs.getString("categoryName"));
 					stockList.add(main);
 				}
 
@@ -141,7 +145,7 @@ public class StockDAO {
 }
 
 		//update
-		public boolean update(AllBeans param) {
+		public boolean update(String stockBuy, String stockLimit, String stockAlert, String stockId, String stockAlertday1, String stockAlertday2, String stockAlertday3, String stockAlertday4) {
 			Connection conn = null;
 			boolean result = false;
 
@@ -152,13 +156,17 @@ public class StockDAO {
 				// データベースに接続する
 				conn = DriverManager.getConnection("jdbc:h2:file:C:/dojo6Data/dojo6Data", "sa", "");
 				// SQL文を準備する
-				String sql = "UPDATE Stock SET stock_buy=?, stock_limit=?, stock_alert=? WHERE stock_id=?";
+				String sql = "UPDATE Stock SET stock_buy=?, stock_limit=?, stock_alert=?, stock_alertday1=?, stock_alertday2=?,stock_alertday3=?, stock_alertday4=?, WHERE stock_id=?";
 				PreparedStatement pStmt = conn.prepareStatement(sql);
 
-				pStmt.setString(1, param.getStock_buy());
-				pStmt.setString(2, param.getStock_limit());
-				pStmt.setString(3, param.getStock_alert());
-				pStmt.setString(4, param.getStock_id());
+				pStmt.setString(1, stockBuy);
+				pStmt.setString(2, stockLimit);
+				pStmt.setString(3, stockAlert);
+				pStmt.setString(4, stockAlertday1);
+				pStmt.setString(5, stockAlertday2);
+				pStmt.setString(6, stockAlertday3);
+				pStmt.setString(7, stockAlertday4);
+				pStmt.setString(8, stockId);
 
 				// SQL文を実行する
 				if (pStmt.executeUpdate() == 1) {
@@ -189,7 +197,7 @@ public class StockDAO {
 		}
 
 		//delete
-		public boolean delete(AllBeans param) {
+		public boolean delete(String stockId) {
 			Connection conn = null;
 			boolean result = false;
 
@@ -200,11 +208,11 @@ public class StockDAO {
 				// データベースに接続する
 				conn = DriverManager.getConnection("jdbc:h2:file:C:/dojo6Data/dojo6Data", "sa", "");
 				// SQL文を準備する
-				String sql = "DELETE FROM Stock WHERE stock_id=?";
+				String sql = "DELETE FROM stock WHERE stock_id=?";
 				PreparedStatement pStmt = conn.prepareStatement(sql);
 
 				// SQL文を完成させる
-				pStmt.setString(1, param.getStock_id());
+				pStmt.setString(1, stockId);
 
 				// SQL文を実行する
 				if (pStmt.executeUpdate() == 1) {
