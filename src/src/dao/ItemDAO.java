@@ -4,16 +4,12 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
-
-import model.AllBeans;
 
 
 public class ItemDAO {
 
 	//insert
-	public boolean insert(AllBeans param){
+	public boolean insert(String item_name, String item_favorite , String category_id ,String page_id ,String item_alert,String stock_name ,String stock_buy ,String stock_limit ,String item_id){
 		Connection conn = null;
 		boolean result = false;
 
@@ -23,34 +19,51 @@ public class ItemDAO {
 
 			// データベースに接続する
 			conn = DriverManager.getConnection("jdbc:h2:file:C:/dojo6Data/dojo6Data", "sa", "");
-			// SQL文を準備する
-			String sql = "";
-			PreparedStatement pStmt = conn.prepareStatement(sql);
+			// ItemテーブルのINSERT文を準備する
+			String sql1 = "INSERT INTO item (item_name , item_favorite , category_id , page_id , item_alert) VALUES ('?','?','?','?','?')";//INSERT INTO テーブル名（列名A,列名B,…） VALUES（値A,値B,…）
+			PreparedStatement pStmt1 = conn.prepareStatement(sql1);
 
 			// SQL文を完成させる
+			pStmt1.setString(1, item_name);
+			pStmt1.setString(2, item_favorite);
+			pStmt1.setString(3, category_id);
+			pStmt1.setString(4, page_id);
+			pStmt1.setString(5, item_alert);
 
+			// StockテーブルのINSERT文を準備する
+			String sql2 = "INSERT INTO item (stock_name , stock_buy , stock_limit , item_id) VALUES ('?','?','?','?')";//INSERT INTO テーブル名（列名A,列名B,…） VALUES（値A,値B,…）
+			PreparedStatement pStmt2 = conn.prepareStatement(sql2);
 
+			// SQL文を完成させる
+			pStmt1.setString(1, stock_name);
+			pStmt1.setString(2, stock_buy);
+			pStmt1.setString(3, stock_limit);
+			pStmt1.setString(4, item_id);
 
+			int ans = 0;
+			conn.setAutoCommit(false);//＝オートコミットを切る
+			ans += pStmt1.executeUpdate();
+			ans += pStmt2.executeUpdate();
 
-
-			// SQL文を実行する
-			if (pStmt.executeUpdate() == 1) {
+			if (ans == 2) {
+				conn.commit(); //全部のsql文ができていれば成功
 				result = true;
 			}
-		}
-		catch (SQLException e) {
+		} catch (SQLException e) {
+			//try catch 文を書く
+			try {
+				conn.rollback();//sql文が一つでもできていなければロールバックする
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
+		} catch (ClassNotFoundException e) {
 				e.printStackTrace();
-		}
-		catch (ClassNotFoundException e) {
-				e.printStackTrace();
-		}
-		finally {
+		} finally {
 			// データベースを切断
 			if (conn != null) {
 				try {
 					conn.close();
-				}
-				catch (SQLException e) {
+				} catch (SQLException e) {
 					e.printStackTrace();
 				}
 			}
@@ -58,57 +71,10 @@ public class ItemDAO {
 
 		// 結果を返す
 		return result;
-
 	}
-
-
-	//select
-	// 引数paramで検索項目を指定し、検索結果のリストを返す
-		public List<AllBeans> select(AllBeans param) {
-			Connection conn = null;
-			List<AllBeans> itemList = new ArrayList<AllBeans>();//ArrayList <インスタンスの型名> 変数名 = new ArrayList<インスタンスの型名>;
-
-			try {
-				// JDBCドライバを読み込む
-				Class.forName("org.h2.Driver");
-
-				// データベースに接続する
-				conn = DriverManager.getConnection("jdbc:h2:file:C:/dojo6Data/dojo6Data", "sa", "");
-
-				// SQL文を準備する
-
-
-			}
-
-			catch (SQLException e) {
-				e.printStackTrace();
-				itemList = null;
-			}
-			catch (ClassNotFoundException e) {
-				e.printStackTrace();
-				itemList = null;
-			}
-			finally {
-				// データベースを切断
-				if (conn != null) {
-					try {
-						conn.close();
-					}
-					catch (SQLException e) {
-						e.printStackTrace();
-						itemList = null;
-					}
-				}
-			}
-
-			// 結果を返す
-			return itemList;
-	}
-
-
 
 	//update
-	public boolean update(AllBeans param){
+	public boolean update(String item_name, String item_favorite , String category_id ,String page_id ,String item_alert,String stock_name ,String stock_buy ,String stock_limit ,String item_id){
 		Connection conn = null;
 		boolean result = false;
 
@@ -118,19 +84,35 @@ public class ItemDAO {
 
 			// データベースに接続する
 			conn = DriverManager.getConnection("jdbc:h2:file:C:/dojo6Data/dojo6Data", "sa", "");
-			// SQL文を準備する
-			String sql = "";
-			PreparedStatement pStmt = conn.prepareStatement(sql);
+			// itemテーブルのUPDATE
+			String sql1 = "UPDATE item SET item_name=? , item_favorite=? , category_id=? , page_id=? , item_alert=? where item_id=?";
+			PreparedStatement pStmt1 = conn.prepareStatement(sql1);
 
-			// SQL文を完成させる
+			pStmt1.setString(1, item_name);
+			pStmt1.setString(2, item_favorite);
+			pStmt1.setString(3, category_id);
+			pStmt1.setString(4, page_id);
+			pStmt1.setString(5, item_alert);
 
+			String sql2 = "UPDATE stock SET stock_name=? , stock_buy=? , stock_limit=? , item_id=? where stock_id=?";
+			PreparedStatement pStmt2 = conn.prepareStatement(sql2);
 
+			pStmt2.setString(1, stock_name);
+			pStmt2.setString(2, stock_buy);
+			pStmt2.setString(3, stock_limit);
+			pStmt2.setString(4, item_id); //item_idは絶対かわらないけどどうする
 
+			int ans=0;
+			conn.setAutoCommit(false);//＝オートコミットを切る
+			ans += pStmt1.executeUpdate();
+			ans += pStmt2.executeUpdate();
 
-
-			// SQL文を実行する
-			if (pStmt.executeUpdate() == 1) {
+			if(ans == 2) {
+				conn.commit();
 				result = true;
+			}else {
+				conn.rollback();
+				result = false;
 			}
 		}
 		catch (SQLException e) {
@@ -158,8 +140,7 @@ public class ItemDAO {
 
 
 	//delete
-	//insert
-	public boolean delete(AllBeans param){
+	public boolean delete(String item_id){
 		Connection conn = null;
 		boolean result = false;
 
@@ -169,19 +150,31 @@ public class ItemDAO {
 
 			// データベースに接続する
 			conn = DriverManager.getConnection("jdbc:h2:file:C:/dojo6Data/dojo6Data", "sa", "");
-			// SQL文を準備する
-			String sql = "";
-			PreparedStatement pStmt = conn.prepareStatement(sql);
+			// stockテーブルのDELETE
+			String sql1 = "DELETE FROM stock WHERE stock_id = '?';";
+			PreparedStatement pStmt1 = conn.prepareStatement(sql1);
 
 			// SQL文を完成させる
+			pStmt1.setString(1, item_id);
 
+			// ItemテーブルのDELETE
+			String sql2 = "DELETE FROM stock WHERE item_id = '?';";
+			PreparedStatement pStmt2 = conn.prepareStatement(sql2);
 
+			// SQL文を完成させる
+			pStmt2.setString(1, item_id);
 
+			int ans = 0;
+			conn.setAutoCommit(false);//＝オートコミットを切る
+			ans += pStmt1.executeUpdate();
+			ans += pStmt2.executeUpdate();
 
-
-			// SQL文を実行する
-			if (pStmt.executeUpdate() == 1) {
+			if(ans == 2) {
+				conn.commit();
 				result = true;
+			}else {
+				conn.rollback();
+				result = false;
 			}
 		}
 		catch (SQLException e) {
