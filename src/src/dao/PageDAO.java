@@ -33,7 +33,9 @@ public class PageDAO {
 			pStmt2.setString(1, userId);
 			pStmt2.setString(2, pageId);
 
-			//③	INSERT	memo	page_idまだ思考中
+
+			//要らない説濃厚
+			//③	INSERT	memo	page_id
 			String sql3 = "INSERT INTO Memo (page_id) VALUES ('?')";//INSERT INTO テーブル名（列名A,列名B,…） VALUES（値A,値B,…）
 			PreparedStatement pStmt3 = conn.prepareStatement(sql3);
 			// SQL文を完成させる
@@ -185,7 +187,7 @@ public class PageDAO {
 			conn = DriverManager.getConnection("jdbc:h2:file:C:/dojo6Data/dojo6Data", "sa", "");
 
 			// SQL文を準備する改造する
-			String sql = "UPDATE Page SET page_flag='0' where page_id=?;";
+			String sql = "UPDATE Page SET page_flag='0' where page_id=?";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 
 			// SQL文を完成させる
