@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import dao.UserDAO;
-import model.LoginUser;
+import model.User;
 
 /**
  * Servlet implementation class LoginServlet
@@ -42,13 +42,13 @@ public class LoginServlet extends HttpServlet {
 				if (iDao.isLoginOK(new User(userId,userPw))) {	// ログイン成功
 					// セッションスコープにIDを格納する
 					HttpSession session = request.getSession();
-					session.setAttribute("id", new LoginUser(userId));
+					session.setAttribute("id", new User(userId));
 
 					// メニューサーブレットにリダイレクトする
 					response.sendRedirect("/syokuzaikanri/MainServlet");
 				}
 				else {									// ログイン失敗
-					// リクエストスコープに、タイトル、メッセージ、戻り先を格納する
+
 
 
 					// 結果ページにフォワードする
