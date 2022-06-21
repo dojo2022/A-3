@@ -17,7 +17,7 @@ public class TestStockDAO {
 				if (sdao.insert("ロールキャベツ","2022-06-21","2022-06-30", "4","2022-06-28", "2022-06-30", "2020-07-02", "2020-07-07")) {
 					System.out.println("登録成功！");
 
-					ArrayList<AllBeans> stockList = sdao.select("1");
+					ArrayList<AllBeans> stockList = sdao.select("3");
 					for (AllBeans main : stockList) {
 						System.out.println("itemId：" + main.getItemId());
 						System.out.println("itemName：" + main.getItemName());

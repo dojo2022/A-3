@@ -95,25 +95,25 @@ public class StockDAO {
 				// 結果表をコレクションにコピーする
 				while (rs.next()) {
 					AllBeans main = new AllBeans();
-					main.setItemId(rs.getString("itemId"));
-					main.setItemName(rs.getString("itemName"));
-					main.setItemFavorite(rs.getString("itemFavorite"));
-					main.setItemRemain(rs.getString("itemRemain"));
-					main.setItemLostday(rs.getString("itemLostday"));
-					main.setCategoryId(rs.getString("categoryId"));
-					main.setPageId(rs.getString("pageId"));
-					main.setItemAlert(rs.getString("itemAlert"));
-					main.setItemAlertday(rs.getString("itemAlertday"));
-					main.setStockId(rs.getString("stockId"));
-					main.setStockName(rs.getString("stockName"));
-					main.setStockBuy(rs.getString("stockBuy"));
-					main.setStockLimit(rs.getString("stockLimit"));
-					main.setStockAlert(rs.getString("stockAlert"));
-					main.setStockAlertday1(rs.getString("stockAlertday1"));
-					main.setStockAlertday2(rs.getString("stockAlertday2"));
-					main.setStockAlertday3(rs.getString("stockAlertday3"));
-					main.setStockAlertday4(rs.getString("stockAlertday4"));
-					main.setCategoryName(rs.getString("categoryName"));
+					main.setItemId(rs.getString("item_id"));
+					main.setItemName(rs.getString("item_name"));
+					main.setItemFavorite(rs.getString("item_favorite"));
+					main.setItemRemain(rs.getString("item_remain"));
+					main.setItemLostday(rs.getString("item_lostday"));
+					main.setCategoryId(rs.getString("category_id"));
+					main.setPageId(rs.getString("page_id"));
+					main.setItemAlert(rs.getString("item_alert"));
+					main.setItemAlertday(rs.getString("item_alertday"));
+					main.setStockId(rs.getString("stock_id"));
+					main.setStockName(rs.getString("stock_name"));
+					main.setStockBuy(rs.getString("stock_buy"));
+					main.setStockLimit(rs.getString("stock_limit"));
+					main.setStockAlert(rs.getString("stock_alert"));
+					main.setStockAlertday1(rs.getString("stock_alertday1"));
+					main.setStockAlertday2(rs.getString("stock_alertday2"));
+					main.setStockAlertday3(rs.getString("stock_alertday3"));
+					main.setStockAlertday4(rs.getString("stock_alertday4"));
+					main.setCategoryName(rs.getString("category_name"));
 					stockList.add(main);
 				}
 
