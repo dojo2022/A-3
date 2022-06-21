@@ -12,7 +12,7 @@
 
 <div class="form">
 <form method="POST" action="/syokuzaikanri/ItemRegistServlet">
-
+				<input type="hidden" name="pageId" value="1">
 	 <p>項目名<input type="text" name="itemName"></p>
 	 <p>分類名<select name="categoryId">
 			    <option value="1">野菜</option>
@@ -36,11 +36,12 @@
 	 期限日<input type="date" name="stockBuy"></p>
 
  			<p><input type="submit" name="regist" value="新規登録"></p>
-</div>
+
 
 
 
 </form>
+</div>
 </body>
 
 </html>
