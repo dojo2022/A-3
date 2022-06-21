@@ -34,9 +34,9 @@ public class MemoDAO {
 			// 結果表をコレクションにコピーする
 			while (rs.next()) { //rsインスタンスの内容を全て取り出す
 				Memo memo = new Memo();
-				memo.setMemoId(rs.getString("memoId"));
-				memo.setMemoItem(rs.getString("memoItem"));
-				memo.setMemoCheck(rs.getString("memoCheck"));
+				memo.setMemoId(rs.getString("memo_id"));
+				memo.setMemoItem(rs.getString("memo_item"));
+				memo.setMemoCheck(rs.getString("memo_check"));
 
 				memoList.add(memo);
 			}

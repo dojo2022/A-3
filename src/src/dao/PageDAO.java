@@ -187,7 +187,7 @@ public class PageDAO {
 			conn = DriverManager.getConnection("jdbc:h2:file:C:/dojo6Data/dojo6Data", "sa", "");
 
 			// SQL文を準備する改造する
-			String sql = "UPDATE Page SET page_flag=0 where page_id=?";
+			String sql = "UPDATE Page SET page_flag=0 WHERE page_id=?";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 
 			// SQL文を完成させる

@@ -21,7 +21,7 @@ public class ItemDAO {
 			// データベースに接続する
 			conn = DriverManager.getConnection("jdbc:h2:file:C:/dojo6Data/dojo6Data", "sa", "");
 			// ItemテーブルのINSERT文を準備する
-			String sql1 = "INSERT INTO Item (item_name , item_favorite , category_id , page_id , item_alert) VALUES ('?','?','?','?','?')";//INSERT INTO テーブル名（列名A,列名B,…） VALUES（値A,値B,…）
+			String sql1 = "INSERT INTO Item (item_name , item_favorite , category_id , page_id , item_alert) VALUES (?,?,?,?,?)";//INSERT INTO テーブル名（列名A,列名B,…） VALUES（値A,値B,…）
 			PreparedStatement pStmt1 = conn.prepareStatement(sql1);
 
 			// SQL文を完成させる
@@ -32,7 +32,7 @@ public class ItemDAO {
 			pStmt1.setString(5, itemAlert);
 
 			// StockテーブルのINSERT文を準備する（賞味期限アラートを追加する（別クラスで計算したものを持ってくる））
-			String sql2 = "INSERT INTO Stock (stock_name , stock_buy , stock_limit ,stock_alertday1 ,stock_alertday2 ,stock_alertday3 ,stock_alertday4, item_id) VALUES ('?','?','?','?')";//INSERT INTO テーブル名（列名A,列名B,…） VALUES（値A,値B,…）
+			String sql2 = "INSERT INTO Stock (stock_name , stock_buy , stock_limit ,stock_alertday1 ,stock_alertday2 ,stock_alertday3 ,stock_alertday4, item_id) VALUES (?,?,?,?)";//INSERT INTO テーブル名（列名A,列名B,…） VALUES（値A,値B,…）
 			PreparedStatement pStmt2 = conn.prepareStatement(sql2);
 
 			// SQL文を完成させる
@@ -166,14 +166,14 @@ public class ItemDAO {
 			// データベースに接続する
 			conn = DriverManager.getConnection("jdbc:h2:file:C:/dojo6Data/dojo6Data", "sa", "");
 			// stockテーブルのDELETE
-			String sql1 = "DELETE FROM Stock WHERE item_id = '?'";
+			String sql1 = "DELETE FROM Stock WHERE item_id = ?";
 			PreparedStatement pStmt1 = conn.prepareStatement(sql1);
 
 			// SQL文を完成させる
 			pStmt1.setString(1, itemId);
 
 			// ItemテーブルのDELETE
-			String sql2 = "DELETE FROM Item WHERE item_id = '?'";
+			String sql2 = "DELETE FROM Item WHERE item_id = ?";
 			PreparedStatement pStmt2 = conn.prepareStatement(sql2);
 
 			// SQL文を完成させる

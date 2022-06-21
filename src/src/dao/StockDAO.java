@@ -83,7 +83,7 @@ public class StockDAO {
 				// データベースに接続する
 				conn = DriverManager.getConnection("jdbc:h2:file:C:/dojo6Data/dojo6Data", "sa", "");
 				// SQL文を準備する
-				String sql = "SELECT * FROM Item  LEFT JOIN stock ON Item.item_id = Stock.item_id LEFT JOIN Category ON  Item.category_id = Category.category_id WHERE Item.page_id = ?";
+				String sql = "SELECT * FROM Item  LEFT JOIN Stock ON Item.item_id = Stock.item_id LEFT JOIN Category ON  Item.category_id = Category.category_id WHERE Item.page_id = ?";
 				PreparedStatement pStmt = conn.prepareStatement(sql);
 
 				pStmt.setString(1, pageId);

@@ -25,7 +25,7 @@ public class UserDAO {
 			conn = DriverManager.getConnection("jdbc:h2:file:C:/dojo6Data/dojo6Data", "sa", "");
 
 			// usertableのINSERT文を準備する
-			String sql1 = "INSERT INTO User (user_id,user_pw,user_name) VALUES ('?','?','?')";//INSERT INTO テーブル名（列名A,列名B,…） VALUES（値A,値B,…）
+			String sql1 = "INSERT INTO User (user_id,user_pw,user_name) VALUES (?,?,?)";//INSERT INTO テーブル名（列名A,列名B,…） VALUES（値A,値B,…）
 			PreparedStatement pStmt1 = conn.prepareStatement(sql1);
 
 			pStmt1.setString(1,userId);
@@ -34,7 +34,7 @@ public class UserDAO {
 
 			//pagetableのINSERT文を準備する
 			//INSERT INTO テーブル名（列名A,列名B,…） VALUES（値A,値B,…）
-			String sql2 = "INSERT INTO Page (page_title) VALUES ('メインページ')";
+			String sql2 = "INSERT INTO Page (page_title) VALUES (?)";
 			PreparedStatement pStmt2 = conn.prepareStatement(sql2);
 
 			pStmt2.setString(1,pageTitle);
@@ -46,7 +46,7 @@ public class UserDAO {
 
 			//UPjoinのINSERT文を準備する
 			//INSERT INTO テーブル名（列名A,列名B,…） VALUES（値A,値B,…）
-			String sql3 = "INSERT INTO UPjoin (user_id,page_id) VALUES ('?','?')";
+			String sql3 = "INSERT INTO UPjoin (user_id,page_id) VALUES (?,?)";
 			PreparedStatement pStmt3 = conn.prepareStatement(sql3);
 
 			pStmt3.setString(1,userId);
@@ -54,7 +54,7 @@ public class UserDAO {
 
 			//MemoのINSERT文を準備する
 			//INSERT INTO テーブル名（列名A,列名B,…） VALUES（値A,値B,…）
-			String sql4 = "INSERT INTO Memo (memo_item,memo_check) VALUES ('?','?')";
+			String sql4 = "INSERT INTO Memo (memo_item,memo_check) VALUES (?,?)";
 			PreparedStatement pStmt4 = conn.prepareStatement(sql4);
 
 			pStmt4.setString(1,memoItem);
@@ -227,7 +227,7 @@ public class UserDAO {
 			//トランザクションする必要あり？
 
 			// usertableにUPjointableとpagetableをくっつけたもののためのSQLを準備する
-			String sql1 = "SELECT *  FROM User LEFT OUTER JOIN UPjoin ON user.user_id = UPjoin.user_id LEFT OUTER JOIN page ON UPjoin.page_id = page.page_id WHERE user.user_id= ?";
+			String sql1 = "SELECT *  FROM User LEFT OUTER JOIN UPjoin ON User.user_id = UPjoin.user_id LEFT OUTER JOIN Page ON UPjoin.page_id = Page.page_id WHERE User.user_id= ?";
 			PreparedStatement pStmt1 = conn.prepareStatement(sql1);
 			pStmt1.setString(1,userId);
 
@@ -283,7 +283,7 @@ public class UserDAO {
 			conn = DriverManager.getConnection("jdbc:h2:file:C:/dojo6Data/dojo6Data", "sa", "");
 
 			//// UserUPDATE文を準備する
-			String sql = "UPDATE User SET user_pw= ?,user_name= ?,icon_id= ? where user_id= ?";
+			String sql = "UPDATE User SET user_pw= ?,user_name= ?,icon_id= ? WHERE user_id= ?";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 
 			pStmt.setString(1, userPw);
@@ -337,7 +337,7 @@ public class UserDAO {
 
 
 			//// Userのuserflag UPDATE文を準備する
-			String sql = "UPDATE User SET user_flag= 0 where user_id=?";//SQL文記述
+			String sql = "UPDATE User SET user_flag= 0 WHERE user_id=?";//SQL文記述
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 
 			pStmt.setString(1, userId);
