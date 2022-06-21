@@ -11,7 +11,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import dao.MemoDAO;
-import model.Memo;
 
 /**
  * Servlet implementation class MemoTestServlet
@@ -44,13 +43,25 @@ public class MemoTestServlet extends HttpServlet {
 				textList.add(request.getParameter("in"+i));
 				//System.out.println(request.getParameter("in"+i));
 
-				Memo memo = new Memo();
-				memo.setTextList(textList);
+				//Memo memo = new Memo();
+				//memo.setTextList(textList);
 			}
 		}
 
+
 		MemoDAO dao = new MemoDAO();
-		dao.insert(textList);//,pageId
+		int ans = 0;
+		for(String str : textList) {
+			ans += dao.insert(str);
+		}
+		//成功
+		if(textList.size()==ans) {
+			System.out.println("成功");
+		//失敗
+		}else {
+			System.out.println("失敗");
+		}
+
 		System.out.println(textList);
 		//登録の判定をするかも？
 

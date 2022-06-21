@@ -107,9 +107,9 @@ public class MemoDAO {
 		return result;
 	}
 	// ,String pageId
-	public boolean insert(ArrayList<String> textList) {
+	public int insert(String str, String pageId) {
 		Connection conn = null;
-		boolean result = false;
+		int ans = 0;
 		try {
 			// JDBCドライバを読み込む
 			Class.forName("org.h2.Driver");
@@ -119,23 +119,19 @@ public class MemoDAO {
 
 			// SQL文を完成させる
 			//①	memoINSERT
-			int ans = 0;
+
 
 			//memoのINSERT文を準備する(下の２行はエラーになったら外（↑）に出してあげる
-			String sql = "INSERT INTO memo (memo_item) VALUES ('?')";//INSERT INTO テーブル名（列名A,列名B,…） VALUES（値A,値B,…）
+			String sql = "INSERT INTO memo (memo_item,page_id) VALUES (?,?)";//INSERT INTO テーブル名（列名A,列名B,…） VALUES（値A,値B,…）
 			PreparedStatement pStmt = conn.prepareStatement(sql);
-			for(int i =0;i<textList.size();i++) {
+
 
 //
-//				//どうやってpage_idをもってきて、それをくっつけるのか
-				pStmt.setString(1, textList.get(i));
-				//pStmt.setString(2, pageId);
-				ans += pStmt.executeUpdate();
-			}
+//			//どうやってpage_idをもってきて、それをくっつけるのか
+			pStmt.setString(1, str);
+			pStmt.setString(2, pageId);
+			ans =  pStmt.executeUpdate();
 
-			if(ans == textList.size()) {
-				result=true;
-			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} catch (ClassNotFoundException e) {
@@ -152,6 +148,6 @@ public class MemoDAO {
 		}
 
 		// 結果を返す
-		return result;
+		return ans;
 	}
 }
