@@ -8,9 +8,13 @@ import java.util.Date;
 
 public class Alert {
 
-	public static void main(String args[]) {
-		aaaa();
-	}
+//	public static void main(String args[]) {
+//		aaaaa(1);
+//		aaaaa(2);
+//		aaaaa(3);
+//		aaaaa(4);
+//		aaaaa(5);
+//	}
 
 	public static void aaaa() {
 		//期限日アラート（stock依存）
@@ -25,6 +29,7 @@ public class Alert {
 		Date date3 = new Date();
 		Date date4 = new Date();
 
+		//Calendar型に変換
         Calendar calendar1 = Calendar.getInstance();
         calendar1.setTime(date2);
         Calendar calendar3 = Calendar.getInstance();
@@ -62,11 +67,46 @@ public class Alert {
 
 	}
 
-	public void aaaaa() {
-		//買い替えアラート(item依存)
-		//残量切れ日(item_lostday)、アラート期間（item_alert）を取得
 
-		//残量切れ日+アラート期間を計算、買い替えアラート日（item_alertday）を算出
+	public static void aaaaa(int num) {
+		//買い替えアラート(item依存)
+
+		//残量切れ日(item_lostday)、アラート期間（item_alert）を取得
+		//残量切れ日（残量なしボタンが押された日）の算出
+		Date lostday = new Date();
+
+		//Date型をCalendar型に変換（計算のため）
+		Calendar calendar = Calendar.getInstance();
+        calendar.setTime(lostday);
+
+        //アラート期間の条件を変数numに格納
+
+		//残量切れ日+アラート期間（なし=1、３日後=2、１週間後=3、２週間後=4、１カ月後=5）を計算、買い替えアラート日（item_alertday）を算出
+        if (num == 2) {
+        	calendar.add(Calendar.DAY_OF_MONTH, 3);
+        } else if (num == 3) {
+        	calendar.add(Calendar.DAY_OF_MONTH, 7);
+        } else if (num == 4) {
+        	calendar.add(Calendar.DAY_OF_MONTH, 14);
+        } else if (num == 5) {
+        	calendar.add(Calendar.MONTH, 1);
+        } else {
+        	calendar.set(Calendar.YEAR, 9999);
+        	calendar.set(Calendar.MONTH, 12);
+        	calendar.set(Calendar.DAY_OF_MONTH, 31);
+//        	SimpleDateFormat df = new SimpleDateFormat("yyyy/MM/dd");
+//        	Date date = df.parse("2000/12/31");
+//        	calendar.setTime(date);
+        }
+
+        //Date型に変換
+        lostday = calendar.getTime();
+        System.out.println(lostday);
+
+        //SQLDate型に変換
+        java.sql.Date alertday = new java.sql.Date(lostday.getTime());
+        System.out.println(alertday);
+
 
 		//買い替えアラート日（item_alertday）を返す（orセットする）
 	}
