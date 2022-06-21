@@ -7,7 +7,25 @@
 <title>Insert title here</title>
 </head>
 <body>
-新規登録繋がったよ
-
+	<img src="/syokuzaikanri/img/pokezo_logo.png" alt="ロゴ">
+		<form id="registForm" method="POST" action="/syokuzaikanri/AccountRegistServlet">
+			<table>
+			<tr>
+			<td>
+			<input type="text" name="userNAME" placeholder="ニックネーム">
+			</td>
+			</tr>
+	            <tr>
+	              <td>
+	                <input type="email" name="userId" placeholder="ID・メールアドレス">
+	              </td>
+	            </tr>
+	            <tr>
+	              <td>
+	              <input type="password" name="userPw" id="inputUserPw" placeholder="パスワード"><br>
+				</td>
+				</tr>
+			</table>
+		</form>
 </body>
 </html>
