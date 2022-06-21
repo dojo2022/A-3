@@ -25,7 +25,13 @@
 	              <input type="password" name="userPw" id="inputUserPw" placeholder="パスワード"><br>
 				</td>
 				</tr>
+				<tr>
+				<td>
+				<input type="submit" name="regist" value="新規登録">
+				</td>
+				</tr>
 			</table>
 		</form>
+		<a href="/syokuzaikanri/LoginServlet">ログイン画面に戻る</a>
 </body>
 </html>
