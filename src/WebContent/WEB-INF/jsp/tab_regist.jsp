@@ -10,7 +10,7 @@
 <body>
 登録タブ
 
-<form method="POST" action="/suokuzaikanri/RegistServlet">
+<form method="POST" action="/syokuzaikanri/ItemRegistServlet">
 
 	 項目名<input type="text" name="itemName"><br>
 	 分類名<select name="categoryId">
