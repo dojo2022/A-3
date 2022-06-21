@@ -113,7 +113,7 @@ public class UserDAO {
 			conn = DriverManager.getConnection("jdbc:h2:file:C:/dojo6Data/dojo6Data", "sa", "");
 
 			// SELECT文を完成させる
-			String sql = "select count(*) from user where user_id = '?' and user_pw = '?'";
+			String sql = "select count(*) from user where user_id = ? and user_pw = ?";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 
 			pStmt.setString(1, userId);
@@ -168,7 +168,7 @@ public class UserDAO {
 			//トランザクションする必要あり？
 
 			// usertableにicontableをくっつけたもののためのSQLを準備する
-			String sql1 = "SELECT *  FROM User LEFT OUTER JOIN Icon ON User.icon_id = Icon.icon_id WHERE user_id='?'";
+			String sql1 = "SELECT *  FROM User LEFT OUTER JOIN Icon ON User.icon_id = Icon.icon_id WHERE user_id= ?";
 			PreparedStatement pStmt1 = conn.prepareStatement(sql1);
 			pStmt1.setString(1,userId);
 
@@ -227,7 +227,7 @@ public class UserDAO {
 			//トランザクションする必要あり？
 
 			// usertableにUPjointableとpagetableをくっつけたもののためのSQLを準備する
-			String sql1 = "SELECT *  FROM User LEFT OUTER JOIN UPjoin ON user.user_id = UPjoin.user_id LEFT OUTER JOIN page ON UPjoin.page_id = page.page_id WHERE user.user_id='?'";
+			String sql1 = "SELECT *  FROM User LEFT OUTER JOIN UPjoin ON user.user_id = UPjoin.user_id LEFT OUTER JOIN page ON UPjoin.page_id = page.page_id WHERE user.user_id= ?";
 			PreparedStatement pStmt1 = conn.prepareStatement(sql1);
 			pStmt1.setString(1,userId);
 
@@ -283,7 +283,7 @@ public class UserDAO {
 			conn = DriverManager.getConnection("jdbc:h2:file:C:/dojo6Data/dojo6Data", "sa", "");
 
 			//// UserUPDATE文を準備する
-			String sql = "UPDATE User SET user_pw='?',user_name='?',icon_id='?' where user_id='?'";
+			String sql = "UPDATE User SET user_pw= ?,user_name= ?,icon_id= ? where user_id= ?";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 
 			pStmt.setString(1, userPw);
@@ -337,7 +337,7 @@ public class UserDAO {
 
 
 			//// Userのuserflag UPDATE文を準備する
-			String sql = "UPDATE User SET user_flag='0' where user_id=?;";//SQL文記述
+			String sql = "UPDATE User SET user_flag= 0 where user_id=?;";//SQL文記述
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 
 			pStmt.setString(1, userId);
