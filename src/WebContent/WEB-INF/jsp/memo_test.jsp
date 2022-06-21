@@ -13,6 +13,7 @@
 <form id = memo method="POST" action="/syokuzaikanri/MemoTestServlet">
 <c:forEach begin="0" end="19" step="1" varStatus="status">
 <input type="text" name="in${status.index}" placeholder="in${status.index}">
+<input type="checkbox">
 index：<c:out value="${status.index}"/><br>
 <!--「""」の位置は？ "in"${status.index} or "in${status.index}" -->
 </c:forEach>

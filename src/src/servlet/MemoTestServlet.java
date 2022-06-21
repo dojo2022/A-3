@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import model.Memo;
+
 /**
  * Servlet implementation class MemoTestServlet
  */
@@ -37,9 +39,19 @@ public class MemoTestServlet extends HttpServlet {
 			request.setCharacterEncoding("UTF-8");
 			if(request.getParameter("in"+i).length() != 0){
 				textList.add(request.getParameter("in"+i));
-				System.out.println(request.getParameter("in"+i));
+				//System.out.println(request.getParameter("in"+i));
+
+				Memo memo = new Memo();
+				memo.setTextList(textList);
 			}
 		}
+		//System.out.println(textList);
+		//登録の判定をするかも？
+
+
+
+
+
 	}
 
 }

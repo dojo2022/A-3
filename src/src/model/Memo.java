@@ -1,12 +1,14 @@
 package model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 public class Memo implements Serializable{
 private String memoId;
 private String memoItem;
 private String memoCheck;
 private String pageId;
+private ArrayList<String> textList;
 
 //引数なしコンストラクタ
 public Memo() {
@@ -45,6 +47,14 @@ public String getPageId() {
 
 public void setPageId(String pageId) {
 	this.pageId = pageId;
+}
+
+public ArrayList<String> getTextList() {
+	return textList;
+}
+
+public void setTextList(ArrayList<String> textList) {
+	this.textList = textList;
 }
 
 
