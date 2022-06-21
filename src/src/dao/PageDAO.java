@@ -21,13 +21,13 @@ public class PageDAO {
 			// SQL文を完成させる
 			//①	INSERT	page	page_title
 			// PageテーブルのINSERT文を準備する
-			String sql1 = "INSERT INTO Page (page_title) VALUES ('?')";//INSERT INTO テーブル名（列名A,列名B,…） VALUES（値A,値B,…）
+			String sql1 = "INSERT INTO Page (page_title) VALUES (?)";//INSERT INTO テーブル名（列名A,列名B,…） VALUES（値A,値B,…）
 			PreparedStatement pStmt1 = conn.prepareStatement(sql1);
 			// SQL文を完成させる
 			pStmt1.setString(1, pageTitle);
 
 			//②	INSERT	UPjoin	user_id、page_id
-			String sql2 = "INSERT INTO UPjoin (user_id , page_id) VALUES ('?','?')";//INSERT INTO テーブル名（列名A,列名B,…） VALUES（値A,値B,…）
+			String sql2 = "INSERT INTO UPjoin (user_id , page_id) VALUES (?,?)";//INSERT INTO テーブル名（列名A,列名B,…） VALUES（値A,値B,…）
 			PreparedStatement pStmt2 = conn.prepareStatement(sql2);
 			// SQL文を完成させる
 			pStmt2.setString(1, userId);
@@ -36,7 +36,7 @@ public class PageDAO {
 
 			//要らない説濃厚
 			//③	INSERT	memo	page_id
-			String sql3 = "INSERT INTO Memo (page_id) VALUES ('?')";//INSERT INTO テーブル名（列名A,列名B,…） VALUES（値A,値B,…）
+			String sql3 = "INSERT INTO Memo (page_id) VALUES (?)";//INSERT INTO テーブル名（列名A,列名B,…） VALUES（値A,値B,…）
 			PreparedStatement pStmt3 = conn.prepareStatement(sql3);
 			// SQL文を完成させる
 			pStmt3.setString(1, pageId);//jnsert文memodao
@@ -88,7 +88,7 @@ public class PageDAO {
 			conn = DriverManager.getConnection("jdbc:h2:file:C:/dojo6Data/dojo6Data", "sa", "");
 
 			// SQL文を準備する
-			String sql = "UPDATE Page SET page_title='?' WHERE page_id=? ";
+			String sql = "UPDATE Page SET page_title=? WHERE page_id=? ";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 
 			// SQL文を完成させる
@@ -187,7 +187,7 @@ public class PageDAO {
 			conn = DriverManager.getConnection("jdbc:h2:file:C:/dojo6Data/dojo6Data", "sa", "");
 
 			// SQL文を準備する改造する
-			String sql = "UPDATE Page SET page_flag='0' where page_id=?";
+			String sql = "UPDATE Page SET page_flag=0 where page_id=?";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 
 			// SQL文を完成させる
