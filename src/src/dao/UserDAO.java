@@ -33,10 +33,15 @@ public class UserDAO {
 
 			//pagetableのINSERT文を準備する
 			//INSERT INTO テーブル名（列名A,列名B,…） VALUES（値A,値B,…）
-			String sql2 = "INSERT INTO Page (page_title) VALUES ('?')";
+			String sql2 = "INSERT INTO Page (page_title) VALUES ('メインページ')";
 			PreparedStatement pStmt2 = conn.prepareStatement(sql2);
 
 			pStmt2.setString(1,pageTitle);
+
+			//追加したpageidを取得
+//			String sql3 = "SELECT MAX(page_id) FROM Page";
+//			PreparedStatement pStmt3 = conn.prepareStatement(sql3);
+//			pStmt3.setString(1,pageId);
 
 			//UPjoinのINSERT文を準備する
 			//INSERT INTO テーブル名（列名A,列名B,…） VALUES（値A,値B,…）
@@ -162,7 +167,7 @@ public class UserDAO {
 			//トランザクションする必要あり？
 
 			// usertableにicontableをくっつけたもののためのSQLを準備する
-			String sql1 = "SELECT *  FROM User LEFT OUTER JOIN icon ON user.icon_id = icon.icon_id WHERE user_id='?'";
+			String sql1 = "SELECT *  FROM User LEFT OUTER JOIN Icon ON User.icon_id = Icon.icon_id WHERE user_id='?'";
 			PreparedStatement pStmt1 = conn.prepareStatement(sql1);
 			pStmt1.setString(1,userId);
 
