@@ -12,6 +12,7 @@ import model.AllBeans;
 public class UserDAO {
 
 	// insert
+	//ここの引数減らしたい
 	public boolean insert(String userId,String userPw,String userName,String pageTitle,String pageId,String memoItem,String memoCheck) {
 		Connection conn = null;
 		boolean result = false;
