@@ -31,9 +31,9 @@
 			    <option value="4">２週間後</option>
 			    <option value="5">１か月後</option>
 			  </select><br></p>
-	 <p>在庫名<input type="text" id="datepicker"><p>
+	 <p>在庫名<input type="text" name="stockName"><p>
 	 <p>購入日 <input type="date" name="stockBuy">
-	 期限日<input type="date" name="stockBuy"></p>
+	 期限日<input type="date" name="stockLimit"></p>
 
  			<p><input type="submit" name="regist" value="新規登録"></p>
 
