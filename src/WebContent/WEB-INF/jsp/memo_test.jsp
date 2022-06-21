@@ -15,7 +15,7 @@
 <input type="text" name="in${status.index}" placeholder="in${status.index}">
 <input type="checkbox">
 index：<c:out value="${status.index}"/><br>
-<!--「""」の位置は？ "in"${status.index} or "in${status.index}" -->
+<!--「name""」の位置は？ "in"${status.index} or "in${status.index}" -->
 </c:forEach>
 <!-- begin  : 初期値
 end : ～になるまで

@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import dao.MemoDAO;
 import model.Memo;
 
 /**
@@ -32,8 +33,10 @@ public class MemoTestServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		//ページidだけ取得
+
 		//入力されているテキストボックスのみ値をArrayListで取得
-		ArrayList<String> textList = new ArrayList<>();
+		ArrayList<String> textList = new ArrayList<String>();
 
 		for(int i = 0; i < 20; i++){
 			request.setCharacterEncoding("UTF-8");
@@ -45,7 +48,10 @@ public class MemoTestServlet extends HttpServlet {
 				memo.setTextList(textList);
 			}
 		}
-		//System.out.println(textList);
+
+		MemoDAO dao = new MemoDAO();
+		dao.insert(textList,pageId);
+		System.out.println(textList);
 		//登録の判定をするかも？
 
 

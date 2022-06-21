@@ -79,15 +79,64 @@ public class MemoDAO {
 			String sql = "UPDATE Memo SET memo_item = ?, memo_check = ? WHERE memo_id = ?";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 
-			pStmt.setString(1,memoItem);
-			pStmt.setString(2,memoCheck);
-			pStmt.setString(3,memoId);
+			pStmt.setString(1, memoItem);
+			pStmt.setString(2, memoCheck);
+			pStmt.setString(3, memoId);
 
 			// SQL文を実行する
 			if (pStmt.executeUpdate() == 1) {
 				result = true;
 			}
 
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} finally {
+			// データベースを切断
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+
+		// 結果を返す
+		return result;
+	}
+
+	public boolean insert(ArrayList<String> textList ,String pageId) {
+		Connection conn = null;
+		boolean result = false;
+		try {
+			// JDBCドライバを読み込む
+			Class.forName("org.h2.Driver");
+
+			// データベースに接続する
+			conn = DriverManager.getConnection("jdbc:h2:file:C:/dojo6Data/dojo6Data", "sa", "");
+
+			// SQL文を完成させる
+			//①	memoINSERT
+			int ans = 0;
+			for(int i =0;i<textList.size();i++) {
+				//memoのINSERT文を準備する(下の２行はエラーになったら外（↑）に出してあげる
+				String sql = "INSERT INTO memo (memo_item,page_id) VALUES (?,?)";//INSERT INTO テーブル名（列名A,列名B,…） VALUES（値A,値B,…）
+				PreparedStatement pStmt = conn.prepareStatement(sql);
+//
+//				//どうやってpage_idをもってきて、それをくっつけるのか
+//				// SQL文を完成させる
+//				Memo memo = new Memo();
+
+				pStmt.setString(1, textList.get(i));
+				pStmt.setString(2, pageId);
+				ans += pStmt.executeUpdate();
+			}
+
+			if(ans == textList.size()) {
+				result=true;
+			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} catch (ClassNotFoundException e) {
