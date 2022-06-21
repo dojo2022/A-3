@@ -52,7 +52,7 @@ public class MemoTestServlet extends HttpServlet {
 		MemoDAO dao = new MemoDAO();
 		int ans = 0;
 		for(String str : textList) {
-			ans += dao.insert(str);
+			ans += dao.insert(str);//pageIdの引数どうやって渡す…？
 		}
 		//成功
 		if(textList.size()==ans) {
