@@ -337,7 +337,7 @@ public class UserDAO {
 
 
 			//// Userのuserflag UPDATE文を準備する
-			String sql = "UPDATE User SET user_flag= 0 where user_id=?;";//SQL文記述
+			String sql = "UPDATE User SET user_flag= 0 where user_id=?";//SQL文記述
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 
 			pStmt.setString(1, userId);
