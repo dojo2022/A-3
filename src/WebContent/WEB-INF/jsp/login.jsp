@@ -4,10 +4,11 @@
 <html>
 <head>
 	<meta charset="UTF-8">
-	<title>ポケ蔵～POKEZO～</title>
+	<title>ログインページ | ポケ蔵</title>
 	<script type="text/javascript" src="/syokuzaikanri/javaScript/login.js"></script>
 </head>
 <body>
+	<div class="wrapper">
 	<div class="login">
 		<img src="/syokuzaikanri/img/pokezo_logo.png" alt="ロゴ">
 		<form id="loginForm" method="POST" action="/syokuzaikanri/LoginServlet">
@@ -45,6 +46,12 @@
             	</tr>
             </form>
 	     </table>
+	     </div>
+	     <!-- フッター（ここから） -->
+	     <div id="footer">
+	     	<p>&copy;Copyright KANRANSHA . All rights reserved.</p>
+	     </div>
+	     <!-- フッター（ここまで） -->
 	</div>
 </body>
 </html>
