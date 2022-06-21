@@ -4,10 +4,15 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+	<title>ウェルカムページ | ポケ蔵</title>
 </head>
 <body>
-新規登録完了したよ
-
+	<div class="wrapper">
+		<div class="accountregistresult">
+			<img src="/syokuzaikanri/img/pokezo_logo.png" alt="ロゴ">
+			<h1>ようこそポケ蔵へ！</h1>
+			<a href="/syokuzaikanri/NeedItemServlet">必須項目選択画面へ移る</a>
+		</div>
+	</div>
 </body>
 </html>
