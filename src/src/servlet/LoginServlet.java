@@ -34,14 +34,14 @@ public class LoginServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//リクエストパラメータを取得する
 		request.setCharacterEncoding("UTF-8");
-		String userId = request.getParameter("id");
-		String userPw = request.getParameter("pw");
+		String userId = request.getParameter("userId");
+		String userPw = request.getParameter("userPw");
 		// ログイン処理を行う
 				UserDAO iDao = new UserDAO();
 				if (iDao.Login(userId,userPw)) {	// ログイン成功
 					// セッションスコープにIDを格納する
 					HttpSession session = request.getSession();
-					session.setAttribute("id",(userId));
+					session.setAttribute("userId",userId);
 
 					// メニューサーブレットにリダイレクトする
 					response.sendRedirect("/syokuzaikanri/MainServlet");
