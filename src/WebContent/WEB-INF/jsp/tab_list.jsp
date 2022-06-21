@@ -9,43 +9,62 @@
 	<body>
 		<div class="tab">
 			<div class="tab_list">
-			 <table>
-			 	<tr>
-			 		<form id="searchbox" method="POST" action="/syokuzaikanri/MainServlet">
-			 		<td>
-						<input type="search" name="searchWord" placeholder="検索">
-			 		</td>
-			 		<td>
-						<input type="submit" name="search" value="検索">
-			 		</td>
-			 </table>
+			 	<form id="searchbox" method="POST" action="/syokuzaikanri/MainServlet">
+					 <table>
+					 	<tr>
+					 		<td>
+								<input type="search" name="search" placeholder="検索">
+					 		</td>
+					 		<td>
+					 			<!-- 検索ボタンを押したらjsで調べたものの表示だけにする -->
+								<input type="button" value="検索" onclick="search()">
+					 		</td>
+					 </table>
 			 		<input type="submit" name="returnList" value="一覧に戻す">
-			 		</form>
+			 	</form>
 
+				<table>
+					 <tr>
+					 	<div id="remainBottun">
+					 		<td>
+							    <div class="favoriteBottun">
+							        <label for="favoriteOn" class="favoriteLabel">
+							            <img src="/syokuzaikanri/img/favorite_off.png" width="25" height="25" class="favoriteImage">
+							        </label>
+							        <input type="checkbox" name="favorite" class="favorite" value="${itemFavorite}" id="favoriteOn">
+							    </div>
+							</td>
+					 		<td>
+					 			<p>ここには項目名が入ります${itemName}</p>
+					 		</td>
+					 		<td>
+							    <div class="remainBottun">
+							        <label for="remainFull" class="remainLabel">
+							            <img src="/syokuzaikanri/img/remain_full.png" width="25" height="25" class="remainImage">
+							        </label>
+							        <input type="radio" name="remain" class="remain" value="${itemRemain}" id="remainFull">
+							    </div>
+							</td>
+					 		<td>
+							    <div class="remainBottun">
+							        <label for="remainLittle" class="remainLabel">
+							            <img src="/syokuzaikanri/img/remain_little.png" width="25" height="25" class="remainImage">
+							        </label>
+							        <input type="radio" name="remain" class="remain" value="${itemRemain}" id="remainLittle">
+							    </div>
+							</td>
+							<td>
+							    <div class="remainBottun">
+							        <label for="remainNone" class="remainLabel">
+							            <img src="/syokuzaikanri/img/remain_none.png" width="25" height="25" class="remainImage">
+							        </label>
+							        <input type="radio" name="remain" class="remain" value="${itemRemain}" id="remainNone">
+							    </div>
+							</td>
+						</div>
+					  </tr>
+				</table>
 
-			 		<div id="remainBottun">
-					    <div class="remainBottun">
-					        <label for="remainFull" class="remainLabel">
-					            <img src="/syokuzaikanri/img/remain_full.png" width="25" height="25" class="remainImage">
-					        </label>
-					        <input type="radio" name="remain" class="remain" value="3" id="remain3">
-					    </div>
-					    <div class="remainBottun">
-					        <label for="remainLittle" class="remainLabel">
-					            <img src="/syokuzaikanri/img/remain_little.png" width="25" height="25" class="remainImage">
-					        </label>
-					        <input type="radio" name="remain" class="remain" value="2" id="remain2">
-					    </div>
-					    <div class="remainBottun">
-					        <label for="remainNone" class="remainLabel">
-					            <img src="/syokuzaikanri/img/remain_none.png" width="25" height="25" class="remainImage">
-					        </label>
-					        <input type="radio" name="remain" class="remain" value="1" id="remain1">
-					    </div>
-					</div>
-
-
-			 	</tr>
 			</div>
 		</div>
 	</body>
