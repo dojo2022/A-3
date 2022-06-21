@@ -38,6 +38,8 @@ public class AlertPracticeServlet extends HttpServlet {
 
 		// メニューページにフォワードする
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/alertPractice2.jsp");
-		dispatcher.forward(request, response);}
+		dispatcher.forward(request, response);
+
+		}
 
 }
