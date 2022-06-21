@@ -4,7 +4,7 @@
 body {
   margin: 2em 0 0 0;		/* マージンなし（後で個別に設定） */
   padding: 0 0 0 0;		/* パディングなし（後で個別に設定） */
-  color: black;
+  color: #534340;
   font-size: 16px;
   background-color: white;
   font-family: Noto Sans CJK JP;
