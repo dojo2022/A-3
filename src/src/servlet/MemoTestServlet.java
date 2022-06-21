@@ -50,9 +50,11 @@ public class MemoTestServlet extends HttpServlet {
 		}
 
 		MemoDAO dao = new MemoDAO();
-		dao.insert(textList,pageId);
+		dao.insert(textList);//,pageId
 		System.out.println(textList);
 		//登録の判定をするかも？
+
+
 
 
 
