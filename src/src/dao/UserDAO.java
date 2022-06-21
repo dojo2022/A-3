@@ -179,11 +179,11 @@ public class UserDAO {
 			// 結果表をコレクションにコピーする あとで改造
 			while (rs.next()) { //rsインスタンスの内容を全て取り出す
 				AllBeans all = new AllBeans();
-				all.setUserId(rs.getString("userId"));
-				all.setUserPw(rs.getString("userPw"));
-				all.setUserName(rs.getString("userName"));
-				all.setIconId(rs.getString("iconId"));
-				all.setIconPath(rs.getString("iconPath"));
+				all.setUserId(rs.getString("user_id"));
+				all.setUserPw(rs.getString("user_pw"));
+				all.setUserName(rs.getString("user_name"));
+				all.setIconId(rs.getString("icon_id"));
+				all.setIconPath(rs.getString("icon_path"));
 
 				userList.add(all);
 			}
@@ -238,11 +238,10 @@ public class UserDAO {
 			// 結果表をコレクションにコピーする
 			while (rs.next()) { //rsインスタンスの内容を全て取り出す
 				AllBeans all = new AllBeans();
-				all.setUserPw(rs.getString("userPageId"));
-				all.setUserId(rs.getString("userId"));
-				all.setPageId(rs.getString("pageId"));
-				all.setPageTitle(rs.getString("pageTitle"));
-
+				all.setUserPw(rs.getString("user_page_id"));
+				all.setUserId(rs.getString("user_id"));
+				all.setPageId(rs.getString("page_id"));
+				all.setPageTitle(rs.getString("page_title"));
 
 				phList.add(all);
 			}

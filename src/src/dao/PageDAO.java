@@ -144,8 +144,8 @@ public class PageDAO {
 				while (rs.next()) { //rsインスタンスの内容を全て取り出す
 
 					Page page = new Page();
-					page.setPageId(rs.getString("PageId"));
-					page.setPageTitle(rs.getString("pageTitle"));
+					page.setPageId(rs.getString("page_id"));
+					page.setPageTitle(rs.getString("page_title"));
 
 					PageList.add(page);
 					}
