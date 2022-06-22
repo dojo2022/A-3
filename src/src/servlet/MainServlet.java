@@ -29,11 +29,11 @@ public class MainServlet extends HttpServlet {
 
 		// もしもログインしていなかったらログインサーブレットにリダイレクトする
 		HttpSession session = request.getSession();
-//		session.getAttribute("userId");
-//		if (session.getAttribute("userId") == null) {
-//			response.sendRedirect("/syokuzaikanri/LoginServlet");
-//		return;
-//		}
+		session.getAttribute("user");
+		if (session.getAttribute("user") == null) {
+			response.sendRedirect("/syokuzaikanri/LoginServlet");
+		return;
+		}
 
 
 
