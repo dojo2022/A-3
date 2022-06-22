@@ -13,7 +13,7 @@
 
 <body>
 <div class="wrapper">
-
+${user.userName}
 
 <!-- nav  -->
 <!-- <hr> 水平に線を引くためのタグ -->

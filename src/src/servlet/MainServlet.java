@@ -8,6 +8,10 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import dao.UserDAO;
+import model.User;
 
 /**
  * Servlet implementation class MainServlet
@@ -22,6 +26,33 @@ public class MainServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/main.jsp");
 		dispatcher.forward(request, response);
+
+		HttpSession session = request.getSession();
+
+
+
+		// もしもログインしていなかったらログインサーブレットにリダイレクトする
+		session.getAttribute("userId");
+		if (session.getAttribute("userId") == null) {
+			response.sendRedirect("/syokuzaikanri/LoginServlet");
+		return;
+		}
+
+		UserDAO udao = new UserDAO();
+
+		User user = (User)session.getAttribute("user");
+		user.getUserName();
+
+
+
+
+
+
+
+
+
+
+
 	}
 
 	/**

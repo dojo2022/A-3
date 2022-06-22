@@ -8,6 +8,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import model.AllBeans;
+import model.User;
 
 public class UserDAO {
 
@@ -101,10 +102,9 @@ public class UserDAO {
 
 	//select ログインするためのメソッド
 	// ログインできるならtrueを返す
-	public boolean Login(String userId, String userPw) {
+	public User Login(String userId, String userPw) {
 		Connection conn = null;
-		boolean loginResult = false;
-
+		User user = null;
 		try {
 			// JDBCドライバを読み込む
 			Class.forName("org.h2.Driver");
@@ -113,7 +113,7 @@ public class UserDAO {
 			conn = DriverManager.getConnection("jdbc:h2:file:C:/dojo6Data/dojo6Data", "sa", "");
 
 			// SELECT文を完成させる
-			String sql = "select count(*) from user where user_id = ? and user_pw = ?";
+			String sql = "select * from user where user_id = ? and user_pw = ?";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 
 			pStmt.setString(1, userId);
@@ -124,17 +124,23 @@ public class UserDAO {
 
 			// ユーザーIDとパスワードが一致するユーザーがいたかどうかをチェックする
 
-			rs.next();
-			if (rs.getInt("count(*)") == 1) {
-				loginResult = true;
+			while(rs.next()) {
+				user = new User();
+				user.setUserId(rs.getString("user_id"));
+				user.setUserName(rs.getString("user_name"));
+				user.setIconId(rs.getString("icon_id"));
+				user.setUserFlag(rs.getString("user_flag"));
+
 			}
+
+
 
 		} catch (SQLException e) {
 			e.printStackTrace();
-			loginResult = false;
+			user = null;
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
-			loginResult = false;
+			user = null;
 		} finally {
 			// データベースを切断
 			if (conn != null) {
@@ -142,13 +148,13 @@ public class UserDAO {
 					conn.close();
 				} catch (SQLException e) {
 					e.printStackTrace();
-					loginResult = false;
+					user = null;
 				}
 			}
 		}
 
 		// 結果を返す
-		return loginResult;
+		return user;
 	}
 
 	//select  アカウント編集系
