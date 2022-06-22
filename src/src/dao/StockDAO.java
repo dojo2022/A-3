@@ -156,7 +156,7 @@ public class StockDAO {
 				// データベースに接続する
 				conn = DriverManager.getConnection("jdbc:h2:file:C:/dojo6Data/dojo6Data", "sa", "");
 				// SQL文を準備する
-				String sql = "UPDATE Stock SET stock_buy=?, stock_limit=?, stock_alert=?, stock_alertday1=?, stock_alertday2=?,stock_alertday3=?, stock_alertday4=?, WHERE stock_id=?";
+				String sql = "UPDATE Stock SET stock_buy=?, stock_limit=?, stock_alert=?, stock_alertday1=?, stock_alertday2=?,stock_alertday3=?, stock_alertday4=? WHERE stock_id=?";
 				PreparedStatement pStmt = conn.prepareStatement(sql);
 
 				pStmt.setString(1, stockBuy);
