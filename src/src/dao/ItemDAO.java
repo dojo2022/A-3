@@ -27,7 +27,12 @@ public class ItemDAO {
 
 			// SQL文を完成させる
 			pStmt1.setString(1, itemName);
-			pStmt1.setString(2, itemFavorite); // nullの条件で0を格納する必要あり！
+			if (itemFavorite != null) {
+				pStmt1.setString(2, itemFavorite);// nullの条件で0を格納する必要あり！(済)
+			}
+			else {
+				pStmt1.setString(2, "0");
+			}
 			pStmt1.setString(3, categoryId);
 			pStmt1.setString(4, pageId);
 			pStmt1.setString(5, itemAlert);
