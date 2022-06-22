@@ -3,6 +3,7 @@ package dao;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 
@@ -10,7 +11,7 @@ public class ItemDAO {
 
 	//insert
 	//必須項目の時にお気に入りが登録できないからfavoriteにif文で未入力の場合はこう、とか、サーブレットで値を渡す必要があるかも
-	public boolean insert(String itemName, String itemFavorite , String categoryId ,String pageId ,String itemAlert,String stockName ,String stockBuy ,String stockLimit,String stockAlertday1 ,String stockAlertday2 ,String stockAlertday3 ,String stockAlertday4 ,String itemId ,String stockId){
+	public boolean insert(String itemName, String itemFavorite , String categoryId ,String pageId ,String itemAlert,String stockName ,String stockBuy ,String stockLimit,String stockAlertday1 ,String stockAlertday2 ,String stockAlertday3 ,String stockAlertday4){
 		Connection conn = null;
 		boolean result = false;
 
@@ -31,9 +32,19 @@ public class ItemDAO {
 			pStmt1.setString(4, pageId);
 			pStmt1.setString(5, itemAlert);
 
-			// StockテーブルのINSERT文を準備する（賞味期限アラートを追加する（別クラスで計算したものを持ってくる））
-			String sql2 = "INSERT INTO Stock (stock_name , stock_buy , stock_limit ,stock_alertday1 ,stock_alertday2 ,stock_alertday3 ,stock_alertday4, item_id) VALUES (?,?,?,?)";//INSERT INTO テーブル名（列名A,列名B,…） VALUES（値A,値B,…）
+			// Itemテーブルでitem_idが一番大きいものをselectする
+			String sql2 = "SELECT MAX(item_id) FROM Item";
 			PreparedStatement pStmt2 = conn.prepareStatement(sql2);
+
+			// SQL文を実行し、結果表を取得する
+			ResultSet rs = pStmt2.executeQuery();
+
+			rs.next();
+			String itemId = rs.getString("MAX(item_id)");
+
+			// StockテーブルのINSERT文を準備する（賞味期限アラートを追加する（別クラスで計算したものを持ってくる））
+			String sql3 = "INSERT INTO Stock (stock_name , stock_buy , stock_limit ,stock_alertday1 ,stock_alertday2 ,stock_alertday3 ,stock_alertday4, item_id) VALUES (?,?,?,?,?,?,?,?)";//INSERT INTO テーブル名（列名A,列名B,…） VALUES（値A,値B,…）
+			PreparedStatement pStmt3 = conn.prepareStatement(sql3);
 
 			// SQL文を完成させる
 			pStmt1.setString(1, stockName);
@@ -49,18 +60,21 @@ public class ItemDAO {
 			conn.setAutoCommit(false);//＝オートコミットを切る
 			ans += pStmt1.executeUpdate();
 			ans += pStmt2.executeUpdate();
+			ans += pStmt3.executeUpdate();
 
-			if (ans == 2) {
+			if (ans == 3) {
 				conn.commit(); //全部のsql文ができていれば成功
 				result = true;
 			}
 		} catch (SQLException e) {
 			//try catch 文を書く
+
 			try {
 				conn.rollback();//sql文が一つでもできていなければロールバックする
 			} catch (SQLException e1) {
 				e1.printStackTrace();
 			}
+
 		} catch (ClassNotFoundException e) {
 				e.printStackTrace();
 		} finally {

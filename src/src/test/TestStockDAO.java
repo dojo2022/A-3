@@ -14,7 +14,7 @@ public class TestStockDAO {
 		// insert()のテスト
 				System.out.println("---------- insert()のテスト ----------");
 			//	Bc insRec = new Bc("0006", "西脇 隆俊", "602-8570", "京都市上京区下立売通新町西入薮ノ内町", "関西", "075-451-8111", "kyoto");
-				if (sdao.insert("ロールキャベツ","2022-06-21","2022-06-30", "4","2022-06-28", "2022-06-30", "2020-07-02", "2020-07-07")) {
+				if (sdao.insert("ロールキャベツ","1","1", "1","1", "2022-06-30", "2020-07-02", "2020-07-07")) {
 					System.out.println("登録成功！");
 
 					ArrayList<AllBeans> stockList = sdao.select("3");
