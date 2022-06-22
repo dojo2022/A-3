@@ -5,7 +5,6 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script src="tab_regist.js" charset="utf-8"></script>
 <link rel="stylesheet" type="text/css" href="css/tab_regist.css">
 </head>
 <body>

@@ -27,7 +27,7 @@
 						アラート期間　: ${e.itemAlert}<input type="hidden" name="itemAlert" value="${e.itemAlert}"><br>
 						アラート日 　: ${e.itemAlertday}<input type="hidden" name="itemAlertday" value="${e.itemAlertday}"><br>
 						在庫ID 　: ${e.stockId}<input type="hidden" name="stockId" value="${e.stockId}"><br>
-						在庫名 : ${e.stockBuy}<input type="hidden" name="stockName" value="${e.stockNamer}"><br>
+						在庫名 : ${e.stockBuy}<input type="hidden" name="stockName" value="${e.stockName}"><br>
 						購入日 　: ${e.zipcode}<input type="hidden" name="stockBuy" value="${e.stockBuy}"><br>
 						期限日 　: ${e.stockLimit}<input type="hidden" name="stockLimit" value="${e.stockLimit}"><br>
 						期限日アラート : ${e.stockAlert}<input type="hidden" name="stockAlert" value="${e.stockAlert}"><br>
