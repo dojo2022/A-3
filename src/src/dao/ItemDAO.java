@@ -40,35 +40,34 @@ public class ItemDAO {
 			ResultSet rs = pStmt2.executeQuery();
 
 			rs.next();
-			String itemId = rs.getString("item_id");
+			String itemId = rs.getString("MAX(item_id)");
 
 			// StockテーブルのINSERT文を準備する（賞味期限アラートを追加する（別クラスで計算したものを持ってくる））
 			String sql3 = "INSERT INTO Stock (stock_name , stock_buy , stock_limit ,stock_alertday1 ,stock_alertday2 ,stock_alertday3 ,stock_alertday4, item_id) VALUES (?,?,?,?,?,?,?,?)";//INSERT INTO テーブル名（列名A,列名B,…） VALUES（値A,値B,…）
 			PreparedStatement pStmt3 = conn.prepareStatement(sql3);
 
 			// SQL文を完成させる
-			pStmt1.setString(1, stockName);
-			pStmt1.setString(2, stockBuy);
-			pStmt1.setString(3, stockLimit);
-			pStmt1.setString(4, stockAlertday1);
-			pStmt1.setString(5, stockAlertday2);
-			pStmt1.setString(6, stockAlertday3);
-			pStmt1.setString(7, stockAlertday4);
-			pStmt1.setString(8, itemId);
+			pStmt3.setString(1, stockName);
+			pStmt3.setString(2, stockBuy);
+			pStmt3.setString(3, stockLimit);
+			pStmt3.setString(4, stockAlertday1);
+			pStmt3.setString(5, stockAlertday2);
+			pStmt3.setString(6, stockAlertday3);
+			pStmt3.setString(7, stockAlertday4);
+			pStmt3.setString(8, itemId);
 
 			int ans = 0;
 			conn.setAutoCommit(false);//＝オートコミットを切る
 			ans += pStmt1.executeUpdate();
-			ans += pStmt2.executeUpdate();
 			ans += pStmt3.executeUpdate();
 
-			if (ans == 3) {
+			if (ans == 2) {
 				conn.commit(); //全部のsql文ができていれば成功
 				result = true;
 			}
 		} catch (SQLException e) {
-			//try catch 文を書く
 
+			//try catch 文を書く
 			try {
 				conn.rollback();//sql文が一つでもできていなければロールバックする
 			} catch (SQLException e1) {
