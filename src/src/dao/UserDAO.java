@@ -14,7 +14,7 @@ public class UserDAO {
 
 	// insert
 	//ここの引数減らしたい
-	public boolean insert(String userId,String userPw,String userName,String pageTitle,String pageId,String memoItem,String memoCheck) {
+	public boolean insert(String userId,String userPw,String userName,String memoItem,String memoCheck) {
 		Connection conn = null;
 		boolean result = false;
 
@@ -35,38 +35,45 @@ public class UserDAO {
 
 			//pagetableのINSERT文を準備する
 			//INSERT INTO テーブル名（列名A,列名B,…） VALUES（値A,値B,…）
-			String sql2 = "INSERT INTO Page (page_title) VALUES (?)";
+			//page_flagを1にする
+			String sql2 = "INSERT INTO Page (page_flag) VALUES (1)";
 			PreparedStatement pStmt2 = conn.prepareStatement(sql2);
 
-			pStmt2.setString(1,pageTitle);
-
 			//追加したpageidを取得
-//			String sql3 = "SELECT MAX(page_id) FROM Page";
-//			PreparedStatement pStmt3 = conn.prepareStatement(sql3);
-//			pStmt3.setString(1,pageId);
+			String sql3 = "SELECT MAX(page_id) FROM Page";
+			PreparedStatement pStmt3 = conn.prepareStatement(sql3);
 
 			//UPjoinのINSERT文を準備する
 			//INSERT INTO テーブル名（列名A,列名B,…） VALUES（値A,値B,…）
-			String sql3 = "INSERT INTO UPjoin (user_id,page_id) VALUES (?,?)";
-			PreparedStatement pStmt3 = conn.prepareStatement(sql3);
+			String sql4 = "INSERT INTO UPjoin (user_id, page_id) VALUES (?, ?)";
+			PreparedStatement pStmt4 = conn.prepareStatement(sql4);
 
-			pStmt3.setString(1,userId);
-			pStmt3.setString(2,pageId);//Intで大丈夫？？
+			pStmt4.setString(1, userId);
 
 			//MemoのINSERT文を準備する
 			//INSERT INTO テーブル名（列名A,列名B,…） VALUES（値A,値B,…）
-			String sql4 = "INSERT INTO Memo (memo_item,memo_check) VALUES (?,?)";
-			PreparedStatement pStmt4 = conn.prepareStatement(sql4);
+			String sql5 = "INSERT INTO Memo (memo_item,memo_check) VALUES (?,?)";
+			PreparedStatement pStmt5= conn.prepareStatement(sql5);
 
-			pStmt4.setString(1,memoItem);
-			pStmt4.setString(2,memoCheck);
+			pStmt5.setString(1,memoItem);
+			pStmt5.setString(2,memoCheck);
 
 			int ans = 0;
 			conn.setAutoCommit(false);//＝オートコミットを切る
 			ans += pStmt1.executeUpdate();
 			ans += pStmt2.executeUpdate();
-			ans += pStmt3.executeUpdate();
+
+			//PageのINSERT後にSQL文を実行し、結果表を取得する
+			ResultSet rs = pStmt3.executeQuery();
+			rs.next();
+			String pageId = rs.getString("MAX(page_id)");
+
+			//取得したpage_idをsql4にセット
+			pStmt4.setString(2 ,pageId);
+
 			ans += pStmt4.executeUpdate();
+
+			ans += pStmt5.executeUpdate();
 
 			if (ans == 4) {
 				conn.commit(); //全部のsql文ができていれば成功
