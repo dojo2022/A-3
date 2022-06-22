@@ -37,15 +37,9 @@ public class ItemDAO {
 			pStmt1.setString(4, pageId);
 			pStmt1.setString(5, itemAlert);
 
-			// Itemテーブルでitem_idが一番大きいものをselectする
+			// Itemテーブルでitem_idが一番大きいものをSELECTするSQL文
 			String sql2 = "SELECT MAX(item_id) FROM Item";
 			PreparedStatement pStmt2 = conn.prepareStatement(sql2);
-
-			// SQL文を実行し、結果表を取得する
-			ResultSet rs = pStmt2.executeQuery();
-
-			rs.next();
-			String itemId = rs.getString("MAX(item_id)");
 
 			// StockテーブルのINSERT文を準備する（賞味期限アラートを追加する（別クラスで計算したものを持ってくる））
 			String sql3 = "INSERT INTO Stock (stock_name , stock_buy , stock_limit ,stock_alertday1 ,stock_alertday2 ,stock_alertday3 ,stock_alertday4, item_id) VALUES (?,?,?,?,?,?,?,?)";//INSERT INTO テーブル名（列名A,列名B,…） VALUES（値A,値B,…）
@@ -59,11 +53,21 @@ public class ItemDAO {
 			pStmt3.setString(5, stockAlertday2);
 			pStmt3.setString(6, stockAlertday3);
 			pStmt3.setString(7, stockAlertday4);
-			pStmt3.setString(8, itemId);
+
 
 			int ans = 0;
 			conn.setAutoCommit(false);//＝オートコミットを切る
 			ans += pStmt1.executeUpdate();
+
+			//ItemのINSERT後にSQL文を実行し、結果表を取得する
+			ResultSet rs = pStmt2.executeQuery();
+			rs.next();
+			String itemId = rs.getString("MAX(item_id)");
+
+			//取得したitemIdをsql3にセット
+			pStmt3.setString(8, itemId);
+
+			//StockテーブルへのINSERT文を実行する
 			ans += pStmt3.executeUpdate();
 
 			if (ans == 2) {
