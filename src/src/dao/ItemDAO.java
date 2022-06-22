@@ -40,7 +40,7 @@ public class ItemDAO {
 			ResultSet rs = pStmt2.executeQuery();
 
 			rs.next();
-			String itemId = rs.getString("MAX(item_id)");
+			String itemId = rs.getString("item_id");
 
 			// StockテーブルのINSERT文を準備する（賞味期限アラートを追加する（別クラスで計算したものを持ってくる））
 			String sql3 = "INSERT INTO Stock (stock_name , stock_buy , stock_limit ,stock_alertday1 ,stock_alertday2 ,stock_alertday3 ,stock_alertday4, item_id) VALUES (?,?,?,?,?,?,?,?)";//INSERT INTO テーブル名（列名A,列名B,…） VALUES（値A,値B,…）
