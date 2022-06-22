@@ -29,7 +29,7 @@
 				 		<td>
 						    <div class="favoriteBottun">
 						        <label for="favoriteOn" class="favoriteLabel">
-						            <img src="/syokuzaikanri/img/favorite_off.png" width="25" height="25" class="favoriteImage">
+						            <img src="/syokuzaikanri/img/favorite_off.png" width="25" height="25" id="favoriteImage" onclick="favoriteImage()">
 						        </label>
 						        <input type="checkbox" name="favorite" class="favorite" value="${itemFavorite}" id="favoriteOn" onclick="favorite()">
 						    </div>
@@ -87,10 +87,10 @@
 						  </td>
 						  <td>
 						    <div class="alertlBottun">
-						        <label for="alertl" class="favoriteLabel">
-						            <img src="/syokuzaikanri/img/alert_off.png" width="25" height="25" class="alertlImage">
+						        <label for="alertl" class="alertlLabel">
+						            <img src="/syokuzaikanri/img/alert_on.png" width="25" height="25" id="alertlImage" onclick="alertlImage()">
 						        </label>
-						        <input type="checkbox" name="bell" class="alertl" value="${itemFavorite}" id="alertl" onclick="alertl()">
+						        <input type="checkbox" name="bell" class="alertl" value="${stockAlert}" id="alertl" onclick="alertl()">
 						    </div>
 						  </td>
 						  <td>
