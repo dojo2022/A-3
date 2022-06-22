@@ -1,0 +1,32 @@
+@charset "UTF-8";
+/*画像一覧アコーディオンのデザイン*/
+.accordionIcon-check{
+    display: none;
+}
+.accordionIcon-label{
+    color: #000000;
+    display: block;
+    height: 30px;
+    position: relative;
+}
+.accordionIcon-label:after{
+    background: #c0c0c0;
+    box-sizing: border-box;
+    display: block;
+    height: 30px;
+    position: absolute;
+}
+.accordionIcon-content{
+	margin-left: 30px;
+    height: 0;
+    opacity: 0;
+    padding: 0 10px;
+    transition: .5s;
+    visibility: hidden;
+}
+.accordionIcon-check:checked + .accordionIcon-label + .accordionIcon-content{
+    height: 350px;
+    opacity: 1;
+    padding: 10px;
+    visibility: visible;
+}
