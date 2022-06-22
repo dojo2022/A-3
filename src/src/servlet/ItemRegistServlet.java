@@ -2,12 +2,15 @@ package servlet;
 
 import java.io.IOException;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.swing.JOptionPane;
 
+import dao.ItemDAO;
 import model.Alert;
 
 /**
@@ -51,24 +54,18 @@ public class ItemRegistServlet extends HttpServlet {
 		String stockAlertday3 = str[2];
 		String stockAlertday4 = str[3];
 
+		//登録処理を行う
+		ItemDAO iDao = new ItemDAO();
+		if (iDao.insert(itemName, itemFavorite, categoryId, pageId, itemAlert, stockName, stockBuy, stockLimit, stockAlertday1, stockAlertday2, stockAlertday3, stockAlertday4)) {
+			JOptionPane.showMessageDialog(null, "登録が成功しました！");
+		} else {
+			JOptionPane.showMessageDialog(null, "登録できませんでした");
+		}
 
-		System.out.println(itemName);
-		System.out.println(categoryId);
-		System.out.println(itemFavorite);
-		System.out.println(itemAlert);
-		System.out.println(stockName);
-		System.out.println(stockBuy);
-		System.out.println(stockLimit);
-		System.out.println(pageId);
-		System.out.println(stockAlertday1);
-		System.out.println(stockAlertday2);
-		System.out.println(stockAlertday3);
-		System.out.println(stockAlertday4);
+		// メインページにフォワードする
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/main.jsp");
+		dispatcher.forward(request, response);
 
-
-//		//登録処理を行う
-//		ItemDAO iDAO = new ItemDAO();
-//		iDAO.insert();
 	}
 
 }
