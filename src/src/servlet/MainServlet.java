@@ -11,7 +11,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import dao.StockDAO;
 import dao.UserDAO;
 import model.AllBeans;
 import model.User;
@@ -27,51 +26,48 @@ public class MainServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/main.jsp");
-		dispatcher.forward(request, response);
-
-		HttpSession session = request.getSession();
-
-
 
 		// もしもログインしていなかったらログインサーブレットにリダイレクトする
-		session.getAttribute("userId");
-		if (session.getAttribute("userId") == null) {
-			response.sendRedirect("/syokuzaikanri/LoginServlet");
-		return;
-		}
+		HttpSession session = request.getSession();
+//		session.getAttribute("userId");
+//		if (session.getAttribute("userId") == null) {
+//			response.sendRedirect("/syokuzaikanri/LoginServlet");
+//		return;
+//		}
+
+
+
+
+
+
 
 
 		//セッションからuserIdを取得
 		User user = (User)session.getAttribute("user");
-		user.getUserId();
-
 		String userId = user.getUserId();
 
 
 
-		//minpselectメソッドを使ってuser_idが持っているページの中で一番小さいpage_idを取得
+
+		//page_idとpage_titleをセッションに保存
 		UserDAO uDao = new UserDAO();
-		String pageId = null;
+		ArrayList<AllBeans> phList = uDao.upselect(userId);
+		session.setAttribute("phList",phList);
 
-		ArrayList<AllBeans> phList = uDao.minpselect(userId);
-		for (AllBeans all : phList) {
-			 pageId = all.getPageId();
-		}
-
-
-		StockDAO sDao = new StockDAO();
-		ArrayList<AllBeans> stocklist = sDao.select(pageId);
-
-		request.setAttribute("stocklist", stocklist);
+		//user_idが持つ一番小さいpage_idでitemとstockを全件検索
 
 
 
 
 
+//		StockDAO sDao = new StockDAO();
+//		ArrayList<AllBeans> stocklist = sDao.select(pageId);
+//
+//		request.setAttribute("stocklist", stocklist);
 
 
-
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/main.jsp");
+		dispatcher.forward(request, response);
 
 
 

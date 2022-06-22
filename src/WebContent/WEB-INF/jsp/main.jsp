@@ -13,8 +13,8 @@
 
 <body>
 <div class="wrapper">
-${user.userName}
-${stocklist.ItemName}
+${user.userId}
+
 
 <!-- nav  -->
 <!-- <hr> 水平に線を引くためのタグ -->

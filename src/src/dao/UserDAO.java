@@ -277,7 +277,7 @@ public class UserDAO {
 
 
 	//user_idが持っているページの中で一番小さいpage_idを取得する。
-		public ArrayList<AllBeans> minpselect(String userId) {
+		public ArrayList<AllBeans> upselect(String userId) {
 			Connection conn = null;
 			ArrayList<AllBeans> phList = new ArrayList<AllBeans>();
 
@@ -292,7 +292,7 @@ public class UserDAO {
 				//トランザクションする必要あり？
 
 				// usertableにUPjointableとpagetableをくっつけたもののためのSQLを準備する
-				String sql1 = "SElECT * FROM UPjoin WHERE user_id = ? ORDER BY page_id LIMIT 1";
+				String sql1 = "SELECT * FROM upjoin LEFT OUTER JOIN page ON upjoin.page_id = page.page_id WHERE upjoin.user_id =? AND page.page_flag =1";
 				PreparedStatement pStmt1 = conn.prepareStatement(sql1);
 				pStmt1.setString(1,userId);
 
@@ -304,6 +304,7 @@ public class UserDAO {
 				while (rs.next()) { //rsインスタンスの内容を全て取り出す
 					AllBeans all = new AllBeans();
 					all.setPageId(rs.getString("page_id"));
+					all.setPageId(rs.getString("page_title"));
 
 					phList.add(all);
 				}
