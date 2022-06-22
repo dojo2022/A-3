@@ -127,7 +127,7 @@ public class ItemDAO {
 			pStmt1.setString(9, itemId);
 
 			// stockテーブルのUPDATE（賞味期限アラートを更新する（別クラスで計算したものを持ってくる））
-			String sql2 = "UPDATE Stock SET stock_name=? , stock_buy=? , stock_limit=?, stock_alert=? ,stock_alertday1=? ,stock_alertday2=? ,stock_alertday3=? ,stock_alertday4=?, where stock_id=?";
+			String sql2 = "UPDATE Stock SET stock_name=? , stock_buy=? , stock_limit=?, stock_alert=? ,stock_alertday1=? ,stock_alertday2=? ,stock_alertday3=? ,stock_alertday4=? where stock_id=?";
 			PreparedStatement pStmt2 = conn.prepareStatement(sql2);
 
 			pStmt1.setString(1, stockName);
