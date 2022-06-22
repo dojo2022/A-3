@@ -26,8 +26,8 @@
 	            <tr>
 	            <tr>
 	              <td colspan="2">
-	                <input type="submit" name="login" value="ログイン">
-	                <input type="reset" name="loginReset" value="リセット"><br>
+	              	<input type="reset" name="loginReset" value="リセット">
+	                <input type="submit" name="login" value="ログイン"><br>
 	              <td>
 	            </tr>
 	        </table>
