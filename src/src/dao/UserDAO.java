@@ -276,6 +276,63 @@ public class UserDAO {
 	}
 
 
+	//user_idが持っているページの中で一番小さいpage_idを取得する。
+		public ArrayList<AllBeans> minpselect(String userId) {
+			Connection conn = null;
+			ArrayList<AllBeans> phList = new ArrayList<AllBeans>();
+
+			try {
+				// JDBCドライバを読み込む
+				Class.forName("org.h2.Driver");
+
+				// データベースに接続する
+				conn = DriverManager.getConnection("jdbc:h2:file:C:/dojo6Data/dojo6Data", "sa", "");
+				// SELECT文を完成させる
+
+				//トランザクションする必要あり？
+
+				// usertableにUPjointableとpagetableをくっつけたもののためのSQLを準備する
+				String sql1 = "SElECT * FROM UPjoin WHERE user_id = ? ORDER BY page_id LIMIT 1";
+				PreparedStatement pStmt1 = conn.prepareStatement(sql1);
+				pStmt1.setString(1,userId);
+
+				// SQL文を実行し、結果表を取得する
+				ResultSet rs = pStmt1.executeQuery();
+
+
+				// 結果表をコレクションにコピーする
+				while (rs.next()) { //rsインスタンスの内容を全て取り出す
+					AllBeans all = new AllBeans();
+					all.setPageId(rs.getString("page_id"));
+
+					phList.add(all);
+				}
+
+			} catch (SQLException e) {
+				e.printStackTrace();
+				phList = null;
+			} catch (ClassNotFoundException e) {
+				e.printStackTrace();
+				phList = null;
+
+			} finally {
+				// データベースを切断
+				if (conn != null) {
+					try {
+						conn.close();
+					} catch (SQLException e) {
+						e.printStackTrace();
+						phList = null;
+					}
+				}
+			}
+
+			// 結果を返す
+			return phList;
+		}
+
+
+
 	//update
 	public boolean update(String userPw, String userName, String iconId, String userId) {
 		Connection conn = null;
@@ -328,6 +385,7 @@ public class UserDAO {
 		return result;
 
 	}
+
 
 	//deleteFlag
 	public boolean deleteFlag(String userId) {

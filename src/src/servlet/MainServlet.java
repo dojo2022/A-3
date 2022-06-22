@@ -1,6 +1,7 @@
 package servlet;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -10,7 +11,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import dao.StockDAO;
 import dao.UserDAO;
+import model.AllBeans;
 import model.User;
 
 /**
@@ -38,10 +41,33 @@ public class MainServlet extends HttpServlet {
 		return;
 		}
 
-		UserDAO udao = new UserDAO();
 
+		//セッションからuserIdを取得
 		User user = (User)session.getAttribute("user");
-		user.getUserName();
+		user.getUserId();
+
+		String userId = user.getUserId();
+
+
+
+		//minpselectメソッドを使ってuser_idが持っているページの中で一番小さいpage_idを取得
+		UserDAO uDao = new UserDAO();
+		String pageId = null;
+
+		ArrayList<AllBeans> phList = uDao.minpselect(userId);
+		for (AllBeans all : phList) {
+			 pageId = all.getPageId();
+		}
+
+
+		StockDAO sDao = new StockDAO();
+		ArrayList<AllBeans> stocklist = sDao.select(pageId);
+
+		request.setAttribute("stocklist", stocklist);
+
+
+
+
 
 
 
