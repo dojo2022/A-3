@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -26,7 +27,7 @@
 			 	</form>
 			<div class="tab_list">
 				<table class="item_list">
- 				<c:forEach var="e" items="${allList}" varStatus = "if">
+ 				<c:forEach var="e" items="${allList}" varStatus = "status">
  					<c:if test="${e.itemId ==taihi}">
  						<tr>
 						  <td>
@@ -68,6 +69,9 @@
 					  </tr>
  					</c:if>
  					<c:if test="${e.itemId !=taihi}" >
+							<!-- 一回目のプラスボタンは見せないようにする -->
+ 							<c:if test="${status.index!=0 }">
+
  							  <tr>
 							  	  <td colspan="7">
 							  	  	<input id="stockAdd" class="stockAdd" type="checkbox">
@@ -99,6 +103,8 @@
 									</div>
 							  	  </td>
 					  		  </tr>
+
+					  		</c:if>
 								<!-- 大項目------------------------------------------------------ -->
 							 <tr>
 						 		<td>

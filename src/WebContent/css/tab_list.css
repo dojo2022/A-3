@@ -10,6 +10,7 @@
 .item_list{
 	border: 2px #000000 solid;
 	height: 340px;
+
 }
 .item_list td{
 	border-bottom-width: 2px;
@@ -48,4 +49,8 @@
     opacity: 1;
     padding: 10px;
     visibility: visible;
+}
+
+#all_content{
+	overflow: scroll;
 }
