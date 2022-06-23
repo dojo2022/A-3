@@ -11,7 +11,6 @@
 </head>
 	<body>
 		<div class="tab">
-			<div class="tab_list">
 			 	<form id="searchbox" method="POST" action="/syokuzaikanri/MainServlet">
 					 <table>
 					 	<tr>
@@ -25,69 +24,71 @@
 					 </table>
 			 		<input type="submit" name="returnList" value="一覧に戻す">
 			 	</form>
+			<div class="tab_list">
 				<table class="item_list">
  				<c:forEach var="e" items="${allList}" >
 					 <tr>
 				 		<td>
-				 		<c:if test="${e.itemFavorite} = TRUE" ><!-- おきに入り→お気に入りじゃないの場合 -->
+<%-- 				 		<c:if test="${e.itemFavorite = TRUE}" > --%><!-- おきに入り→お気に入りじゃないの場合 -->
 						    <div class="favoriteBottun">
-						        <label for="favoriteOff" class="favoriteLabel">
+						        <label for="${e.itemId}favoriteOn" class="favoriteLabel">
 						            <img src="/syokuzaikanri/img/favorite_on.png" width="25" height="25" id="favoriteImage1" onclick="favoriteImage1()">
 						        </label>
-						        <input type="checkbox" name="itemFavorite" class="itemFavorite" value="${e.itemFavorite}" id="favoriteOff" onclick="favoriteOff()">
+						        <input type="checkbox" name="itemFavorite" class="itemFavorite" value="${e.itemFavorite}" id="${e.itemId}favoriteOn" onclick="favoriteOff()">
 						    </div>
-						</c:if>
-						<c:if test="${e.itemFavorite} = FALSE" ><!-- おきに入りじゃない→お気に入り場合 -->
+<%-- 						</c:if> --%>
+						<c:if test="${e.itemFavorite = FALSE}" ><!-- おきに入りじゃない→お気に入り場合 -->
 						    <div class="favoriteBottun">
-						        <label for="favoriteOn" class="favoriteLabel">
+						        <label for="${e.itemId}favoriteOff" class="favoriteLabel">
 						            <img src="/syokuzaikanri/img/favorite_off.png" width="25" height="25" id="favoriteImage0" onclick="favoriteImage0()">
 						        </label>
-						        <input type="checkbox" name="itemFavorite" class="itemFavorite" value="${e.itemFavorite}" id="favoriteOn" onclick="favoriteOn()">
+						        <input type="checkbox" name="itemFavorite" class="itemFavorite" value="${e.itemFavorite}" id="${e.itemId}favoriteOff" onclick="favoriteOn()">
 						    </div>
 						</c:if>
 						</td>
+<%-- 						<c:if test="${ここに前の名前と一緒じゃなければ表示をかく}" > --%>
 				 		<td colspan="2">
-				 			項目名${e.itemName}
+				 			${e.itemName}
 				 		</td>
-					 	<div id="remainBottun">
 					 		<td>
 							    <div class="remainBottun">
-							        <label for="remainFull" class="remainLabel">
+							        <label for="${e.itemId}remainFull" class="remainLabel">
 							            <img src="/syokuzaikanri/img/remain_full.png" width="25" height="25" class="remainImage" >
 							        </label>
-							        <input type="radio" name="remain" class="remain" value="${e.itemRemain}" id="remainFull" onclick="remain()">
+							        <input type="radio" name="remain" class="remain" value="${e.itemRemain}" id="${e.itemId}remainFull" onclick="remain()">
 							    </div>
 							    <div class="remainBottun">
-							        <label for="remainLittle" class="remainLabel">
+							        <label for="${e.itemId}remainLittle" class="remainLabel">
 							            <img src="/syokuzaikanri/img/remain_little.png" width="25" height="25" class="remainImage">
 							        </label>
-							        <input type="radio" name="remain" class="remain" value="${e.itemRemain}" id="remainLittle" onclick="remain()">
+							        <input type="radio" name="remain" class="remain" value="${e.itemRemain}" id="${e.itemId}remainLittle" onclick="remain()">
 							    </div>
 							    <div class="remainBottun">
-							        <label for="remainNone" class="remainLabel">
+							        <label for="${e.itemId}remainNone" class="remainLabel">
 							            <img src="/syokuzaikanri/img/remain_none.png" width="25" height="25" class="remainImage">
 							        </label>
-							        <input type="radio" name="remain" class="remain" value="${e.itemRemain}" id="remainNone" onclick="remain()">
+							        <input type="radio" name="remain" class="remain" value="${e.itemRemain}" id="${e.itemId}remainNone" onclick="remain()">
 							    </div>
 							</td>
-						</div>
 					 		<td>
 					 		</td>
 					 		<td>
 					 		</td>
 							<td>
 							    <div class="editItemButton">
-							    	<form method="POST" action="/syokuzaikanri/ItemUpdateDeleteServlet" id="edit">
-									<input type="hidden" name="itemName" value="${e.itemName}"><%-- hiddenで渡したい値をvalueに入れて渡すことが可能 --%>
+							    	<form method="GET" action="/syokuzaikanri/ItemUpdateDeleteServlet" id="edit">
+									<input type="hidden" name="itemName" value="${e.itemId}"><%-- hiddenで渡したい値をvalueに入れて渡すことが可能 --%>
 									<input type="submit" name="editItem" value="編集"></form>
 							    </div>
 							</td>
+<%-- 					  	</c:if> --%>
 					  </tr>
+<%-- 					  <c:forEach var="s" items="${allList}" > --%>
 					  <tr>
 						  <td>
 						  </td>
 						  <td>
-						  	・在庫名が入ります${e.stockName}
+						  	・${e.stockName}
 						  </td>
 						  <td>
 						  	<label for="stockBuy">購入日</label>
@@ -98,20 +99,20 @@
 						  	<input type="date" value="${e.stockLimit}" name="stockLimit" id="stockLimit" onclick="changeStockLimit()">
 						  </td>
 						  <td>
-							  <c:if test="${e.stockAlert} = 1" >
+<%-- 							  <c:if test="${e.stockAlert = TRUE}" > --%>
 							    <div class="alertlBottun"><!-- オン→オフ場合 -->
-							        <label for="alertlOff" class="alertlLabel">
+							        <label for="${e.itemId}alertOn" class="alertlLabel">
 							            <img src="/syokuzaikanri/img/alert_on.png" width="25" height="25" id="alertlImage1" onclick="alertlImage1()">
 							        </label>
-							        <input type="checkbox" name="bell" class="alertl" value="${e.stockAlert}" id="alertlOff" onclick="alertlOff()">
+							        <input type="checkbox" name="bell" class="alertl" value="${e.stockAlert}" id="${e.itemId}alertOn" onclick="alertlOff()">
 							    </div>
-							  </c:if>
-							  <c:if test="${e.stockAlert} = 0" >
+<%-- 							  </c:if> --%>
+							  <c:if test="${e.stockAlert = FALSE}" >
 							    <div class="alertlBottun"><!-- オフ→オン場合 -->
-							        <label for="alertlOn" class="alertlLabel">
+							        <label for="${e.itemId}alertOff" class="alertlLabel">
 							            <img src="/syokuzaikanri/img/alert_off.png" width="25" height="25" id="alertlImage0" onclick="alertlImage0()">
 							        </label>
-							        <input type="checkbox" name="bell" class="alertl" value="${e.stockAlert}" id="alertlOn" onclick="alertlOff()">
+							        <input type="checkbox" name="bell" class="alertl" value="${e.stockAlert}" id="${e.itemId}alertOff" onclick="alertlOff()">
 							    </div>
 							  </c:if>
 						  </td>
@@ -121,6 +122,7 @@
 					 	  <td>
 					 	  </td>
 					  </tr>
+<%-- 				</c:forEach> --%>
 					  <tr>
 					  	  <td colspan="7">
 					  	  	<input id="stockAdd" class="stockAdd" type="checkbox">
@@ -152,7 +154,7 @@
 							</div>
 					  	  </td>
 					  </tr>
-					   				</c:forEach>
+				</c:forEach>
 				</table>
 			</div>
 		</div>
