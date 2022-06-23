@@ -36,6 +36,9 @@ public class ItemUpdateDeleteServlet extends HttpServlet {
 		}
 
 		//セッションからitemidを取得
+		User user = (User)session.getAttribute("user");
+		String itemId = user.getUserId();
+
 
 
 	}
@@ -87,8 +90,8 @@ public class ItemUpdateDeleteServlet extends HttpServlet {
 			//一件だけ検索してくるメソッドを呼び出す（一覧タブ空の編集ボタン）
 			//これからメソッドを作るらしいので保留
 
-			if (iDao.(itemName, itemFavorite, categoryId, pageId, itemAlert, stockName, stockBuy, stockLimit,
-					itemRemain, itemLostday, itemId, stockAlertday1, stockAlertday2, stockAlertday3, stockAlertday4)) {
+			if (iDao.update(itemName, itemFavorite, categoryId, pageId, itemAlert, stockName, stockBuy, stockLimit,
+					itemRemain, itemLostday, itemId, stockAlertday1, stockAlertday2, stockAlertday3, stockAlertday4,itemId,stockId)) {
 				//			out.print("編集成功");
 				System.out.println("編集成功");
 			} else {
@@ -99,10 +102,10 @@ public class ItemUpdateDeleteServlet extends HttpServlet {
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/tab_edit.jsp");
 			dispatcher.forward(request, response);
 
-		} else if (request.getParameter("SUBMIT").equals("編集")) {
+		} else if (request.getParameter("SUBMIT").equals("編集/削除")) {
 			//update
 			if (iDao.update(itemName, itemFavorite, categoryId, pageId, itemAlert, stockName, stockBuy, stockLimit,
-					itemRemain, itemLostday, itemId, stockAlertday1, stockAlertday2, stockAlertday3, stockAlertday4)) {
+					itemRemain, itemLostday, itemId, stockAlertday1, stockAlertday2, stockAlertday3, stockAlertday4,itemId ,stockId)) {
 				//			out.print("編集成功");
 				System.out.println("編集成功");
 			} else {
