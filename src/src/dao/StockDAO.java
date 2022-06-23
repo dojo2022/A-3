@@ -28,16 +28,47 @@ public class StockDAO {
 			String sql = "INSERT INTO Stock (stock_name, stock_buy, stock_limit,item_id, stock_alertday1, stock_alertday2, stock_alertday3, stock_alertday4) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 
+			// SQL文を完成させる
+			// Date型の値は""を"9999-12-31"にする
 			pStmt.setString(1, stockName);
-			pStmt.setString(2, stockBuy);
-			pStmt.setString(3, stockLimit);
+
+			if (stockBuy != "") {
+				pStmt.setString(2, stockBuy);
+			} else {
+				pStmt.setString(2, "9999-12-31");
+			}
+
+			if (stockLimit != "") {
+				pStmt.setString(3, stockLimit);
+			} else {
+				pStmt.setString(3, "9999-12-31");
+			}
+
 			pStmt.setString(4, itemId);
-			pStmt.setString(5, stockAlertday1);
-			pStmt.setString(6, stockAlertday2);
-			pStmt.setString(7, stockAlertday3);
-			pStmt.setString(8, stockAlertday4);
 
+			if (stockAlertday1 != "") {
+				pStmt.setString(5, stockAlertday1);
+			} else {
+				pStmt.setString(5, "9999-12-31");
+			}
 
+			if (stockAlertday2 != "") {
+				pStmt.setString(6, stockAlertday2);
+			} else {
+				pStmt.setString(6, "9999-12-31");
+			}
+
+			if (stockAlertday3 != "") {
+				pStmt.setString(7, stockAlertday3);
+			} else {
+				pStmt.setString(7, "9999-12-31");
+			}
+
+			if (stockAlertday4 != "") {
+				pStmt.setString(8, stockAlertday4);
+			} else {
+				pStmt.setString(8, "9999-12-31");
+			}
 			// SQL文を実行する
 			if (pStmt.executeUpdate() == 1) {
 				result = true;
@@ -159,13 +190,37 @@ public class StockDAO {
 				String sql = "UPDATE Stock SET stock_buy=?, stock_limit=?, stock_alert=?, stock_alertday1=?, stock_alertday2=?,stock_alertday3=?, stock_alertday4=? WHERE stock_id=?";
 				PreparedStatement pStmt = conn.prepareStatement(sql);
 
-				pStmt.setString(1, stockBuy);
-				pStmt.setString(2, stockLimit);
+				if (stockBuy != "") {
+					pStmt.setString(1, stockBuy);
+				} else {
+					pStmt.setString(1, "9999-12-31");
+				}
+				if (stockLimit != "") {
+					pStmt.setString(2, stockLimit);
+				} else {
+					pStmt.setString(2, "9999-12-31");
+				}
 				pStmt.setString(3, stockAlert);
-				pStmt.setString(4, stockAlertday1);
-				pStmt.setString(5, stockAlertday2);
-				pStmt.setString(6, stockAlertday3);
-				pStmt.setString(7, stockAlertday4);
+				if (stockAlertday1 != "") {
+					pStmt.setString(4, stockAlertday1);
+				} else {
+					pStmt.setString(4, "9999-12-31");
+				}
+				if (stockAlertday2 != "") {
+					pStmt.setString(5, stockAlertday2);
+				} else {
+					pStmt.setString(5, "9999-12-31");
+				}
+				if (stockAlertday3 != "") {
+					pStmt.setString(6, stockAlertday3);
+				} else {
+					pStmt.setString(6, "9999-12-31");
+				}
+				if (stockAlertday4 != "") {
+					pStmt.setString(7, stockAlertday4);
+				} else {
+					pStmt.setString(7, "9999-12-31");
+				}
 				pStmt.setString(8, stockId);
 
 				// SQL文を実行する
