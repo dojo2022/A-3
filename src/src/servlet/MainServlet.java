@@ -37,13 +37,15 @@ public class MainServlet extends HttpServlet {
 		return;
 		}
 
-
+		//登録完了のメッセージのセット
+		if(request.getAttribute("msg") != null){
+			request.setAttribute("registMsg", request.getAttribute("msg"));
+		}
 
 
 		//セッションからuserIdを取得
 		User user = (User)session.getAttribute("user");
 		String userId = user.getUserId();
-
 
 
 		//page_idとpage_titleをセッションに保存
@@ -53,8 +55,8 @@ public class MainServlet extends HttpServlet {
 
 		//user_idが持つ一番小さいpage_idでitemとstockを全件検索
 		ArrayList<AllBeans> pList = (ArrayList<AllBeans>)session.getAttribute("phList");
-		AllBeans aB = pList.get(0);
-		String pageId= aB.getPageId();
+		AllBeans aB1 = pList.get(0);
+		String pageId= aB1.getPageId();
 
 		//一覧に表示するリストをselect
 		StockDAO sDao = new StockDAO();
@@ -62,6 +64,36 @@ public class MainServlet extends HttpServlet {
 
 		// 検索結果をリクエストスコープに格納する
 		request.setAttribute("allList", allList);
+
+
+//		//allListからstockを抽出する
+//		ArrayList<Stock> stockList = new ArrayList<Stock>();
+//		for(int i = 0; i < allList.size(); i++) {
+//			AllBeans aB2 = allList.get(i);
+//			Stock st = new Stock();
+//			st.setStockId(aB2.getStockId());
+//			st.setStockName(aB2.getStockName());
+//			st.setStockBuy(aB2.getStockBuy());
+//			st.setStockLimit(aB2.getStockLimit());
+//			st.setStockAlert(aB2.getStockAlert());
+//			st.setItemId(aB2.getItemId());
+//			stockList.add(st);
+//		}
+//
+//		//AllListから重複するitem行を削除する
+//		int i = 0;
+//		int k = 1;
+//		while(i < timelineList.size()) {
+//			while(k < timelineList.size()) {
+//				if(timelineList.get(i).getDecsId() == timelineList.get(k).getDecsId()) {
+//					timelineList.remove(k);
+//				}else {
+//					i++;
+//					k++;
+//				}
+//			}
+//			break;
+//		}
 
 
 

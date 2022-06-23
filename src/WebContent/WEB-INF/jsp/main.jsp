@@ -12,6 +12,11 @@
 
 
 <body>
+	<script>
+		<c:if test="${registMsg  != null }">
+			alert(${registMsg})；
+		</c:if>
+	</script>
 <div class="wrapper">
 ${user.userId}
 

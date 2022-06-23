@@ -2,7 +2,6 @@ package servlet;
 
 import java.io.IOException;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -60,15 +59,15 @@ public class ItemRegistServlet extends HttpServlet {
 
 		if (iDao.insert(itemName, itemFavorite, categoryId, pageId, itemAlert, stockName, stockBuy, stockLimit, stockAlertday1, stockAlertday2, stockAlertday3, stockAlertday4)) {
 //			out.print("登録成功");
+			request.setAttribute("msg", ("登録成功"));
 			System.out.println("登録成功");
 		} else {
 //			out.print("登録失敗");
 			System.out.println("登録失敗");
 		}
 
-		// メインページにフォワードする
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/main.jsp");
-		dispatcher.forward(request, response);
+		// メニューサーブレットにリダイレクトする
+		response.sendRedirect("/syokuzaikanri/MainServlet");
 
 	}
 

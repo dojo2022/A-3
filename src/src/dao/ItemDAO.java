@@ -11,7 +11,7 @@ public class ItemDAO {
 
 	//insert
 	//必須項目の時にお気に入りが登録できないからfavoriteにif文で未入力の場合はこう、とか、サーブレットで値を渡す必要があるかも
-	public boolean insert(String itemName, String itemFavorite , String categoryId ,String pageId ,String itemAlert,String stockName ,String stockBuy ,String stockLimit,String stockAlertday1 ,String stockAlertday2 ,String stockAlertday3 ,String stockAlertday4){
+	public boolean insert(String itemName, String itemFavorite, String categoryId, String pageId, String itemAlert, String stockName, String stockBuy, String stockLimit, String stockAlertday1, String stockAlertday2, String stockAlertday3, String stockAlertday4){
 		Connection conn = null;
 		boolean result = false;
 
@@ -131,7 +131,7 @@ public class ItemDAO {
 
 	//update 一覧タブ用
 	//全部一個のメソッドにする分、残量切れ日を更新する時とそうじゃない時のif文が必要
-	public boolean update(String itemName, String itemFavorite ,String itemRemain, String itemLostday, String categoryId ,String pageId ,String itemAlert, String itemAlertday, String stockName ,String stockBuy ,String stockLimit,String stockAlert, String stockAlertday1 ,String stockAlertday2 ,String stockAlertday3 ,String stockAlertday4 ,String itemId ,String stockId){
+	public boolean update(String itemFavorite, String itemRemain, String itemLostday, String itemAlertday, String itemId){
 		Connection conn = null;
 		boolean result = false;
 
@@ -142,44 +142,22 @@ public class ItemDAO {
 			// データベースに接続する
 			conn = DriverManager.getConnection("jdbc:h2:file:C:/dojo6Data/dojo6Data", "sa", "");
 			// itemテーブルのUPDATE（買い替えアラートを更新する（別クラスで計算したものを持ってくる））
-			String sql1 = "UPDATE Item SET item_name=? , item_favorite=? ,item_remain=?, item_lostday=?, category_id=? , page_id=? , item_alert=? , item_alertday=? where item_id=?";
-			PreparedStatement pStmt1 = conn.prepareStatement(sql1);
+			String sql = "UPDATE Item SET item_favorite=?, item_remain=?, item_lostday=?, item_alertday=? where item_id=?";
+			PreparedStatement pStmt = conn.prepareStatement(sql);
 
-			pStmt1.setString(1, itemName);
-			pStmt1.setString(2, itemFavorite);
-			pStmt1.setString(3, itemRemain);
-			pStmt1.setString(4, itemLostday);
-			pStmt1.setString(5, categoryId);
-			pStmt1.setString(6, pageId);
-			pStmt1.setString(7, itemAlert);
-			pStmt1.setString(8, itemAlertday);
-			pStmt1.setString(9, itemId);
+			pStmt.setString(1, itemFavorite);
+			pStmt.setString(2, itemRemain);
+			if (itemRemain == "1") {
+				pStmt.setString(3, itemLostday);
+			} else {
+				pStmt.setString(3, "9999-12-31");
+			}
+			pStmt.setString(4, itemAlertday);
+			pStmt.setString(5, itemId);
 
-			// stockテーブルのUPDATE（賞味期限アラートを更新する（別クラスで計算したものを持ってくる））
-			String sql2 = "UPDATE Stock SET stock_name=? , stock_buy=? , stock_limit=?, stock_alert=? ,stock_alertday1=? ,stock_alertday2=? ,stock_alertday3=? ,stock_alertday4=? where stock_id=?";
-			PreparedStatement pStmt2 = conn.prepareStatement(sql2);
-
-			pStmt1.setString(1, stockName);
-			pStmt1.setString(2, stockBuy);
-			pStmt1.setString(3, stockLimit);
-			pStmt1.setString(3, stockAlert);
-			pStmt1.setString(4, stockAlertday1);
-			pStmt1.setString(5, stockAlertday2);
-			pStmt1.setString(6, stockAlertday3);
-			pStmt1.setString(7, stockAlertday4);
-			pStmt1.setString(8, stockId);
-
-			int ans=0;
-			conn.setAutoCommit(false);//＝オートコミットを切る
-			ans += pStmt1.executeUpdate();
-			ans += pStmt2.executeUpdate();
-
-			if(ans == 2) {
-				conn.commit();
+			//SQL文を実行する
+			if (pStmt.executeUpdate() == 1) {
 				result = true;
-			}else {
-				conn.rollback();
-				result = false;
 			}
 		}
 		catch (SQLException e) {
@@ -206,7 +184,7 @@ public class ItemDAO {
 	}
 
 	//update 編集・削除タブ用
-	public boolean update(String itemName, String itemFavorite ,String itemRemain, String itemLostday, String categoryId ,String pageId ,String itemAlert, String itemAlertday, String stockName ,String stockBuy ,String stockLimit,String stockAlert, String stockAlertday1 ,String stockAlertday2 ,String stockAlertday3 ,String stockAlertday4 ,String itemId ,String stockId){
+	public boolean update(String itemName, String itemFavorite, String categoryId, String itemAlert, String itemAlertday, String itemId, String stockName, String stockBuy, String stockLimit, String stockAlert, String stockAlertday1, String stockAlertday2, String stockAlertday3, String stockAlertday4, String stockId){
 		Connection conn = null;
 		boolean result = false;
 
@@ -217,32 +195,53 @@ public class ItemDAO {
 			// データベースに接続する
 			conn = DriverManager.getConnection("jdbc:h2:file:C:/dojo6Data/dojo6Data", "sa", "");
 			// itemテーブルのUPDATE（買い替えアラートを更新する（別クラスで計算したものを持ってくる））
-			String sql1 = "UPDATE Item SET item_name=? , item_favorite=? ,item_remain=?, item_lostday=?, category_id=? , page_id=? , item_alert=? , item_alertday=? where item_id=?";
+			String sql1 = "UPDATE Item SET item_name=?, item_favorite=?, category_id=?, item_alert=?, item_alertday=? where item_id=?";
 			PreparedStatement pStmt1 = conn.prepareStatement(sql1);
 
 			pStmt1.setString(1, itemName);
 			pStmt1.setString(2, itemFavorite);
-			pStmt1.setString(3, itemRemain);
-			pStmt1.setString(4, itemLostday);
-			pStmt1.setString(5, categoryId);
-			pStmt1.setString(6, pageId);
-			pStmt1.setString(7, itemAlert);
-			pStmt1.setString(8, itemAlertday);
-			pStmt1.setString(9, itemId);
+			pStmt1.setString(3, categoryId);
+			pStmt1.setString(4, itemAlert);
+			pStmt1.setString(5, itemAlertday);
+			pStmt1.setString(6, itemId);
 
 			// stockテーブルのUPDATE（賞味期限アラートを更新する（別クラスで計算したものを持ってくる））
 			String sql2 = "UPDATE Stock SET stock_name=? , stock_buy=? , stock_limit=?, stock_alert=? ,stock_alertday1=? ,stock_alertday2=? ,stock_alertday3=? ,stock_alertday4=? where stock_id=?";
 			PreparedStatement pStmt2 = conn.prepareStatement(sql2);
 
-			pStmt1.setString(1, stockName);
-			pStmt1.setString(2, stockBuy);
-			pStmt1.setString(3, stockLimit);
-			pStmt1.setString(3, stockAlert);
-			pStmt1.setString(4, stockAlertday1);
-			pStmt1.setString(5, stockAlertday2);
-			pStmt1.setString(6, stockAlertday3);
-			pStmt1.setString(7, stockAlertday4);
-			pStmt1.setString(8, stockId);
+			pStmt2.setString(1, stockName);
+			if (stockBuy != "") {
+				pStmt2.setString(2, stockBuy);
+			} else {
+				pStmt2.setString(2, "9999-12-31");
+			}
+			if (stockLimit != "") {
+				pStmt2.setString(3, stockLimit);
+			} else {
+				pStmt2.setString(3, "9999-12-31");
+			}
+			pStmt2.setString(4, stockAlert);
+			if (stockAlertday1 != "") {
+				pStmt2.setString(5, stockAlertday1);
+			} else {
+				pStmt2.setString(5, "9999-12-31");
+			}
+			if (stockAlertday2 != "") {
+				pStmt2.setString(6, stockAlertday2);
+			} else {
+				pStmt2.setString(6, "9999-12-31");
+			}
+			if (stockAlertday3 != "") {
+				pStmt2.setString(7, stockAlertday3);
+			} else {
+				pStmt2.setString(7, "9999-12-31");
+			}
+			if (stockAlertday4 != "") {
+				pStmt2.setString(8, stockAlertday4);
+			} else {
+				pStmt2.setString(8, "9999-12-31");
+			}
+			pStmt2.setString(9, stockId);
 
 			int ans=0;
 			conn.setAutoCommit(false);//＝オートコミットを切る
