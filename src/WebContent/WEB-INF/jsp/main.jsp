@@ -23,8 +23,9 @@ ${user.userId}
 <div class="item1">ham</div>
 <div class="item2"><img src="img/pokezo_logo.png"></div>
 <div class="item3">日付</div>
-<div class="item4">ニックネーム</div>
-<div class="item5"><img src="img/icon.png"></div>
+<div class="item4">ヘルプ</div>
+<div class="item5">ニックネーム</div>
+<div class="item6"><a href="/syokuzaikanri/AccountEditServlet"><img src="img/icon.png"></a></div>
 </div>
 <!-- nav ここまで -->
 
