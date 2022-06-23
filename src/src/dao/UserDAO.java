@@ -14,7 +14,7 @@ public class UserDAO {
 
 	// insert
 	//ここの引数減らしたい
-	public boolean insert(String userId,String userPw,String userName) {
+	public boolean insert(String user,String userPw,String userName) {
 		Connection conn = null;
 		boolean result = false;
 
@@ -29,7 +29,7 @@ public class UserDAO {
 			String sql1 = "INSERT INTO User (user_id,user_pw,user_name) VALUES (?,?,?)";//INSERT INTO テーブル名（列名A,列名B,…） VALUES（値A,値B,…）
 			PreparedStatement pStmt1 = conn.prepareStatement(sql1);
 
-			pStmt1.setString(1,userId);
+			pStmt1.setString(1,user);
 			pStmt1.setString(2,userPw);
 			pStmt1.setString(3,userName);
 
@@ -48,7 +48,7 @@ public class UserDAO {
 			String sql4 = "INSERT INTO UPjoin (user_id, page_id) VALUES (?, ?)";
 			PreparedStatement pStmt4 = conn.prepareStatement(sql4);
 
-			pStmt4.setString(1, userId);
+			pStmt4.setString(1, user);
 
 			int ans = 0;
 			conn.setAutoCommit(false);//＝オートコミットを切る

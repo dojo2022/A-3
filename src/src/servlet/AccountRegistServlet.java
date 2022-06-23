@@ -29,15 +29,15 @@ public class AccountRegistServlet extends HttpServlet {
 		//リクエストパラメータを取得する
 		request.setCharacterEncoding("UTF-8");
 		String userName = request.getParameter("userName");
-		String userId = request.getParameter("userId");
+		String user = request.getParameter("userId");
 		String userPw = request.getParameter("userPw");
 
 		UserDAO uDao = new UserDAO();
-		if (uDao.insert(userId,userPw,userName)) {	// 登録成功
+		if (uDao.insert(user,userPw,userName)) {	// 登録成功
 			// セッションスコープにIDを格納する
 			HttpSession session = request.getSession();
-			
-			session.setAttribute("userId",userId);
+
+			session.setAttribute("userId",user);
 			// ウェルカムサーブレットにリダイレクトする
 			response.sendRedirect("/syokuzaikanri/WelcomeServlet");
 		}
