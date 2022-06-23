@@ -302,7 +302,7 @@ public class UserDAO {
 				while (rs.next()) { //rsインスタンスの内容を全て取り出す
 					AllBeans all = new AllBeans();
 					all.setPageId(rs.getString("page_id"));
-					all.setPageId(rs.getString("page_title"));
+					all.setPageTitle(rs.getString("page_title"));
 
 					phList.add(all);
 				}
