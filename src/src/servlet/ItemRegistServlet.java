@@ -8,7 +8,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.swing.JOptionPane;
 
 import dao.ItemDAO;
 import model.Alert;
@@ -56,10 +55,13 @@ public class ItemRegistServlet extends HttpServlet {
 
 		//登録処理を行う
 		ItemDAO iDao = new ItemDAO();
+//		//JSPに返却する値を作成する。値はoutの中に格納する
+//		PrintWriter out = response.getWriter();
+
 		if (iDao.insert(itemName, itemFavorite, categoryId, pageId, itemAlert, stockName, stockBuy, stockLimit, stockAlertday1, stockAlertday2, stockAlertday3, stockAlertday4)) {
-			JOptionPane.showMessageDialog(null, "登録が成功しました！");
+//			out.print("登録成功");
 		} else {
-			JOptionPane.showMessageDialog(null, "登録できませんでした");
+//			out.print("登録失敗");
 		}
 
 		// メインページにフォワードする
