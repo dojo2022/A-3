@@ -36,6 +36,7 @@ public class AccountRegistServlet extends HttpServlet {
 		if (uDao.insert(userId,userPw,userName)) {	// 登録成功
 			// セッションスコープにIDを格納する
 			HttpSession session = request.getSession();
+			
 			session.setAttribute("userId",userId);
 			// ウェルカムサーブレットにリダイレクトする
 			response.sendRedirect("/syokuzaikanri/WelcomeServlet");
