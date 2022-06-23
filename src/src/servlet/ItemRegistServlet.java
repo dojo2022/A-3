@@ -60,8 +60,10 @@ public class ItemRegistServlet extends HttpServlet {
 
 		if (iDao.insert(itemName, itemFavorite, categoryId, pageId, itemAlert, stockName, stockBuy, stockLimit, stockAlertday1, stockAlertday2, stockAlertday3, stockAlertday4)) {
 //			out.print("登録成功");
+			System.out.println("登録成功");
 		} else {
 //			out.print("登録失敗");
+			System.out.println("登録失敗");
 		}
 
 		// メインページにフォワードする
