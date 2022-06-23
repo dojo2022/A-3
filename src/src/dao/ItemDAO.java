@@ -47,13 +47,42 @@ public class ItemDAO {
 
 			// SQL文を完成させる
 			pStmt3.setString(1, stockName);
-			pStmt3.setString(2, stockBuy);
-			pStmt3.setString(3, stockLimit);
-			pStmt3.setString(4, stockAlertday1);
-			pStmt3.setString(5, stockAlertday2);
-			pStmt3.setString(6, stockAlertday3);
-			pStmt3.setString(7, stockAlertday4);
 
+			if (stockBuy != "") {
+				pStmt3.setString(2, stockBuy);
+			} else {
+				pStmt3.setString(2, "9999-12-31");
+			}
+
+			if (stockLimit != "") {
+				pStmt3.setString(3, stockLimit);
+			} else {
+				pStmt3.setString(3, "9999-12-31");
+			}
+
+			if (stockAlertday1 != "") {
+				pStmt3.setString(4, stockAlertday1);
+			} else {
+				pStmt3.setString(4, "9999-12-31");
+			}
+
+			if (stockAlertday2 != "") {
+				pStmt3.setString(5, stockAlertday2);
+			} else {
+				pStmt3.setString(5, "9999-12-31");
+			}
+
+			if (stockAlertday3 != "") {
+				pStmt3.setString(6, stockAlertday3);
+			} else {
+				pStmt3.setString(6, "9999-12-31");
+			}
+
+			if (stockAlertday4 != "") {
+				pStmt3.setString(7, stockAlertday4);
+			} else {
+				pStmt3.setString(7, "9999-12-31");
+			}
 
 			int ans = 0;
 			conn.setAutoCommit(false);//＝オートコミットを切る
@@ -100,7 +129,7 @@ public class ItemDAO {
 		return result;
 	}
 
-	//update、残量
+	//update 一覧タブ用
 	//全部一個のメソッドにする分、残量切れ日を更新する時とそうじゃない時のif文が必要
 	public boolean update(String itemName, String itemFavorite ,String itemRemain, String itemLostday, String categoryId ,String pageId ,String itemAlert, String itemAlertday, String stockName ,String stockBuy ,String stockLimit,String stockAlert, String stockAlertday1 ,String stockAlertday2 ,String stockAlertday3 ,String stockAlertday4 ,String itemId ,String stockId){
 		Connection conn = null;
@@ -175,6 +204,82 @@ public class ItemDAO {
 		return result;
 
 	}
+
+	//update 編集・削除タブ用
+	public boolean update(String itemName, String itemFavorite ,String itemRemain, String itemLostday, String categoryId ,String pageId ,String itemAlert, String itemAlertday, String stockName ,String stockBuy ,String stockLimit,String stockAlert, String stockAlertday1 ,String stockAlertday2 ,String stockAlertday3 ,String stockAlertday4 ,String itemId ,String stockId){
+		Connection conn = null;
+		boolean result = false;
+
+		try {
+			// JDBCドライバを読み込む
+			Class.forName("org.h2.Driver");
+
+			// データベースに接続する
+			conn = DriverManager.getConnection("jdbc:h2:file:C:/dojo6Data/dojo6Data", "sa", "");
+			// itemテーブルのUPDATE（買い替えアラートを更新する（別クラスで計算したものを持ってくる））
+			String sql1 = "UPDATE Item SET item_name=? , item_favorite=? ,item_remain=?, item_lostday=?, category_id=? , page_id=? , item_alert=? , item_alertday=? where item_id=?";
+			PreparedStatement pStmt1 = conn.prepareStatement(sql1);
+
+			pStmt1.setString(1, itemName);
+			pStmt1.setString(2, itemFavorite);
+			pStmt1.setString(3, itemRemain);
+			pStmt1.setString(4, itemLostday);
+			pStmt1.setString(5, categoryId);
+			pStmt1.setString(6, pageId);
+			pStmt1.setString(7, itemAlert);
+			pStmt1.setString(8, itemAlertday);
+			pStmt1.setString(9, itemId);
+
+			// stockテーブルのUPDATE（賞味期限アラートを更新する（別クラスで計算したものを持ってくる））
+			String sql2 = "UPDATE Stock SET stock_name=? , stock_buy=? , stock_limit=?, stock_alert=? ,stock_alertday1=? ,stock_alertday2=? ,stock_alertday3=? ,stock_alertday4=? where stock_id=?";
+			PreparedStatement pStmt2 = conn.prepareStatement(sql2);
+
+			pStmt1.setString(1, stockName);
+			pStmt1.setString(2, stockBuy);
+			pStmt1.setString(3, stockLimit);
+			pStmt1.setString(3, stockAlert);
+			pStmt1.setString(4, stockAlertday1);
+			pStmt1.setString(5, stockAlertday2);
+			pStmt1.setString(6, stockAlertday3);
+			pStmt1.setString(7, stockAlertday4);
+			pStmt1.setString(8, stockId);
+
+			int ans=0;
+			conn.setAutoCommit(false);//＝オートコミットを切る
+			ans += pStmt1.executeUpdate();
+			ans += pStmt2.executeUpdate();
+
+			if(ans == 2) {
+				conn.commit();
+				result = true;
+			}else {
+				conn.rollback();
+				result = false;
+			}
+		}
+		catch (SQLException e) {
+			e.printStackTrace();
+		}
+		catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+		finally {
+			// データベースを切断
+			if (conn != null) {
+				try {
+					conn.close();
+				}
+				catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+
+		// 結果を返す
+		return result;
+
+	}
+
 
 	//delete
 	public boolean delete(String itemId){
