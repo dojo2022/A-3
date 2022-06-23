@@ -14,7 +14,7 @@ public class UserDAO {
 
 	// insert
 	//ここの引数減らしたい
-	public boolean insert(String userId,String userPw,String userName,String memoItem,String memoCheck) {
+	public boolean insert(String userId,String userPw,String userName) {
 		Connection conn = null;
 		boolean result = false;
 
@@ -50,14 +50,6 @@ public class UserDAO {
 
 			pStmt4.setString(1, userId);
 
-			//MemoのINSERT文を準備する
-			//INSERT INTO テーブル名（列名A,列名B,…） VALUES（値A,値B,…）
-			String sql5 = "INSERT INTO Memo (memo_item,memo_check) VALUES (?,?)";
-			PreparedStatement pStmt5= conn.prepareStatement(sql5);
-
-			pStmt5.setString(1,memoItem);
-			pStmt5.setString(2,memoCheck);
-
 			int ans = 0;
 			conn.setAutoCommit(false);//＝オートコミットを切る
 			ans += pStmt1.executeUpdate();
@@ -73,9 +65,8 @@ public class UserDAO {
 
 			ans += pStmt4.executeUpdate();
 
-			ans += pStmt5.executeUpdate();
 
-			if (ans == 4) {
+			if (ans == 3) {
 				conn.commit(); //全部のsql文ができていれば成功
 				result = true;
 			}
