@@ -1,0 +1,49 @@
+@charset "UTF-8";
+/*残量ボタンの横ならべ*/
+.remainBottun{
+	float: left;
+}
+/*一覧の線*/
+.item_list{
+	border: 2px #000000 solid;
+	height: 340px;
+	overflow: auto;
+}
+.item_list td{
+	border-bottom-width: 2px;
+    border-bottom-style: solid;
+    border-bottom-color: #000000;
+}
+
+/*在庫追加アコーディオンのデザイン*/
+.stockAdd{
+    display: none;
+}
+.stockAdd-label{
+    color: #fff;
+    display: block;
+    height: 30px;
+    position: relative;
+}
+.stockAdd-label:after{
+    background: #c0c0c0;
+    box-sizing: border-box;
+    display: block;
+    height: 30px;
+    position: absolute;
+}
+.stockAdd-content{
+	margin-left: 30px;
+    background: #c0c0c0;
+    height: 0;
+    opacity: 0;
+    padding: 0 10px;
+    transition: .5s;
+    visibility: hidden;
+}
+.stockAdd:checked + .stockAdd-label + .stockAdd-content{
+    height: 40px;
+    opacity: 1;
+    padding: 10px;
+    visibility: visible;
+}
