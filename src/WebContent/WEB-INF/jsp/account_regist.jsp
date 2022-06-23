@@ -12,7 +12,7 @@
 			<table>
 			<tr>
 			<td>
-			<input type="text" name="userNAME" placeholder="ニックネーム">
+			<input type="text" name="userName" placeholder="ニックネーム">
 			</td>
 			</tr>
 	            <tr>
