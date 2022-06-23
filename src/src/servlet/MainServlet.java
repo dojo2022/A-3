@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import dao.StockDAO;
 import dao.UserDAO;
 import model.AllBeans;
 import model.User;
@@ -27,17 +28,14 @@ public class MainServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		// もしもログインしていなかったらログインサーブレットにリダイレクトする
+
 		HttpSession session = request.getSession();
 		session.getAttribute("user");
+		// もしもログインしていなかったらログインサーブレットにリダイレクトする
 		if (session.getAttribute("user") == null) {
 			response.sendRedirect("/syokuzaikanri/LoginServlet");
 		return;
 		}
-
-
-
-
 
 
 
@@ -48,13 +46,26 @@ public class MainServlet extends HttpServlet {
 
 
 
-
 		//page_idとpage_titleをセッションに保存
 		UserDAO uDao = new UserDAO();
 		ArrayList<AllBeans> phList = uDao.upselect(userId);
 		session.setAttribute("phList",phList);
 
 		//user_idが持つ一番小さいpage_idでitemとstockを全件検索
+		ArrayList<AllBeans> pList = (ArrayList<AllBeans>)session.getAttribute("phList");
+		AllBeans aB = pList.get(0);
+		String pageId= aB.getPageId();
+
+		//一覧に表示するリストをselect
+		StockDAO sDao = new StockDAO();
+		ArrayList<AllBeans> allList = sDao.select(pageId);
+
+		// 検索結果をリクエストスコープに格納する
+		request.setAttribute("allList", allList);
+
+
+
+
 
 
 

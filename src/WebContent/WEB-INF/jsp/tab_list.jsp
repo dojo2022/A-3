@@ -26,8 +26,8 @@
 			 		<input type="submit" name="returnList" value="一覧に戻す">
 			 	</form>
 				<table class="item_list">
-<%-- 				<c:forEach var="e" items="${ここに項目とか在庫のデータを入れたアレイリストの名前が入るはず…？}" >
- --%>					 <tr>
+ 				<c:forEach var="e" items="${allList}" >
+					 <tr>
 				 		<td>
 				 		<c:if test="${itemFavorite} = 1" ><!-- おきに入り→お気に入りじゃないの場合 -->
 						    <div class="favoriteBottun">
@@ -152,7 +152,7 @@
 							</div>
 					  	  </td>
 					  </tr>
-<%-- 				</c:forEach> --%>
+					   				</c:forEach>
 				</table>
 			</div>
 		</div>

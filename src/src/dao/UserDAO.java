@@ -274,7 +274,7 @@ public class UserDAO {
 	}
 
 
-	//user_idが持っているページの中で一番小さいpage_idを取得する。
+	//pageflagが1のpageidとpagetitleを取得
 		public ArrayList<AllBeans> upselect(String userId) {
 			Connection conn = null;
 			ArrayList<AllBeans> phList = new ArrayList<AllBeans>();
