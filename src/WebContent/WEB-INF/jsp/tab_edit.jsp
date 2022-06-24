@@ -10,7 +10,7 @@
 <body>
 
 <form method="POST" action="/syokuzaikanri/MainServlet">
-	<p>検索<input type="search"  name="search" placeholder="検索"></p>
+	<p>検索<input type="search"  name="search" placeholder="検索" ></p>
 </form>
 
 <c:forEach var="e" items="${itemList}">

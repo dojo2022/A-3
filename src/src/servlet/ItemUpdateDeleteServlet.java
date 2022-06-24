@@ -49,7 +49,7 @@ public class ItemUpdateDeleteServlet extends HttpServlet {
 		request.setAttribute("itemList", itemList);
 
 		//tab_edit.jspにフォワードする
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/tab_edit.jsp");
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/tab_edit.jsp#edit");
 		dispatcher.forward(request, response);
 	}
 
@@ -95,34 +95,34 @@ public class ItemUpdateDeleteServlet extends HttpServlet {
 		String stockAlertday3 = str[2];
 		String stockAlertday4 = str[3];
 
-		//		itemName, itemFavorite, categoryId, pageId, itemAlert, stockName, stockBuy, stockLimit,
-		//		itemRemain, itemLostday, itemId, stockAlertday1, stockAlertday2, stockAlertday3, stockAlertday4,itemId ,stockId
-		// 編集または削除を行う
-		ItemDAO iDao = new ItemDAO();
-		if (request.getParameter("SUBMIT").equals("編集")) {
-			//update
-			if (iDao.update(itemFavorite, itemRemain, itemLostday, itemAlertday, itemId)) {
-				//			out.print("編集成功");
-				System.out.println("編集成功");
-			} else {
-				//			out.print("編集失敗");
-				System.out.println("編集失敗");
-			}
-		} else {
-			//delete
-			if (iDao.delete(itemFavorite, itemRemain, itemLostday, itemAlertday, itemId)) {
-				//			out.print("削除成功");
-				System.out.println("削除成功");
-			} else {
-				//			out.print("削除失敗");
-				System.out.println("削除失敗");
-			}
-		}
-
-		// メインページにフォワードする
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/main.jsp");
-		dispatcher.forward(request, response);
-
+//		//		itemName, itemFavorite, categoryId, pageId, itemAlert, stockName, stockBuy, stockLimit,
+//		//		itemRemain, itemLostday, itemId, stockAlertday1, stockAlertday2, stockAlertday3, stockAlertday4,itemId ,stockId
+//		// 編集または削除を行う
+//		ItemDAO iDao = new ItemDAO();
+//		if (request.getParameter("SUBMIT").equals("編集")) {
+//			//update
+//			if (iDao.update(itemFavorite, itemRemain, itemLostday, itemAlertday, itemId)) {
+//				//			out.print("編集成功");
+//				System.out.println("編集成功");
+//			} else {
+//				//			out.print("編集失敗");
+//				System.out.println("編集失敗");
+//			}
+//		} else {
+//			//delete
+//			if (iDao.delete(itemFavorite, itemRemain, itemLostday, itemAlertday, itemId)) {
+//				//			out.print("削除成功");
+//				System.out.println("削除成功");
+//			} else {
+//				//			out.print("削除失敗");
+//				System.out.println("削除失敗");
+//			}
+//		}
+//
+//		// メインページにフォワードする
+//		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/main.jsp");
+//		dispatcher.forward(request, response);
+//
 	}
 
 }

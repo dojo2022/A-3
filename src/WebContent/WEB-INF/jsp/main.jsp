@@ -67,7 +67,7 @@ ${user.userId}
 			<label class="tab_item" for="ccc">登録</label>
 			<input id="ddd" type="radio"	name="tab_item">
 
-			<label class="tab_item" for="ddd">編集/削除</label>
+			<label class="tab_item" for="ddd" id ="edit">編集/削除</label>
 
 
 		<!-- ここから内容 -->
@@ -87,8 +87,9 @@ ${user.userId}
 				<%@ include file="tab_regist.jsp" %>
 			</div>
 
-			<div class="tab_content" id="ddd_content">
+			<div class="tab_content" id="ddd_content" >
 				<%@ include file="tab_edit.jsp" %>
+
 			</div>
 	</div>
 </div>
