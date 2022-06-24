@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,7 +12,8 @@
 
 <div class="form">
 <form method="POST" action="/syokuzaikanri/ItemRegistServlet">
-				<input type="hidden" name="pageId" value="1">
+				<input type="hidden" name="pageId" value="${phList.pageId}">
+				${phList.pageId}
 	 <p>項目名<input type="text" name="itemName"></p>
 	 <p>分類名<select name="categoryId">
 			    <option value="1">野菜</option>
