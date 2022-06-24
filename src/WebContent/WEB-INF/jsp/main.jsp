@@ -29,7 +29,7 @@
 	</c:if>
 
 <div class="wrapper">
-${user.userId}
+
 
 
 <!-- nav  -->
@@ -40,7 +40,7 @@ ${user.userId}
 <div class="item2"><img src="img/pokezo_logo.png"></div>
 <div class="item3">日付</div>
 <div class="item4">ヘルプ</div>
-<div class="item5">ニックネーム</div>
+<div class="item5">${user.userName}</div>
 <div class="item6"><a href="/syokuzaikanri/AccountEditServlet"><img src="img/icon.png"></a></div>
 </div>
 <!-- nav ここまで -->
@@ -106,7 +106,23 @@ ${user.userId}
         これは仮の背景だよ
     </div>
     <div class="grid_test-child"><!-- grit 子要素④  -->
-        コンテンツが入ります
+
+	<div class= memoitem>
+	   <form id = memo method="POST" action="/syokuzaikanri/MemoTestServlet">
+		<div class=memotitle>買い物メモ</div><br>
+			<c:forEach begin="0" end="19" step="1" varStatus="status">
+				●<input type="text" class= memotext size="28" name="in${status.index}" <%-- placeholder="in${status.index}" --%>>
+				<input class = memocheck type="checkbox"><br>
+				<!-- index：<c:out value="${status.index}"/><br> -->
+				<!--「name""」の位置は？ "in"${status.index} or "in${status.index}" -->
+			</c:forEach>
+		<div class = memobutton>
+			<input type="reset" class=memob name="memoReset" value="リセット">
+			&emsp;
+			<input  type="submit" class=memob name="SUBMIT" value="更新">
+		</div>
+		</form>
+	</div>
     </div>
 </div>
 
