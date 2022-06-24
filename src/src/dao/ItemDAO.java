@@ -185,7 +185,8 @@ public class ItemDAO {
 		return result;
 
 	}
-//itemFavoriteの値が2、3の時のupdateメソッド
+
+	//itemRemainの値が2、3の時のupdateメソッド
 	public boolean itemFRupdate(String itemFavorite, String itemRemain, String itemId){
 		Connection conn = null;
 		boolean result = false;
@@ -233,8 +234,59 @@ public class ItemDAO {
 	}
 
 
-	//update 編集・削除タブ用
-	public boolean update(String itemName, String itemFavorite, String categoryId, String itemAlert, String itemAlertday, String itemId, String stockName, String stockBuy, String stockLimit, String stockAlert, String stockAlertday1, String stockAlertday2, String stockAlertday3, String stockAlertday4, String stockId){
+	//update 新編集・削除タブ用
+	public boolean editUpdate(String itemName, String itemFavorite, String categoryId, String itemAlert, String itemAlertday, String itemId){
+		Connection conn = null;
+		boolean result = false;
+
+		try {
+			// JDBCドライバを読み込む
+			Class.forName("org.h2.Driver");
+
+			// データベースに接続する
+			conn = DriverManager.getConnection("jdbc:h2:file:C:/dojo6Data/dojo6Data", "sa", "");
+			// itemテーブルのUPDATE（買い替えアラートを更新する（別クラスで計算したものを持ってくる））
+			String sql = "UPDATE Item SET item_name=?, item_favorite=?, category_id=?, item_alert=?, item_alertday=? where item_id=?";
+			PreparedStatement pStmt = conn.prepareStatement(sql);
+
+			pStmt.setString(1, itemName);
+			pStmt.setString(2, itemFavorite);
+			pStmt.setString(3, categoryId);
+			pStmt.setString(4, itemAlert);
+			pStmt.setString(5, itemAlertday);
+			pStmt.setString(6, itemId);
+
+			//SQL文を実行する
+			if (pStmt.executeUpdate() == 1) {
+				result = true;
+			}
+		}
+		catch (SQLException e) {
+			e.printStackTrace();
+		}
+		catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+		finally {
+			// データベースを切断
+			if (conn != null) {
+				try {
+					conn.close();
+				}
+				catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+
+		// 結果を返す
+		return result;
+
+	}
+
+
+	//update	旧編集・削除タブ用？
+	public boolean oldUpdate(String itemName, String itemFavorite, String categoryId, String itemAlert, String itemAlertday, String itemId, String stockName, String stockBuy, String stockLimit, String stockAlert, String stockAlertday1, String stockAlertday2, String stockAlertday3, String stockAlertday4, String stockId){
 		Connection conn = null;
 		boolean result = false;
 
@@ -342,28 +394,40 @@ public class ItemDAO {
 			// データベースに接続する
 			conn = DriverManager.getConnection("jdbc:h2:file:C:/dojo6Data/dojo6Data", "sa", "");
 			// stockテーブルのDELETE
-			String sql1 = "DELETE FROM Stock WHERE item_id = ?";
+			String sql1 = "SELECT COUNT(*) FROM Stock WHERE item_id = ?";
 			PreparedStatement pStmt1 = conn.prepareStatement(sql1);
 
 			// SQL文を完成させる
 			pStmt1.setString(1, itemId);
 
-			// ItemテーブルのDELETE
-			String sql2 = "DELETE FROM Item WHERE item_id = ?";
+			String sql2 = "DELETE FROM Stock WHERE item_id = ?";
 			PreparedStatement pStmt2 = conn.prepareStatement(sql2);
 
 			// SQL文を完成させる
 			pStmt2.setString(1, itemId);
 
-			int ans = 0;
-			conn.setAutoCommit(false);//＝オートコミットを切る
-			ans += pStmt1.executeUpdate();
-			ans += pStmt2.executeUpdate();
+			// ItemテーブルのDELETE
+			String sql3 = "DELETE FROM Item WHERE item_id = ?";
+			PreparedStatement pStmt3 = conn.prepareStatement(sql3);
 
-			if(ans == 2) {
+			// SQL文を完成させる
+			pStmt3.setString(1, itemId);
+
+			int selectAns=0;
+			int ans1 = 0;
+			int ans2 = 0;
+			conn.setAutoCommit(false);//＝オートコミットを切る
+			ResultSet rs = pStmt1.executeQuery();
+			while (rs.next()) {
+				selectAns=rs.getInt("COUNT(*)");
+			}
+			ans1 = pStmt2.executeUpdate();
+			ans2 = pStmt3.executeUpdate();
+
+			if (ans1+ans2 == (selectAns+ans2)) {
 				conn.commit();
 				result = true;
-			}else {
+			} else {
 				conn.rollback();
 				result = false;
 			}
@@ -390,6 +454,7 @@ public class ItemDAO {
 		return result;
 
 	}
+
 	// select一覧タブからの編集削除タブ用
 	public ArrayList<AllBeans> select(String itemId){
 		Connection conn = null;

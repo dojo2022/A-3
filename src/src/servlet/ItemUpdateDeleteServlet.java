@@ -41,7 +41,6 @@ public class ItemUpdateDeleteServlet extends HttpServlet {
 		String itemId = request.getParameter("itemName");
 
 		//ItemDAOから一件だけもらってくる
-
 		ItemDAO iDao = new ItemDAO();
 		//if
 		ArrayList<AllBeans> itemList = iDao.select(itemId);
@@ -49,6 +48,7 @@ public class ItemUpdateDeleteServlet extends HttpServlet {
 		request.setAttribute("itemList", itemList);
 		request.setAttribute("flg","切り替えフラグ");
 		System.out.println(request.getAttribute("flg"));
+
 		//tab_edit.jspにフォワードする
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/main.jsp#ddd_content");
 		dispatcher.forward(request, response);
@@ -76,54 +76,37 @@ public class ItemUpdateDeleteServlet extends HttpServlet {
 		String categoryId = request.getParameter("categoryId");
 		String itemFavorite = request.getParameter("itemFavorite");
 		String itemAlert = request.getParameter("itemAlert");
-		String stockName = request.getParameter("stockName");
-		String stockBuy = request.getParameter("stockBuy");
-		String stockLimit = request.getParameter("stockLimit");
-		//inout type=hiddenもリクエストパラメータで取得する！！
-		String pageId = request.getParameter("pageId");
-		String itemRemain = request.getParameter("itemRemain");
+//		String pageId = request.getParameter("pageId");
+//		String itemRemain = request.getParameter("itemRemain");
 		String itemLostday = request.getParameter("itemLostday");
 		String itemId = request.getParameter("itemId");
 
 		//期限日の計算を行う
 		Alert alert = new Alert();
-		String[] str = alert.stockAlert(stockLimit);
-
 		//期限日が計算されている前提（エラー未想定）
-		//stockAlertday1～4を定義
-		String stockAlertday1 = str[0];
-		String stockAlertday2 = str[1];
-		String stockAlertday3 = str[2];
-		String stockAlertday4 = str[3];
+		String itemAlertday = alert.itemAlertEdit(itemLostday, itemAlert);
 
-//		//		itemName, itemFavorite, categoryId, pageId, itemAlert, stockName, stockBuy, stockLimit,
-//		//		itemRemain, itemLostday, itemId, stockAlertday1, stockAlertday2, stockAlertday3, stockAlertday4,itemId ,stockId
-//		// 編集または削除を行う
-//		ItemDAO iDao = new ItemDAO();
-//		if (request.getParameter("SUBMIT").equals("編集")) {
-//			//update
-//			if (iDao.update(itemFavorite, itemRemain, itemLostday, itemAlertday, itemId)) {
-//				//			out.print("編集成功");
-//				System.out.println("編集成功");
-//			} else {
-//				//			out.print("編集失敗");
-//				System.out.println("編集失敗");
-//			}
-//		} else {
-//			//delete
-//			if (iDao.delete(itemFavorite, itemRemain, itemLostday, itemAlertday, itemId)) {
-//				//			out.print("削除成功");
-//				System.out.println("削除成功");
-//			} else {
-//				//			out.print("削除失敗");
-//				System.out.println("削除失敗");
-//			}
-//		}
-//
-//		// メインページにフォワードする
-//		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/main.jsp");
-//		dispatcher.forward(request, response);
-//
+		// 編集または削除を行う
+		ItemDAO iDao = new ItemDAO();
+		if (request.getParameter("regist").equals("編集")) {
+			//update
+			if (iDao.editUpdate(itemName, itemFavorite, categoryId, itemAlert, itemAlertday, itemId)) {
+				System.out.println("編集成功");
+			} else {
+				System.out.println("編集失敗");
+			}
+		} else {
+			//delete
+			if (iDao.delete(itemId)) {
+				System.out.println("削除成功");
+			} else {
+				System.out.println("削除失敗");
+			}
+		}
+
+			// メインサーブレットにリダイレクトする
+			response.sendRedirect("/syokuzaikanri/MainServlet");
+
 	}
 
 }

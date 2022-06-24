@@ -2,8 +2,11 @@ package model;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+
+import dao.ItemDAO;
 
 
 
@@ -11,9 +14,10 @@ import java.util.Date;
 public class Alert {
 
 //	public static void main(String args[]) {
-//		stockAlert("");
-//		stockAlert("2022-06-21");
-//		stockAlert("2022/06/21");
+//		Item i =itemAlert("40");
+//
+//		System.out.println(i.getItemLostday());
+//		System.out.println(i.getItemAlertday());
 //	}
 
 	//期限日アラート（stock依存）
@@ -69,7 +73,7 @@ public class Alert {
 			    String alert3 = new SimpleDateFormat("yyyy-MM-dd").format(date3);
 			    String alert4 = new SimpleDateFormat("yyyy-MM-dd").format(date4);
 
-			    //期限アラート日をarrayにセットする）
+			    //期限アラート日をarrayにセットする
 			    array[0] = alert1;
 			    array[1] = alert2;
 			    array[2] = alert3;
@@ -78,7 +82,7 @@ public class Alert {
 
 		} catch (ParseException e) {//エラー出たときどうしよう？
 			e.printStackTrace();
-			array[0] = "期限日をカレンダーから入力し直してください";
+			array = null;
 		}
 
 		for (String str : array) {
@@ -91,47 +95,120 @@ public class Alert {
 
 	}
 
-	public void itemAlert(String itemAlert) {
-		//買い替えアラート(item依存)
+	//買い替えアラート 買い替えアラート期間(item_Alert)切り替えによる計算
+	//ItemUpdateDeleteServlet用
+	public String itemAlertEdit(String itemLostday, String itemAlert) {
+		String itemAlertday = new String();//戻り値1
 
-		//残量切れ日(item_lostday)、アラート期間（item_alert）を取得
-		//残量切れ日（残量なしボタンが押された日）の算出
-		Date lostday = new Date();
+		try {
+			if (itemLostday == "9999-12-31" || itemLostday == null) {
+				itemAlertday = "9999-12-31";
+			} else {
+				//文字列のフォーマットを指定
+				SimpleDateFormat sdFormat = new SimpleDateFormat("yyyy-MM-dd");
+				//String型をDate型に変換する
+				Date lostday = sdFormat.parse(itemLostday);
 
-		//Date型をCalendar型に変換（計算のため）
-		Calendar calendar = Calendar.getInstance();
-        calendar.setTime(lostday);
+				//Date型をCalendar型に変換（計算のため）
+			    Calendar calendar = Calendar.getInstance();
+			    calendar.setTime(lostday);
 
-        //アラート期間の条件を変数numに格納
+				//残量切れ日+アラート期間（なし=1、即日=2、３日後=3、１週間後=4、２週間後=5、１カ月後=6）を計算、買い替えアラート日（item_alertday）を算出
+				if (itemAlert == "3") {
+					calendar.add(Calendar.DAY_OF_MONTH, 3);
+				} else if (itemAlert == "4") {
+					calendar.add(Calendar.DAY_OF_MONTH, 7);
+				} else if (itemAlert == "5") {
+					calendar.add(Calendar.DAY_OF_MONTH, 14);
+				} else if (itemAlert == "6") {
+					calendar.add(Calendar.MONTH, 1);
+				} else if (itemAlert == "1"){
+					calendar.set(Calendar.YEAR, 9999);
+					calendar.set(Calendar.MONTH, 11);
+					calendar.set(Calendar.DAY_OF_MONTH, 31);
+				}
 
-		//残量切れ日+アラート期間（なし=1、３日後=2、１週間後=3、２週間後=4、１カ月後=5）を計算、買い替えアラート日（item_alertday）を算出
-        if (itemAlert == "2") {
-        	calendar.add(Calendar.DAY_OF_MONTH, 3);
-        } else if (itemAlert == "3") {
-        	calendar.add(Calendar.DAY_OF_MONTH, 7);
-        } else if (itemAlert == "4") {
-        	calendar.add(Calendar.DAY_OF_MONTH, 14);
-        } else if (itemAlert == "5") {
-        	calendar.add(Calendar.MONTH, 1);
-        } else {
-        	calendar.set(Calendar.YEAR, 9999);
-        	calendar.set(Calendar.MONTH, 11);
-        	calendar.set(Calendar.DAY_OF_MONTH, 31);
-//        	SimpleDateFormat df = new SimpleDateFormat("yyyy/MM/dd");
-//        	Date date = df.parse("2000/12/31");
-//        	calendar.setTime(date);
-        }
+				//Calender型からDate型を取得する
+				Date date = calendar.getTime();
+				System.out.println(date);
 
-        //Date型に変換
-        lostday = calendar.getTime();
-        System.out.println(lostday);
+				//Date型をString型に変換
+				itemAlertday = new SimpleDateFormat("yyyy-MM-dd").format(date);
+			}
 
-        //SQLDate型に変換
-        java.sql.Date alertday = new java.sql.Date(lostday.getTime());
-        System.out.println(alertday);
+		} catch (Exception e) {//エラー出たときどうしよう？
+			e.printStackTrace();
+			itemAlertday = null;
+		}
 
-		//買い替えアラート日（item_alertday）を返す（orセットする）
+		//結果を返す
+		return itemAlertday;
+	}
 
+	//買い替えアラート 残量ボタン(item_remain)切り替えによる計算
+	//ItemAjaxServlet用
+	public Item itemAlertButton(String itemRemain, String itemId) {
+		Item item = new Item();//戻り値格納用
+		String itemLostday = new String();//戻り値1
+		String itemAlertDay = new String();//戻り値2
+
+		try {
+			if (itemRemain != "1") {
+				itemLostday = "9999-12-31";
+				itemAlertDay = "9999-12-31";
+			} else {
+				//残量切れ日（残量なしボタンが押された日）の算出
+				Date lostday = new Date();
+
+				//Date型をCalendar型に変換（計算のため）
+				Date date = new Date();
+			    Calendar calendar = Calendar.getInstance();
+			    calendar.setTime(date);
+
+				//アラート期間（item_alert）を取得
+				String itemAlert = new String();
+				ItemDAO iDao = new ItemDAO();
+				ArrayList<AllBeans> list = iDao.select(itemId);
+				for (AllBeans a : list) {
+					itemAlert = a.getItemAlert();
+				}
+				System.out.println(itemAlert);
+
+				//残量切れ日+アラート期間（なし=1、即日=2、３日後=3、１週間後=4、２週間後=5、１カ月後=6）を計算、買い替えアラート日（item_alertday）を算出
+				if (itemAlert == "3") {
+					calendar.add(Calendar.DAY_OF_MONTH, 3);
+				} else if (itemAlert == "4") {
+					calendar.add(Calendar.DAY_OF_MONTH, 7);
+				} else if (itemAlert == "5") {
+					calendar.add(Calendar.DAY_OF_MONTH, 14);
+				} else if (itemAlert == "6") {
+					calendar.add(Calendar.MONTH, 1);
+				} else if (itemAlert == "1"){
+					calendar.set(Calendar.YEAR, 9999);
+					calendar.set(Calendar.MONTH, 11);
+					calendar.set(Calendar.DAY_OF_MONTH, 31);
+				}
+
+				//Calender型からDate型を取得する
+				date = calendar.getTime();
+				System.out.println(date);
+
+				//Date型をString型に変換
+				itemLostday = new SimpleDateFormat("yyyy-MM-dd").format(lostday);
+				itemAlertDay = new SimpleDateFormat("yyyy-MM-dd").format(date);
+			}
+
+			//残量切れ日と買い替えアラート日（item_alertday）をセットする
+			item.setItemLostday(itemLostday);
+			item.setItemAlertday(itemAlertDay);
+
+		} catch (Exception e) {//エラー出たときどうしよう？
+			e.printStackTrace();
+			item = null;
+		}
+
+		//結果を返す
+		return item;
 	}
 
 }

@@ -26,7 +26,7 @@
 
 	 <p>項目名<input type="text" name="itemName" value="${e.itemName}"></p>
 	 <p>分類名<select name="categoryId">
-	            <option value="${ecategoryId}">${e.categoryName}</option>
+	            <option value="${e.categoryId}">${e.categoryName}</option>
 			    <option value="1">野菜</option>
 			    <option value="2">肉類</option>
 			    <option value="3">魚類</option>
