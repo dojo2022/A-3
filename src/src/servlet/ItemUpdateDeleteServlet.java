@@ -38,7 +38,7 @@ public class ItemUpdateDeleteServlet extends HttpServlet {
 
 		// リクエストパラメータを取得する
 		request.setCharacterEncoding("UTF-8");
-		String itemId = request.getParameter("itemId");
+		String itemId = request.getParameter("itemName");
 
 		//ItemDAOから一件だけもらってくる
 

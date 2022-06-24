@@ -24,7 +24,7 @@
 	 <input type="hidden" name="itemLostday" value="${e.itemLostday}"><br>
 	 <input type="hidden" name="itemAlertday" value="${e.itemAlertday}">
 
-	 <p>項目名<input type="text" name="${e.itemName}"></p>
+	 <p>項目名<input type="text" name="itemName" value="${e.itemName}"></p>
 	 <p>分類名<select name="categoryId">
 	            <option value="${ecategoryId}">${e.categoryName}</option>
 			    <option value="1">野菜</option>
