@@ -106,7 +106,6 @@
         これは仮の背景だよ
     </div>
     <div class="grid_test-child"><!-- grit 子要素④  -->
-
 	<div class= memoitem>
 	   <form id = memo method="POST" action="/syokuzaikanri/MemoTestServlet">
 		<div class=memotitle>買い物メモ</div><br>

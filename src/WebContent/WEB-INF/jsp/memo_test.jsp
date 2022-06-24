@@ -11,6 +11,7 @@
 <body>
 
 <form id = memo method="POST" action="/syokuzaikanri/MemoTestServlet">
+買い物メモ
 <c:forEach begin="0" end="19" step="1" varStatus="status">
 <input type="text" name="in${status.index}" placeholder="in${status.index}">
 <input type="checkbox">

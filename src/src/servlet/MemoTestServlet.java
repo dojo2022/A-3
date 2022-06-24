@@ -9,6 +9,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import dao.MemoDAO;
 
@@ -48,12 +49,16 @@ public class MemoTestServlet extends HttpServlet {
 			}
 		}
 
+		HttpSession session = request.getSession();
+		String pageId = (String)session.getAttribute("pageId");
 
 		MemoDAO dao = new MemoDAO();
 		int ans = 0;
 		for(String str : textList) {
-			ans += dao.insert(str);//pageIdの引数どうやって渡す…？
+			ans += dao.insert(str,pageId);//pageIdの引数どうやって渡す…？
 		}
+
+
 		//成功
 		if(textList.size()==ans) {
 			System.out.println("成功");
@@ -65,6 +70,11 @@ public class MemoTestServlet extends HttpServlet {
 		System.out.println(textList);
 		//登録の判定をするかも？
 
+
+		//メモのデータベースに保存したデータをjspに表示したい
+		//削除ボタンを作って同じpageIdをすべて削除する
+		//保存した後にページを遷移（値をjspに持っていくならメインサーブレットにリダイレクト）
+		//セッションにメモ内容を保存すればフォワードかも？
 
 
 
