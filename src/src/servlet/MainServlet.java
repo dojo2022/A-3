@@ -83,8 +83,8 @@ public class MainServlet extends HttpServlet {
 		StockDAO sDao = new StockDAO();
 		ArrayList<AllBeans> allList = sDao.select(pageId);
 
-		// 検索結果をリクエストスコープに格納する
-		request.setAttribute("allList", allList);
+		// 検索結果をセッションスコープに格納する
+		session.setAttribute("allList", allList);
 
 
 		//allListからstockを抽出する
