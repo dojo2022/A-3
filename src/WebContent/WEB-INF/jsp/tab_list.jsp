@@ -27,7 +27,6 @@
 			 	</form>
 			<div class="tab_list">
 				<table class="item_list">
-				<c:forEach var="a" items="${allList}" varStatus = "status">
  				<c:forEach var="e" items="${allList}" varStatus = "status">
  					<c:if test="${e.itemId == taihi}">
  						<tr>
@@ -73,7 +72,7 @@
  					<c:if test="${e.itemId !=taihi}" >
 							<!-- 一回目のプラスボタンは見せないようにする -->
  							<c:if test="${status.index!=0 }">
-
+		<!-- ここからが開けるアコーディオン！ ここテストにつかっていいよ-->
  							  <tr>
 							  	  <td colspan="7">
 							  	  	<input id="stockAdd" class="stockAdd" type="checkbox">
@@ -96,7 +95,7 @@
 											  </td>
 											  <div class="stockRegistButton">
 										    	<form method="POST" action="/syokuzaikanri/StockRegistServlet" id="stockRegist${status.index}">
-										    	<input type="hidden" name="itemId${status.index}" value="${e.itemId}">
+										    	<input type="hidden" name="itemId" value="${e.itemId-1}">
 												<td><input type="submit" name="stockRegist" value="登録"></td></form>
 											  </div>
 										  </tr>
@@ -104,7 +103,7 @@
 									</div>
 							  	  </td>
 					  		  </tr>
-
+		<!-- ここまでが開けるアコーディオン！ ここテストにつかっていいよ-->
 					  		</c:if>
 								<!-- 大項目------------------------------------------------------ -->
 							 <tr>
@@ -215,17 +214,16 @@
 							<table>
 							  <tr>
 								  <td>
-								  	<input type="text" name="stockName" id="stockName" placeholder="名前" size="0" maxlength="20">
+								  	・${a.itemId-1}<input type="text" name="stockName" id="stockName" placeholder="名前" size="0" maxlength="20">
 								  </td>
 								  <td>
 								  	<label for="stockBuy">購入日</label>
-								  	<input type="date" value="${a.stockBuy}" name="stockBuy" id="stockBuy">
+								  	<input type="date" name="stockBuy" id="stockBuy">
 								  </td>
 								  <td>
 								  	<label for="stockLimit">期限日</label>
-								  	<input type="date" value="${a.stockLimit}" name="stockLimit" id="stockLimit">
+								  	<input type="date" name="stockLimit" id="stockLimit">
 								  </td>
-							      <td>・${a.itemId-1}</td>
 								  <div class="stockRegistButton">
 							    	<form method="POST" action="/syokuzaikanri/StockRegistServlet" id="stockRegist">
 							    	<input type="hidden" name="itemId" value="${a.itemId-1}">
@@ -236,7 +234,6 @@
 						</div>
 				  	  </td>
 		  		  </tr>
-		  		  </c:forEach>
 				</table>
 			</div>
 		</div>
