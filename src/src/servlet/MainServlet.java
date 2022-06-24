@@ -38,15 +38,26 @@ public class MainServlet extends HttpServlet {
 		return;
 		}
 
-		//登録完了のメッセージのセット
+		//登録成功のメッセージのセット
 		if(session.getAttribute("msg") != null){
 			request.setAttribute("registMsg", session.getAttribute("msg"));
 			session.removeAttribute("msg");
 		}
-		//登録完了のメッセージのセット
+		//登録失敗のメッセージのセット
 		if(session.getAttribute("errMsg") != null){
 			request.setAttribute("errMsg", session.getAttribute("errMsg"));
 			session.removeAttribute("errMsg");
+		}
+
+		//削除成功のメッセージのセット
+		if(session.getAttribute("dsMsg") != null){
+			request.setAttribute("deleteSuccessMsg", session.getAttribute("dsMsg"));
+			session.removeAttribute("dsMsg");
+		}
+		//削除失敗のメッセージのセット
+		if(session.getAttribute("dfMsg") != null){
+			request.setAttribute("deleteFailureMsg", session.getAttribute("dfMsg"));
+			session.removeAttribute("dfMsg");
 		}
 
 

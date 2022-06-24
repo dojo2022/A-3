@@ -12,13 +12,21 @@
 
 
 <body>
+	<!-- 登録完了アラート  -->
+	<c:if test="${registMsg  != null }">
+		<script>alert("登録しました")</script>
+	</c:if>
+	<c:if test="${errMsg  != null }">
+		<script>alert("登録できませんでした")</script>
+	</c:if>
 
-		<c:if test="${registMsg  != null }">
-			<script>alert("登録しました")</script>
-		</c:if>
-		<c:if test="${errMsg  != null }">
-			<script>alert("登録できませんでした")</script>
-		</c:if>
+		<!-- 削除完了アラート  -->
+	<c:if test="${deleteSuccessMsg  != null }">
+		<script>alert("削除しました")</script>
+	</c:if>
+	<c:if test="${deleteFailureMsg  != null }">
+		<script>alert("削除できませんでした")</script>
+	</c:if>
 
 <div class="wrapper">
 ${user.userId}
