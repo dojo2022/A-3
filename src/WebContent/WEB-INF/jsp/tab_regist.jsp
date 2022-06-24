@@ -25,10 +25,11 @@
 	 お気に入り<input type="checkbox" name="itemFavorite" value="1"></p>
 	 <p>買い替えアラート<select name="itemAlert">
 			    <option value="1">なし</option>
-			    <option value="2">３日後</option>
-			    <option value="3">１週間後</option>
-			    <option value="4">２週間後</option>
-			    <option value="5">１か月後</option>
+			    <option value="2">即日</option>
+			    <option value="3">３日後</option>
+			    <option value="4">１週間後</option>
+			    <option value="5">２週間後</option>
+			    <option value="6">１か月後</option>
 			  </select><br></p>
 	 <p>在庫名<input type="text" name="stockName"><p>
 	 <p>購入日 <input type="date" name="stockBuy">
