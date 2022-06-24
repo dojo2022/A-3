@@ -9,38 +9,47 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import dao.ItemDAO;
+import dao.StockDAO;
 import model.Alert;
 
 /**
- * Servlet implementation class ItemRegistServlet
+ * Servlet implementation class StockRegistServlet
  */
-@WebServlet("/ItemRegistServlet")
-public class ItemRegistServlet extends HttpServlet {
+@WebServlet("/StockRegistServlet")
+public class StockRegistServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+
+    /**
+     * @see HttpServlet#HttpServlet()
+     */
+    public StockRegistServlet() {
+        super();
+        // TODO Auto-generated constructor stub
+    }
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-//		//もしもログインしていなかったらログインサーブレットにリダイレクトする？
+		//もしもログインしていなかったらログインサーブレットにリダイレクトする？
 //		HttpSession session = request.getSession();
 //		if (session.getAttribute("user") == null) {
 //			response.sendRedirect("/syokuzaikanri/LoginServlet");
 //			return;
 //		}
 
-		// リクエストパラメータを取得する
+		//リクエストパラメータを取得する
 		request.setCharacterEncoding("UTF-8");
-		String itemName = request.getParameter("itemName");
-		String categoryId = request.getParameter("categoryId");
-		String itemFavorite = request.getParameter("itemFavorite");
-		String itemAlert = request.getParameter("itemAlert");
 		String stockName = request.getParameter("stockName");
 		String stockBuy = request.getParameter("stockBuy");
 		String stockLimit = request.getParameter("stockLimit");
-		//ページIDはリクエストパラメータで取得する！！
-		String pageId = request.getParameter("pageId");
+		String itemId = request.getParameter("itemId");
 
 		//期限日の計算を行う
 		Alert alert = new Alert();
@@ -54,9 +63,9 @@ public class ItemRegistServlet extends HttpServlet {
 		String stockAlertday4 = str[3];
 
 		//登録処理を行う
-		ItemDAO iDao = new ItemDAO();
+		StockDAO sDao = new StockDAO();
 
-		if (iDao.insert(itemName, itemFavorite, categoryId, pageId, itemAlert, stockName, stockBuy, stockLimit, stockAlertday1, stockAlertday2, stockAlertday3, stockAlertday4)) {
+		if (sDao.insert(stockName, stockBuy, stockLimit, itemId, stockAlertday1, stockAlertday2, stockAlertday3, stockAlertday4)) {
 			HttpSession session = request.getSession();
 			session.setAttribute("msg", ("登録成功"));
 			System.out.println("登録成功");
