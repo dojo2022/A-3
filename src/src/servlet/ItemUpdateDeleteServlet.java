@@ -47,9 +47,10 @@ public class ItemUpdateDeleteServlet extends HttpServlet {
 		ArrayList<AllBeans> itemList = iDao.select(itemId);
 
 		request.setAttribute("itemList", itemList);
-
+		request.setAttribute("flg","切り替えフラグ");
+		System.out.println(request.getAttribute("flg"));
 		//tab_edit.jspにフォワードする
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/tab_edit.jsp#edit");
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/main.jsp#ddd_content");
 		dispatcher.forward(request, response);
 	}
 

@@ -70,6 +70,13 @@ ${user.userId}
 			<label class="tab_item" for="ddd" id ="edit">編集/削除</label>
 
 
+			<input type="hidden" id="flg" value="${flg}">
+
+
+
+
+
+
 		<!-- ここから内容 -->
 			<div class="tab_content" id="all_content">
 				<%@ include file="tab_list.jsp" %>
@@ -109,6 +116,14 @@ ${user.userId}
   </div>
   <!-- フッター（ここまで） -->
 </div>
+<script>
+window.onload = function(){
+	let flg = document.getElementById("flg");
+	if(flg.value=="切り替えフラグ"){
+		document.getElementById("edit").click();
+	}
+}
+</script>
 </body>
 
 
