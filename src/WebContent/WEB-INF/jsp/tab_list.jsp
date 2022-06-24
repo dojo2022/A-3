@@ -180,18 +180,18 @@
 								  <td>
 									  <c:if test="${e.stockAlert == true}" >
 									    <div class="alertlBottun"><!-- オン→オフ場合 -->
-									        <label for="${e.itemId}alertOff" class="alertlLabel">
+									        <label for="alertOff${status.index}" class="alertlLabel">
 									            <img src="/syokuzaikanri/img/alert_on.png" width="25" height="25" id="alertlImage${status.index}" onclick="alertlImage(${status.index})">
 									        </label>
-									        <input type="checkbox" name="bell" class="alertl" value="false" id="alertOn${status.index}" onclick="alertlOff(${status.index})">
+									        <input type="checkbox" name="bell" class="alertl" value="false" id="alertOff${status.index}" onclick="alertlOff(${status.index})">
 									    </div>
 										  </c:if>
 									  <c:if test="${e.stockAlert == false}" >
 									    <div class="alertlBottun"><!-- オフ→オン場合 -->
-									        <label for="${e.itemId}alertOn" class="alertlLabel">
+									        <label for="alertOn${status.index}" class="alertlLabel">
 									            <img src="/syokuzaikanri/img/alert_off.png" width="25" height="25" id="alertlImage${status.index}" onclick="alertlImage(${status.index})">
 									        </label>
-									        <input type="checkbox" name="bell" class="alertl" value="true" id="alertOff${status.index}" onclick="alertlOn(${status.index})">
+									        <input type="checkbox" name="bell" class="alertl" value="true" id="alertOn${status.index}" onclick="alertlOn(${status.index})">
 									    </div>
 									  </c:if>
 								  </td>
@@ -214,7 +214,7 @@
 							<table>
 							  <tr>
 								  <td>
-								  	・${itemId-1}<input type="text" name="stockName" id="stockName" placeholder="名前" size="0" maxlength="20">
+								  	<input type="text" name="stockName" id="stockName" placeholder="名前" size="0" maxlength="20">
 								  </td>
 								  <td>
 								  	<label for="stockBuy">購入日</label>
@@ -226,7 +226,7 @@
 								  </td>
 								  <div class="stockRegistButton">
 							    	<form method="POST" action="/syokuzaikanri/StockRegistServlet" id="stockRegist">
-							    	<input type="hidden" name="itemId" value="${itemId-1}">
+							    	<input type="hidden" name="itemId" value="${itemId}">
 									<td><input type="submit" name="stockRegist" value="登録"></td></form>
 								  </div>
 							  </tr>
