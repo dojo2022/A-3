@@ -185,6 +185,53 @@ public class ItemDAO {
 		return result;
 
 	}
+//itemFavoriteの値が2、3の時のupdateメソッド
+	public boolean itemFRupdate(String itemFavorite, String itemRemain, String itemId){
+		Connection conn = null;
+		boolean result = false;
+
+		try {
+			// JDBCドライバを読み込む
+			Class.forName("org.h2.Driver");
+
+			// データベースに接続する
+			conn = DriverManager.getConnection("jdbc:h2:file:C:/dojo6Data/dojo6Data", "sa", "");
+
+			String sql = "UPDATE Item SET item_favorite=?, item_remain=?,where item_id=?";
+			PreparedStatement pStmt = conn.prepareStatement(sql);
+
+			pStmt.setString(1, itemFavorite);
+			pStmt.setString(2, itemRemain);
+			pStmt.setString(3, itemId);
+
+			//SQL文を実行する
+			if (pStmt.executeUpdate() == 1) {
+				result = true;
+			}
+		}
+		catch (SQLException e) {
+			e.printStackTrace();
+		}
+		catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+		finally {
+			// データベースを切断
+			if (conn != null) {
+				try {
+					conn.close();
+				}
+				catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+
+		// 結果を返す
+		return result;
+
+	}
+
 
 	//update 編集・削除タブ用
 	public boolean update(String itemName, String itemFavorite, String categoryId, String itemAlert, String itemAlertday, String itemId, String stockName, String stockBuy, String stockLimit, String stockAlert, String stockAlertday1, String stockAlertday2, String stockAlertday3, String stockAlertday4, String stockId){
