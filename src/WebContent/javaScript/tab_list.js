@@ -1,4 +1,4 @@
-//お気に入りボタンの変更(おきに入り→お気に入りじゃないの場合)
+/*//お気に入りボタンの変更(おきに入り→お気に入りじゃないの場合)
 var favorite1_img_src = new Array("/syokuzaikanri/img/favorite_on.png","/syokuzaikanri/img/favorite_off.png");
 var h = 0;
 function favoriteImage1(){
@@ -19,8 +19,49 @@ function favoriteImage0(){
       i ++;
     }s
     document.getElementById("favoriteImage0").src = favorite0_img_src[i];
+}*/
+
+
+
+
+
+//賞味期限アラートのAjax
+function alertlOff(id){
+	alert("functionはいったよ！");
+	let stockId = id;
+	let stockName = document.addEventListener('DOMContentLoaded', () => { document.getElementById('stockName').value; });
+	let stockBuy = document.addEventListener('DOMContentLoaded', () => { document.getElementById('stockBuy').value; });
+	let stockLimit = document.addEventListener('DOMContentLoaded', () => { document.getElementById('stockLimit').value; });
+	let bell = document.addEventListener('DOMContentLoaded', () => { document.getElementById(id + "alertlOff").value; });
+	bell = "false";
+
+	console.log(stockId);
+	console.log(stockName);
+	console.log(stockBuy);
+	console.log(stockLimit);
+	console.log(bell);
+
+	let date = {stockId:stockId,stockName:stockName,stockBuy:stockBuy,stockLimit:stockLimit,bell:bell}
+	alert(date);
+
+				//非同期通信始めるよ
+			$.ajax({
+				//どのサーブレットに送るか
+				//ajaxSampleのところは自分のプロジェクト名に変更する必要あり。
+				url: '/syokuzaikanri/StockAjaxServlet',
+				//どのメソッドを使用するか
+				type:"POST",
+				//何をサーブレットに飛ばすか（変数を記述）
+				data: date,
+				//この下の２行はとりあえず書いてる（書かなくても大丈夫？）
+				processDate:false,
+				timeStamp: new Date().getTime()
+			})
 }
-//お気に入りのAjax
+
+
+/*
+
 
 
 //賞味期限アラートのボタンの変更(On→Off)
@@ -58,4 +99,4 @@ function stockAddButton(){
       l ++;
     }
     document.getElementById("stockAddButton").src = stockadd_img_src[l];
-}
+}*/
