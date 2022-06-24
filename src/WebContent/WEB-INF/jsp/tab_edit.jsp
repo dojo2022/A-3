@@ -13,7 +13,8 @@
 	<p>検索<input type="search"  name="search" placeholder="検索"></p>
 </form>
 
-<c:forEach var="e" items="${stockList}">
+<c:forEach var="e" items="${stockList}"> //リストの名前変える必要あり！
+
 
 <form method="POST" action="/syokuzaikanri/ItemUpdateDeleteServlet">
 
@@ -21,6 +22,8 @@
 	 <input type="hidden" name="itemId" value="${e.itemId}"><br>
 	 <input type="hidden" name="itemRemain" value="${e.itemRemain}"><br>
 	 <input type="hidden" name="itemLostday" value="${e.itemLostday}"><br>
+	 <input type="hidden" name="itemAlertday" value="${e.itemAlertday}">
+
 	 <p>項目名<input type="text" name="${e.itemName}"></p>
 	 <p>分類名<select name="categoryId">
 	            <option value="${ecategoryId}">${e.categoryName}</option>
@@ -41,16 +44,6 @@
 			    <option value="4">２週間後</option>
 			    <option value="5">１か月後</option>
 			  </select><br></p>
-	 <p>在庫名<input type="text" name="${e.stockName}"><p>
-	 <p>購入日 <input type="date" name="${e.stockBuy}">
-	 期限日<input type="date" name="${e.stockLimit}"></p>
-
-    <input type="hidden" name="stockId" value="${e.stockId}"><br>
-	<input type="hidden" name="itemAlertday" value="${e.itemAlertday}">
-	<input type="hidden" name="stockAlert" value="${e.stockAlert}"><br>
-
-
-
 
  			<p><input type="submit" name="regist" value="削除">
  			<input type="submit" name="regist" value="編集"></p>
