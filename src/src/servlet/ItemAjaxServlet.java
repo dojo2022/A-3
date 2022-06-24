@@ -7,6 +7,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import dao.ItemDAO;
 
 /**
  * Servlet implementation class ItemAjaxServlet
@@ -31,11 +34,34 @@ public class ItemAjaxServlet extends HttpServlet {
 		String itemRemain = request.getParameter("");
 		String itemId = request.getParameter("");
 
-		//itemFavoriteの値が1に更新されたときはitemLostday,itemAlertdayを計算
+		//itemRemainの値が1に更新されたときはitemLostday,itemAlertdayを計算
+		if(itemRemain.equals("1")) {
 
-		//itemFavoriteの値が2、3の時のuptate
+		}
 
-		//itemFavoriteの値が1の時のupdate
+		//updateメソッドの呼び出し
+
+		ItemDAO iDao = new ItemDAO();
+
+		if(itemRemain.equals("1")) {
+			//itemRemainの値が1の時のupdate
+			boolean itemUp = iDao.update(itemFavorite, itemRemain, itemLostday, itemAlertday, itemId);
+			if(itemUp == false) {
+				HttpSession session = request.getSession();
+				session.setAttribute("errMsg", ("登録失敗"));
+				System.out.println("登録失敗");
+			}
+		}else {
+			//itemRemainの値が2、3の時のupdate
+			boolean itemFRup = iDao.itemFRupdate(itemFavorite,itemRemain,itemId);
+			if(itemFRup == false) {
+				HttpSession session = request.getSession();
+				session.setAttribute("errMsg", ("登録失敗"));
+				System.out.println("登録失敗");
+			}
+		}
+
+
 
 	}
 
