@@ -39,10 +39,11 @@
 	 <p>買い替えアラート<select name="itemAlert">
 	 			<option value="${e.itemAlert}">${e.itemAlert}</option>
 			    <option value="1">なし</option>
-			    <option value="2">３日後</option>
-			    <option value="3">１週間後</option>
-			    <option value="4">２週間後</option>
-			    <option value="5">１か月後</option>
+			    <option value="2">即日</option>
+			    <option value="3">３日後</option>
+			    <option value="4">１週間後</option>
+			    <option value="5">２週間後</option>
+			    <option value="6">１か月後</option>
 			  </select><br></p>
 
  			<p><input type="submit" name="regist" value="削除">
