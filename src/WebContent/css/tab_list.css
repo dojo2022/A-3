@@ -1,9 +1,14 @@
 @charset "UTF-8";
+.tab{
+	margin: 10px;
+}
 /*残量ボタンの横ならべ*/
 .remainBottun{
 	float: left;
 }
 .tab_list{
+	margin-top: 10px;
+	height: 320px;
 	overflow: auto;
 }
 /*一覧の線*/
@@ -52,5 +57,5 @@
 }
 
 #all_content{
-	overflow: scroll;
+	height: auto;
 }
