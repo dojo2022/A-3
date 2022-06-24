@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title></title>
 </head>
 <body>
 
@@ -13,7 +13,7 @@
 	<p>検索<input type="search"  name="search" placeholder="検索"></p>
 </form>
 
-<c:forEach var="e" items="${stockList}"> //リストの名前変える必要あり！
+<c:forEach var="e" items="${itemList}">
 
 
 <form method="POST" action="/syokuzaikanri/ItemUpdateDeleteServlet">
