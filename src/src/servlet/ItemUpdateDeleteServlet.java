@@ -54,11 +54,12 @@ public class ItemUpdateDeleteServlet extends HttpServlet {
 //				//			out.print("編集失敗");
 //				System.out.println("遷移失敗");
 //			}
-//			//tab_edit.jspにフォワードする
-//			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/tab_edit.jsp");
-//			dispatcher.forward(request, response);
+//
 //
 //		}
+		//tab_edit.jspにフォワードする
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/tab_edit.jsp");
+		dispatcher.forward(request, response);
 	}
 
 	/**
