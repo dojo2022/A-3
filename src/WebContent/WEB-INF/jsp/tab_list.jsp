@@ -34,7 +34,7 @@
 						  	・
 						  </td>
 						  <td>
-						  	<input type="text${status.index}" value="${e.stockName}" name="stockName" id="stockName${status.index}" size="0" maxlength="20" onclick="changeStockName(${status.index})">
+						  	<input type="text" value="${e.stockName}" name="stockName" id="stockName${status.index}" size="0" maxlength="20" onclick="changeStockName(${status.index})">
 						  </td>
 						  <td>
 						  	<label for="stockBuy${status.index}">購入日</label>
@@ -55,10 +55,10 @@
 								  </c:if>
 							  <c:if test="${e.stockAlert == false}" >
 							    <div class="alertlBottun"><!-- オフ→オン場合 -->
-							        <label for="alertOff${status.index}" class="alertlLabel">
+							        <label for="alertOn${status.index}" class="alertlLabel">
 							            <img src="/syokuzaikanri/img/alert_off.png" width="25" height="25" id="alertlImage${status.index}" onclick="alertlImage(${status.index})">
 							        </label>
-							        <input type="checkbox" name="bell" class="alertl" value="true" id="alertOff${status.index}" onclick="alertlOff(${status.index})">
+							        <input type="checkbox" name="bell" class="alertl" value="true" id="alertOn${status.index}" onclick="alertlOn(${status.index})">
 							    </div>
 							  </c:if>
 						  </td>
@@ -75,7 +75,7 @@
 		<!-- ここからが開けるアコーディオン！ ここテストにつかっていいよ-->
  							  <tr>
 							  	  <td colspan="7">
-							  	  	<input id="stockAdd" class="stockAdd" type="checkbox">
+							  	  	<input id="stockAdd${status.index}" class="stockAdd" type="checkbox">
 									<label class="stockAdd-label" for="stockAdd">
 										<img src="/syokuzaikanri/img/stockadd_plus.png" width="30" height="35" id="stockAddButton${status.index}" onclick="stockAddButton(${status.index})">
 									</label>
@@ -167,21 +167,21 @@
 								  	・
 								  </td>
 								  <td>
-								  	<input type="text" value="${e.stockName}" name="stockName" id="stockName${status.index}" size="0" maxlength="20" onclick="changeStockName()">
+								  	<input type="text" value="${e.stockName}" name="stockName" id="stockName${status.index}" size="0" maxlength="20" onclick="changeStockName(${status.index})">
 								  </td>
 								  <td>
 								  	<label for="stockBuy">購入日</label>
-								  	<input type="date" value="${e.stockBuy}" name="stockBuy" id="stockBuy${status.index}" onclick="changeStockBuy()">
+								  	<input type="date" value="${e.stockBuy}" name="stockBuy" id="stockBuy${status.index}" onclick="changeStockBuy(${status.index})">
 								  </td>
 								  <td>
 								  	<label for="stockLimit">期限日</label>
-								  	<input type="date" value="${e.stockLimit}" name="stockLimit" id="stockLimit${status.index}" onclick="changeStockLimit()">
+								  	<input type="date" value="${e.stockLimit}" name="stockLimit" id="stockLimit${status.index}" onclick="changeStockLimit(${status.index})">
 								  </td>
 								  <td>
 									  <c:if test="${e.stockAlert == true}" >
 									    <div class="alertlBottun"><!-- オン→オフ場合 -->
 									        <label for="${e.itemId}alertOff" class="alertlLabel">
-									            <img src="/syokuzaikanri/img/alert_on.png" width="25" height="25" id="alertlImage${status.index}" onclick="alertlImage1()">
+									            <img src="/syokuzaikanri/img/alert_on.png" width="25" height="25" id="alertlImage${status.index}" onclick="alertlImage(${status.index})">
 									        </label>
 									        <input type="checkbox" name="bell" class="alertl" value="false" id="alertOn${status.index}" onclick="alertlOff(${status.index})">
 									    </div>
@@ -189,7 +189,7 @@
 									  <c:if test="${e.stockAlert == false}" >
 									    <div class="alertlBottun"><!-- オフ→オン場合 -->
 									        <label for="${e.itemId}alertOn" class="alertlLabel">
-									            <img src="/syokuzaikanri/img/alert_off.png" width="25" height="25" id="alertlImage${status.index}" onclick="alertlImage0()">
+									            <img src="/syokuzaikanri/img/alert_off.png" width="25" height="25" id="alertlImage${status.index}" onclick="alertlImage(${status.index})">
 									        </label>
 									        <input type="checkbox" name="bell" class="alertl" value="true" id="alertOff${status.index}" onclick="alertlOn(${status.index})">
 									    </div>
@@ -214,7 +214,7 @@
 							<table>
 							  <tr>
 								  <td>
-								  	・${a.itemId-1}<input type="text" name="stockName" id="stockName" placeholder="名前" size="0" maxlength="20">
+								  	・${itemId-1}<input type="text" name="stockName" id="stockName" placeholder="名前" size="0" maxlength="20">
 								  </td>
 								  <td>
 								  	<label for="stockBuy">購入日</label>
@@ -226,7 +226,7 @@
 								  </td>
 								  <div class="stockRegistButton">
 							    	<form method="POST" action="/syokuzaikanri/StockRegistServlet" id="stockRegist">
-							    	<input type="hidden" name="itemId" value="${a.itemId-1}">
+							    	<input type="hidden" name="itemId" value="${itemId-1}">
 									<td><input type="submit" name="stockRegist" value="登録"></td></form>
 								  </div>
 							  </tr>
