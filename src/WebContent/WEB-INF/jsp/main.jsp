@@ -74,9 +74,11 @@ ${user.userId}
 			<div class="tab_content" id="bbb_content">
 				<%@ include file="tab_favorite.jsp" %>
 			</div>
-			<div class="tab_content" id="ccc_content">
+
+				<div class="tab_content" id="ccc_content">
 				<%@ include file="tab_regist.jsp" %>
 			</div>
+
 			<div class="tab_content" id="ddd_content">
 				<%@ include file="tab_edit.jsp" %>
 			</div>

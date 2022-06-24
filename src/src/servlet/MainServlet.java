@@ -31,6 +31,7 @@ public class MainServlet extends HttpServlet {
 
 		HttpSession session = request.getSession();
 		session.getAttribute("user");
+
 		// もしもログインしていなかったらログインサーブレットにリダイレクトする
 		if (session.getAttribute("user") == null) {
 			response.sendRedirect("/syokuzaikanri/LoginServlet");
@@ -64,6 +65,8 @@ public class MainServlet extends HttpServlet {
 		ArrayList<AllBeans> pList = (ArrayList<AllBeans>)session.getAttribute("phList");
 		AllBeans aB1 = pList.get(0);
 		String pageId= aB1.getPageId();
+
+		session.setAttribute("pageId", pageId);
 
 		//一覧に表示するリストをselect
 		StockDAO sDao = new StockDAO();
