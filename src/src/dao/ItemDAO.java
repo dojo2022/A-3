@@ -343,10 +343,10 @@ public class ItemDAO {
 		return result;
 
 	}
-	// select
-	public ArrayList<AllBeans> select2(String itemId){
+	// select一覧タブからの編集削除タブ用
+	public ArrayList<AllBeans> select(String itemId){
 		Connection conn = null;
-		ArrayList<AllBeans> stockList = new ArrayList<AllBeans>();//ArrayList <インスタンスの型名> 変数名 = new ArrayList<インスタンスの型名>;
+		ArrayList<AllBeans> itemList = new ArrayList<AllBeans>();//ArrayList <インスタンスの型名> 変数名 = new ArrayList<インスタンスの型名>;
 
 		try {
 			// JDBCドライバを読み込む
@@ -355,7 +355,7 @@ public class ItemDAO {
 			// データベースに接続する
 			conn = DriverManager.getConnection("jdbc:h2:file:C:/dojo6Data/dojo6Data", "sa", "");
 			// SQL文を準備する
-			//ここ考えないと！！ itemid一件だけ検索する
+			//ここ考えないと！！ itemid 一件だけ検索する
 			String sql = "SELECT * FROM Item  LEFT JOIN Stock ON Item.item_id = Stock.item_id LEFT JOIN Category ON  Item.category_id = Category.category_id WHERE Item.item_id = ?";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 
@@ -377,28 +377,19 @@ public class ItemDAO {
 				main.setPageId(rs.getString("page_id"));
 				main.setItemAlert(rs.getString("item_alert"));
 				main.setItemAlertday(rs.getString("item_alertday"));
-				main.setStockId(rs.getString("stock_id"));
-				main.setStockName(rs.getString("stock_name"));
-				main.setStockBuy(rs.getString("stock_buy"));
-				main.setStockLimit(rs.getString("stock_limit"));
-				main.setStockAlert(rs.getString("stock_alert"));
-				main.setStockAlertday1(rs.getString("stock_alertday1"));
-				main.setStockAlertday2(rs.getString("stock_alertday2"));
-				main.setStockAlertday3(rs.getString("stock_alertday3"));
-				main.setStockAlertday4(rs.getString("stock_alertday4"));
 				main.setCategoryName(rs.getString("category_name"));
-				stockList.add(main);
+				itemList.add(main);
 			}
 
 
 		}
 			catch (SQLException e) {
 				e.printStackTrace();
-				stockList = null;
+				itemList = null;
 			}
 			catch (ClassNotFoundException e) {
 				e.printStackTrace();
-				stockList = null;
+				itemList = null;
 			}
 			finally {
 				// データベースを切断
@@ -408,13 +399,13 @@ public class ItemDAO {
 					}
 					catch (SQLException e) {
 						e.printStackTrace();
-						stockList = null;
+						itemList = null;
 					}
 				}
 			}
 
 			// 結果を返す
-			return stockList;
+			return itemList;
 }
 
 

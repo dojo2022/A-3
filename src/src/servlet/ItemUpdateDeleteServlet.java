@@ -1,6 +1,7 @@
 package servlet;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -12,6 +13,7 @@ import javax.servlet.http.HttpSession;
 
 import dao.ItemDAO;
 import model.Alert;
+import model.AllBeans;
 
 /**
  * Servlet implementation class ItemUpdateDeleteServlet
@@ -38,29 +40,19 @@ public class ItemUpdateDeleteServlet extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		String itemId = request.getParameter("itemId");
 
-		//stockDAOから一件だけもらってくる
+		//ItemDAOから一件だけもらってくる
 
+		ItemDAO iDao = new ItemDAO();
+		//if
+		ArrayList<AllBeans> itemList = iDao.select(itemId);
 
+		request.setAttribute("itemList", itemList);
 
-//		if (request.getParameter("SUBMIT").equals("編集/削除")) {
-//			//一件だけ検索してくるメソッドを呼び出す（一覧タブ空の編集ボタン）
-//			//これからメソッドを作るらしいので保留
-//			StockDAO sDao = new StockDAO();
-//			if (sDao.update(itemFavorite,itemAlertday,
-//					itemRemain, itemLostday, itemId	 )) {
-//				//			out.print("編集成功");
-//				System.out.println("編集成功");
-//			} else {
-//				//			out.print("編集失敗");
-//				System.out.println("遷移失敗");
-//			}
-//
-//
-//		}
 		//tab_edit.jspにフォワードする
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/tab_edit.jsp");
 		dispatcher.forward(request, response);
 	}
+
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
@@ -103,13 +95,13 @@ public class ItemUpdateDeleteServlet extends HttpServlet {
 		String stockAlertday3 = str[2];
 		String stockAlertday4 = str[3];
 
-//		itemName, itemFavorite, categoryId, pageId, itemAlert, stockName, stockBuy, stockLimit,
-//		itemRemain, itemLostday, itemId, stockAlertday1, stockAlertday2, stockAlertday3, stockAlertday4,itemId ,stockId
+		//		itemName, itemFavorite, categoryId, pageId, itemAlert, stockName, stockBuy, stockLimit,
+		//		itemRemain, itemLostday, itemId, stockAlertday1, stockAlertday2, stockAlertday3, stockAlertday4,itemId ,stockId
 		// 編集または削除を行う
 		ItemDAO iDao = new ItemDAO();
 		if (request.getParameter("SUBMIT").equals("編集")) {
 			//update
-			if (iDao.update(itemFavorite, itemRemain,itemLostday,itemAlertday,itemId)) {
+			if (iDao.update(itemFavorite, itemRemain, itemLostday, itemAlertday, itemId)) {
 				//			out.print("編集成功");
 				System.out.println("編集成功");
 			} else {
@@ -118,7 +110,7 @@ public class ItemUpdateDeleteServlet extends HttpServlet {
 			}
 		} else {
 			//delete
-			if (iDao.delete(itemFavorite, itemRemain,itemLostday,itemAlertday,itemId)) {
+			if (iDao.delete(itemFavorite, itemRemain, itemLostday, itemAlertday, itemId)) {
 				//			out.print("削除成功");
 				System.out.println("削除成功");
 			} else {
