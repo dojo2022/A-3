@@ -14,7 +14,6 @@ import javax.servlet.http.HttpSession;
 import dao.StockDAO;
 import dao.UserDAO;
 import model.AllBeans;
-import model.Stock;
 import model.User;
 
 /**
@@ -39,9 +38,16 @@ public class MainServlet extends HttpServlet {
 		}
 
 		//登録完了のメッセージのセット
-		if(request.getAttribute("msg") != null){
-			request.setAttribute("registMsg", request.getAttribute("msg"));
+		if(session.getAttribute("msg") != null){
+			request.setAttribute("registMsg", session.getAttribute("msg"));
+			session.removeAttribute("msg");
 		}
+		//登録完了のメッセージのセット
+		if(session.getAttribute("errMsg") != null){
+			request.setAttribute("errMsg", session.getAttribute("errMsg"));
+			session.removeAttribute("errMsg");
+		}
+
 
 
 		//セッションからuserIdを取得
@@ -68,39 +74,39 @@ public class MainServlet extends HttpServlet {
 
 
 		//allListからstockを抽出する
-		ArrayList<Stock> stockList = new ArrayList<Stock>();
-		for(int i = 0; i < allList.size(); i++) {
-			AllBeans aB2 = allList.get(i);
-			Stock st = new Stock();
-			st.setStockId(aB2.getStockId());
-			st.setStockName(aB2.getStockName());
-			st.setStockBuy(aB2.getStockBuy());
-			st.setStockLimit(aB2.getStockLimit());
-			st.setStockAlert(aB2.getStockAlert());
-			st.setItemId(aB2.getItemId());
-			stockList.add(st);
-		}
-
-		//AllListから重複するitem行を削除する
-		int i = 0;
-		int k = 1;
-		while (i < allList.size()) {
-			while (k < allList.size()) {
-				if (allList.get(i).getItemId() == allList.get(k).getItemId()) {
-					allList.remove(k);
-				} else {
-					i++;
-					k++;
-				}
-			}
-			System.out.println(allList);
-			break;
-		}
-
-
-		//リクエストスコープにlistを"timelineList"という名前を付けて入れる
-		request.setAttribute("itemList", allList);
-		request.setAttribute("stockList", stockList);
+//		ArrayList<Stock> stockList = new ArrayList<Stock>();
+//		for(int i = 0; i < allList.size(); i++) {
+//			AllBeans aB2 = allList.get(i);
+//			Stock st = new Stock();
+//			st.setStockId(aB2.getStockId());
+//			st.setStockName(aB2.getStockName());
+//			st.setStockBuy(aB2.getStockBuy());
+//			st.setStockLimit(aB2.getStockLimit());
+//			st.setStockAlert(aB2.getStockAlert());
+//			st.setItemId(aB2.getItemId());
+//			stockList.add(st);
+//		}
+//
+//		//AllListから重複するitem行を削除する
+//		int i = 0;
+//		int k = 1;
+//		while (i < allList.size()) {
+//			while (k < allList.size()) {
+//				if (allList.get(i).getItemId() == allList.get(k).getItemId()) {
+//					allList.remove(k);
+//				} else {
+//					i++;
+//					k++;
+//				}
+//			}
+//			System.out.println(allList);
+//			break;
+//		}
+//
+//
+//		//リクエストスコープにlistを"timelineList"という名前を付けて入れる
+//		request.setAttribute("itemList", allList);
+//		request.setAttribute("stockList", stockList);
 
 
 

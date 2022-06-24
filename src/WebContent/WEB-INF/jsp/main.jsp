@@ -12,11 +12,14 @@
 
 
 <body>
-	<script>
+
 		<c:if test="${registMsg  != null }">
-			alert(${registMsg})；
+			<script>alert("登録しました")</script>
 		</c:if>
-	</script>
+		<c:if test="${errMsg  != null }">
+			<script>alert("登録できませんでした")</script>
+		</c:if>
+
 <div class="wrapper">
 ${user.userId}
 

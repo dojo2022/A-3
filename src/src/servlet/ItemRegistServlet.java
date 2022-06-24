@@ -7,6 +7,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import dao.ItemDAO;
 import model.Alert;
@@ -59,10 +60,12 @@ public class ItemRegistServlet extends HttpServlet {
 
 		if (iDao.insert(itemName, itemFavorite, categoryId, pageId, itemAlert, stockName, stockBuy, stockLimit, stockAlertday1, stockAlertday2, stockAlertday3, stockAlertday4)) {
 //			out.print("登録成功");
-			request.setAttribute("msg", ("登録成功"));
+			HttpSession session = request.getSession();
+			session.setAttribute("msg", ("登録成功"));
 			System.out.println("登録成功");
 		} else {
-//			out.print("登録失敗");
+			HttpSession session = request.getSession();
+			session.setAttribute("errMsg", ("登録失敗"));
 			System.out.println("登録失敗");
 		}
 
