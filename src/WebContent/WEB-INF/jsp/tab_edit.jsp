@@ -15,7 +15,7 @@
 
 <c:forEach var="e" items="${stockList}">
 
-<form method="POST" action="/syokuzaikanri/ItemRegistServlet">
+<form method="POST" action="/syokuzaikanri/ItemUpdateDeleteServlet">
 
 		<input type="hidden" name="pageId" value="${e.pageId}">
 	 <input type="hidden" name="itemId" value="${e.itemId}"><br>
@@ -48,10 +48,7 @@
     <input type="hidden" name="stockId" value="${e.stockId}"><br>
 	<input type="hidden" name="itemAlertday" value="${e.itemAlertday}">
 	<input type="hidden" name="stockAlert" value="${e.stockAlert}"><br>
-	<input type="hidden" name="stockAlertday1" value="${e.stockAlertday1}"><br>
-    <input type="hidden" name="stockAlertday2" value="${e.stockAlertday2}"><br>
-	<input type="hidden" name="stockAlertday3" value="${e.stockAlertday3}"><br>
-	<input type="hidden" name="stockAlertday4" value="${e.stockAlertday4}"><br>
+
 
 
 
