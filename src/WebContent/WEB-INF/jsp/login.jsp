@@ -11,7 +11,7 @@
 <body>
 	<div class="wrapper" id="wrap">
 	<div class="login">
-		<img src="/syokuzaikanri/img/pokezo_logo.png" alt="ロゴ">
+		<img src="/syokuzaikanri/img/pokezo_logo.png" class="logo" alt="ロゴ">
 
 		<form id="loginForm"  method="POST" action="/syokuzaikanri/LoginServlet">
 			<table>

@@ -3,16 +3,21 @@
 #wrap {
 	background-image: url(/syokuzaikanri/img/big_reizoko.png);
 	background-size: cover;
-	padding-left:75px;
-	padding-right:75px;
-	padding-top:110px;
+	padding-left:90px;
+	padding-right:210px;
+	padding-top:120px;
 	padding-bottom:70px;
-	width: 500px;
+	width: 535px;
 	float: left;
-	left: 50%;
+	left: 45%;
 	position: absolute;
-    margin-top:-40px;
+    margin-top:-50px;
 	margin-left: -260px;
+}
+/*logo*/
+.logo {
+	margin-bottom: 10px;
+	width: 75%;
 }
 
 /*   ログイン画面のIDとパスワードの幅等の変更   */
@@ -21,17 +26,13 @@
 	font-family: Helvetica, Arial, sans-serif;
     font-weight:500;
 	font-size: 18px;
-	border-radius: 0;
-	line-height: 22px;
+	border-radius: 17px;
+	line-height: 26px;
 	background-color: #fbfbfb;
 	padding: 13px 13px 13px 54px;
-	margin-bottom: 10px;
-	width:100%;
-	-webkit-box-sizing: border-box;
-	-moz-box-sizing: border-box;
-	-ms-box-sizing: border-box;
+	margin-bottom: 20px;
+	width:146%;
 	box-sizing: border-box;
-    border: 3px solid rgba(0,0,0,0);
 }
 /*  ログインボタンの大きさや色を調節  */
 .sub {
@@ -61,8 +62,9 @@
 /* id="footer" */
 #foot {
   background-repeat: repeat-x;
-  margin-top: 0;
+  margin: 0;
   padding: 0px;
   font-size: smaller;
-  color: black;
+  color: #534340;
+  font-weight: bold;
 }
