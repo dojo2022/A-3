@@ -175,6 +175,68 @@ public class StockDAO {
 				return stockList;
 }
 
+
+		// アラートに必要なデータを取ってくるためのselect
+				public ArrayList<AllBeans> selectAlert(String pageId){
+					Connection conn = null;
+					ArrayList<AllBeans> alertList = new ArrayList<AllBeans>();//ArrayList <インスタンスの型名> 変数名 = new ArrayList<インスタンスの型名>;
+
+					try {
+						// JDBCドライバを読み込む
+						Class.forName("org.h2.Driver");
+
+						// データベースに接続する
+						conn = DriverManager.getConnection("jdbc:h2:file:C:/dojo6Data/dojo6Data", "sa", "");
+						// SQL文を準備する
+						String sql = "SELECT item_name, item_alertday, stock_name, stock_alertday1, stock_alertday2, stock_alertday3, stock_alertday4 FROM Item  LEFT JOIN Stock ON Item.item_id = Stock.item_id LEFT JOIN Category ON  Item.category_id = Category.category_id WHERE Item.page_id = ? or stock_alert = 1";
+						PreparedStatement pStmt = conn.prepareStatement(sql);
+
+						pStmt.setString(1, pageId);
+
+
+						// SQL文を実行し、結果表を取得する
+						ResultSet rs = pStmt.executeQuery();
+
+						// 結果表をコレクションにコピーする
+						while (rs.next()) {
+							AllBeans alert = new AllBeans();
+							alert.setItemName(rs.getString("item_name"));
+							alert.setItemAlertday(rs.getString("item_alertday"));
+							alert.setStockName(rs.getString("stock_name"));
+							alert.setStockAlertday1(rs.getString("stock_alertday1"));
+							alert.setStockAlertday2(rs.getString("stock_alertday2"));
+							alert.setStockAlertday3(rs.getString("stock_alertday3"));
+							alert.setStockAlertday4(rs.getString("stock_alertday4"));
+							alertList.add(alert);
+						}
+
+
+					}
+						catch (SQLException e) {
+							e.printStackTrace();
+							alertList = null;
+						}
+						catch (ClassNotFoundException e) {
+							e.printStackTrace();
+							alertList = null;
+						}
+						finally {
+							// データベースを切断
+							if (conn != null) {
+								try {
+									conn.close();
+								}
+								catch (SQLException e) {
+									e.printStackTrace();
+									alertList = null;
+								}
+							}
+						}
+
+						// 結果を返す
+						return alertList;
+					}
+
 		//update
 		public boolean update(String stockName,String stockBuy, String stockLimit, String stockAlert, String stockId, String stockAlertday1, String stockAlertday2, String stockAlertday3, String stockAlertday4) {
 			Connection conn = null;
