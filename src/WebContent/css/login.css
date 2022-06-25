@@ -59,6 +59,10 @@
     cursor: pointer;
     transition: background-color 1s;
 }
+
+#button{
+	text-align: right;
+}
 /* id="footer" */
 #foot {
   background-repeat: repeat-x;

@@ -27,7 +27,7 @@
 	              </td>
 	            <tr>
 	            <tr>
-	              <td colspan="2">
+	              <td colspan="2" id="button">
 	              	<input type="reset" name="loginReset" value="リセット">
 	                <input type="submit"  class="sub" name="login" value="ログイン"><br>
 	              <td>
