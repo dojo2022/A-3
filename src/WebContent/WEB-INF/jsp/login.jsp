@@ -5,29 +5,37 @@
 <head>
 	<meta charset="UTF-8">
 	<title>ログインページ | ポケ蔵</title>
+	<link rel="stylesheet" type="text/css" href="css/login.css">
 	<script type="text/javascript" src="/syokuzaikanri/javaScript/login.js"></script>
 </head>
+<style>
+body {
+	background-image: url(/simpleBC/img/redsea.jpg);
+	background-size: cover;
+}
+</style>
 <body>
-	<div class="wrapper">
+	<div class="wrapper" id="wrapper">
 	<div class="login">
 		<img src="/syokuzaikanri/img/pokezo_logo.png" alt="ロゴ">
+		<hr>
 		<form id="loginForm" method="POST" action="/syokuzaikanri/LoginServlet">
 			<table>
 	            <tr>
 	              <td>
-	                <input type="email" name="userId" placeholder="ID・メールアドレス">
+	                <input type="email" name="userId" class="validate[required,custom[onlyLetter],length[0,100]] feedback-input" placeholder="ID・メールアドレス">
 	              </td>
 	            </tr>
 	            <tr>
 	              <td>
-	              <input type="password" name="userPw" id="inputUserPw" placeholder="パスワード"><br>
+	              <input type="password" name="userPw" id="inputUserPw"class="validate[required,custom[email]] feedback-input" placeholder="パスワード"><br>
 					<label for="inputCheckbox"><input id="inputCheckbox" type="checkbox" name="pwView" value="1"> パスワードを表示する</label>
 	              </td>
 	            <tr>
 	            <tr>
 	              <td colspan="2">
 	              	<input type="reset" name="loginReset" value="リセット">
-	                <input type="submit" name="login" value="ログイン"><br>
+	                <input type="submit" class="sub" name="login" value="ログイン"><br>
 	              <td>
 	            </tr>
 	        </table>
