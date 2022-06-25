@@ -1,117 +1,160 @@
 package model;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
+import java.util.ArrayList;
 import java.util.Date;
+
+import dao.StockDAO;
 
 public class AlertSelect {
 
 	public static void main (String[] args){
+		StockDAO sdao = new StockDAO();
 
-		String[] stockAlert  = stockAlert();
+		ArrayList<AllBeans> alertList = sdao.selectAlert("1");
 
-		for(String s : stockAlert) {
-			System.out.println(s);
+		for(AllBeans alert : alertList) {
+			System.out.println(alert.getItemId());
+			System.out.println(alert.getItemAlertday());
+			System.out.println(alert.getStockName());
+			System.out.println(alert.getStockAlertday1());
+			System.out.println(alert.getStockAlertday1());
+			System.out.println(alert.getStockAlertday1());
+			System.out.println(alert.getStockAlertday1());
+			System.out.println("ここまで");
 		}
-}
 
-		//今日の日付から賞味期限アラートの対象となる日付を計算する
-		public static String[] stockAlert(){
-			//配列を用意
-			String[] stockAlert = new String[8];
+//		AlertSelect a = new AlertSelect();
+		ArrayList<Message> alertDays = alertDay(alertList);
 
-			//今日の日付を取得
-			Date stockAlert0_0 = new Date();
-			Date stockAlert0_1 = new Date();
-			Date stockAlert1_0 = new Date();
-			Date stockAlert1_1 = new Date();
-			Date stockAlert2_0 = new Date();
-			Date stockAlert2_1 = new Date();
-			Date stockAlert3_0 = new Date();
-			Date stockAlert3_1 = new Date();
-
-			//Date型をCalendar型に変換（計算のため）
-		    Calendar calendar0_0 = Calendar.getInstance();
-		    calendar0_0.setTime(stockAlert0_0);
-		    Calendar calendar0_1 = Calendar.getInstance();
-		    calendar0_1.setTime(stockAlert0_1);
-		    Calendar calendar1_0 = Calendar.getInstance();
-		    calendar1_0.setTime(stockAlert1_0);
-		    Calendar calendar1_1 = Calendar.getInstance();
-		    calendar1_1.setTime(stockAlert1_1);
-		    Calendar calendar2_0 = Calendar.getInstance();
-		    calendar2_0.setTime(stockAlert2_0);
-		    Calendar calendar2_1 = Calendar.getInstance();
-		    calendar2_1.setTime(stockAlert2_1);
-		    Calendar calendar3_0 = Calendar.getInstance();
-		    calendar3_0.setTime(stockAlert3_0);
-		    Calendar calendar3_1 = Calendar.getInstance();
-		    calendar3_1.setTime(stockAlert3_1);
-
-		    //賞味期限2日前（stockAlert0_0、stockAlert0_1）を計算
-		    calendar0_0.add(Calendar.DAY_OF_MONTH, 2);
-		    calendar0_1.add(Calendar.DAY_OF_MONTH, 1);
-
-		    //賞味期限当日（stockAlert1_0、stockAlert1_1）を計算
-		    calendar1_1.add(Calendar.DAY_OF_MONTH, -1);
-
-		    //賞味期限2日後（stockAlert2_0、stockAlert2_1）を計算
-		    calendar2_0.add(Calendar.DAY_OF_MONTH, -2);
-		    calendar2_1.add(Calendar.DAY_OF_MONTH, -3);
-
-		  //賞味期限2日後（stockAlert3_0、stockAlert3_1）を計算
-		    calendar3_0.add(Calendar.DAY_OF_MONTH, -7);
-		    calendar3_1.add(Calendar.DAY_OF_MONTH, -8);
-
-		    //Calender型からDate型を取得する
-		    stockAlert0_0 = calendar0_0.getTime();
-		    stockAlert0_1 = calendar0_1.getTime();
-		    stockAlert1_0 = calendar1_0.getTime();
-		    stockAlert1_1 = calendar1_1.getTime();
-		    stockAlert2_0 = calendar2_0.getTime();
-		    stockAlert2_1 = calendar2_1.getTime();
-		    stockAlert3_0 = calendar3_0.getTime();
-		    stockAlert3_1 = calendar3_1.getTime();
-
-		  //Date型をString型に変換
-		    String stockAlert00= new SimpleDateFormat("yyyy-MM-dd").format(stockAlert0_0);
-		    String stockAlert01= new SimpleDateFormat("yyyy-MM-dd").format(stockAlert0_1);
-		    String stockAlert10= new SimpleDateFormat("yyyy-MM-dd").format(stockAlert1_0);
-		    String stockAlert11= new SimpleDateFormat("yyyy-MM-dd").format(stockAlert1_1);
-		    String stockAlert20= new SimpleDateFormat("yyyy-MM-dd").format(stockAlert2_0);
-		    String stockAlert21= new SimpleDateFormat("yyyy-MM-dd").format(stockAlert2_1);
-		    String stockAlert30= new SimpleDateFormat("yyyy-MM-dd").format(stockAlert3_0);
-		    String stockAlert31= new SimpleDateFormat("yyyy-MM-dd").format(stockAlert3_1);
-
-		  //期限アラート日をarrayにセットする
-		    stockAlert[0]= stockAlert00;
-		    stockAlert[1]= stockAlert01;
-		    stockAlert[2]= stockAlert10;
-		    stockAlert[3]= stockAlert11;
-		    stockAlert[4]= stockAlert20;
-		    stockAlert[5]= stockAlert21;
-		    stockAlert[6]= stockAlert30;
-		    stockAlert[7]= stockAlert31;
-
-		  //結果を返す
-		    return stockAlert;
-
+		for(Message message : alertDays) {
+			System.out.println(message.getStockMessage());
+			System.out.println(message.getItemMessage());
 		}
 
 
 
-		// 買い替えアラート
-		public static String itemAlert() {
-			//変数を用意
-			String itemAlert = "0";
+	}
 
-			//今日の日付を取得
-			Date today = new Date();
 
-			//Date型をString型に変換
-		    itemAlert = new SimpleDateFormat("yyyy-MM-dd").format(today);
 
-			return itemAlert;
 
+	// 賞味期限アラートを作成
+	public static ArrayList<Message> alertDay(ArrayList<AllBeans> alertList){
+
+		ArrayList<Message> alertDays = new ArrayList<Message>();//戻り値
+
+		try {
+
+		//今日の日付を取得
+		Date today = new Date();
+		//文字列のフォーマットを指定
+		SimpleDateFormat sdFormat = new SimpleDateFormat("yyyy-MM-dd");
+		//変数に代入
+		String stockName, itemName;
+
+		//String型をDate型に変換する
+		Date date1 = new Date();
+		Date date2 = new Date();
+		Date date3 = new Date();
+		Date date4 = new Date();
+		Date date5 = new Date();
+
+		int ans1, ans2, ans3, ans4, ans5;
+
+		//メッセージを入れる
+		String stockMessage,itemMessage;
+
+
+			for(AllBeans alert : alertList) {
+
+				stockName = alert.getStockName();
+				itemName = alert.getItemName();
+
+				//String型をDate型に変換する
+				date1 = sdFormat.parse(alert.getStockAlertday1());
+				date2 = sdFormat.parse(alert.getStockAlertday2());
+				date3 = sdFormat.parse(alert.getStockAlertday3());
+				date4 = sdFormat.parse(alert.getStockAlertday4());
+				date5  = sdFormat.parse(alert.getItemAlertday());
+
+				//Beansを実体化
+			    Message message = new Message();
+
+			    ans1 = date1.compareTo(today);
+			    ans2 = date2.compareTo(today);
+			    ans3 = date3.compareTo(today);
+			    ans4 = date4.compareTo(today);
+
+
+				//もし今日より一週間後が過去だったら
+				if (ans1 == 0 || ans1 == -1){
+					//｛日付 ｝｛在庫名｝の賞味期限が１週間経過しました。
+					stockMessage = alert.getStockAlertday4() + stockName + "の賞味期限が１週間経過しました。";
+					message.setStockMessage(stockMessage);
+				}
+				 //もし今日より二日後が過去だったら
+				else if(ans2 == 0 || ans2 == -1) {
+					//｛日付 ｝｛在庫名｝の賞味期限が2日経過しました。
+					stockMessage = alert.getStockAlertday3() + stockName + "の賞味期限が2日経過しました。";
+					message.setStockMessage(stockMessage);
+
+				}
+				//もし当日より今日が過去だったら
+				else if (ans3 == 0 || ans3 == -1){
+					//｛日付 ｝｛在庫名｝の賞味期限は今日です。
+					stockMessage = alert.getStockAlertday3() + stockName + "の賞味期限は今日です。";
+					message.setStockMessage(stockMessage);
+
+				}
+				//もし二日前が今日より過去だったら
+				else if (ans4 == 0 || ans4 == -1){
+					//｛日付 ｝｛在庫名｝の賞味期限は明後日です。
+					stockMessage = alert.getStockAlertday1() + stockName + "の賞味期限は明後日です。";
+					message.setStockMessage(stockMessage);
+
+				}
+				//nullにする？
+				else {
+					stockMessage = null;
+					message.setStockMessage(stockMessage);
+				}
+
+				//ここまで賞味期限アラート
+
+
+				//ここから買い替えアラート
+
+				ans5 = date5.compareTo(today);
+
+				if (ans5 == 0 || ans5 == -1) {
+					//{日付} {項目名}の買い替え時期です。
+
+					//ほんとはこれをBeansにセットしたい
+					itemMessage = alert.getItemAlertday() + itemName + "の買い替え時期です。" ;
+					message.setItemMessage(itemMessage);
+				} else {
+					itemMessage = null;
+					message.setItemMessage(itemMessage);
+				}
+
+				alertDays.add(message);
 			}
+		}
+
+		catch (ParseException e) {//エラー出たときどうしよう？
+			e.printStackTrace();
+			alertDays = null;
+		}
+
+
+
+       return alertDays;
+
+	}
+
 }
+
+
+
