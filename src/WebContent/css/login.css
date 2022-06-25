@@ -1,16 +1,17 @@
 @charset "UTF-8";
 /*    ログイン画面の形を作るもの    */
-#wrapper {
-	background-color:rgba(72,72,72,0.4);
-	padding-left:35px;
-	padding-right:35px;
-	padding-top:35px;
-	padding-bottom:50px;
-	width: 450px;
+#wrap {
+	background-image: url(/syokuzaikanri/img/big_reizoko.png);
+	background-size: cover;
+	padding-left:75px;
+	padding-right:75px;
+	padding-top:110px;
+	padding-bottom:70px;
+	width: 500px;
 	float: left;
 	left: 50%;
 	position: absolute;
-    margin-top:30px;
+    margin-top:-40px;
 	margin-left: -260px;
 }
 

@@ -8,17 +8,11 @@
 	<link rel="stylesheet" type="text/css" href="css/login.css">
 	<script type="text/javascript" src="/syokuzaikanri/javaScript/login.js"></script>
 </head>
-<style>
-body {
-	background-image: url(/simpleBC/img/redsea.jpg);
-	background-size: cover;
-}
-</style>
 <body>
-	<div class="wrapper" id="wrapper">
+	<div class="wrapper" id="wrap">
 	<div class="login">
 		<img src="/syokuzaikanri/img/pokezo_logo.png" alt="ロゴ">
-		<hr>
+
 		<form id="loginForm" method="POST" action="/syokuzaikanri/LoginServlet">
 			<table>
 	            <tr>
