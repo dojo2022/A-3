@@ -53,10 +53,28 @@ public class MemoTestServlet extends HttpServlet {
 		String pageId = (String)session.getAttribute("pageId");
 
 		MemoDAO dao = new MemoDAO();
+
+		//insert出来なくなったらfor文だけ残して下のif文を消す。
+		//delate用のServletをつくるかも
+
+//		int ans = 0;
+//		for(String str : textList) {
+//			ans += dao.insert(str,pageId);
+//		}
+
+		//更新ボタンが押されたらメモの
 		int ans = 0;
-		for(String str : textList) {
-			ans += dao.insert(str,pageId);//pageIdの引数どうやって渡す…？
+		if (request.getParameter("regist").equals("保存")) {
+			//update
+			for(String str : textList) {
+			ans += dao.insert(str,pageId);
+			}
+		} else {
+			//delete
+			dao.delete(pageId);
 		}
+
+
 
 
 		//成功
@@ -72,15 +90,16 @@ public class MemoTestServlet extends HttpServlet {
 
 
 		//メモのデータベースに保存したデータをjspに表示したい
-		//削除ボタンを作って同じpageIdをすべて削除する
+		//削除ボタンを作って同じpageIdをすべて削除する〇
 		//保存した後にページを遷移（値をjspに持っていくならメインサーブレットにリダイレクト）
 		//セッションにメモ内容を保存すればフォワードかも？
 
-
+		//MainServletにフォワード
+//		RequestDispatcher dispatcher = request.getRequestDispatcher("/syokuzaikanri/MainServlet");
+//		dispatcher.forward(request, response);
 
 
 
 
 	}
-
 }

@@ -36,6 +36,7 @@
 /*  ログインボタンの大きさや色を調節  */
 .sub {
 	width: 40%;
+	margin-left: auto;
     font-size: 15px;
     color: #fff;
 	display: inline-block;
@@ -48,9 +49,8 @@
     cursor: pointer;
     transition: background-color 1s;
 }
-
 /*--ボタンhover--*/
-.sub :hover {
+.sub:hover {
     color: #5c87a6;
     background-color: #ffffff;
     border: 1px solid #5c87a6;
@@ -58,12 +58,8 @@
     cursor: pointer;
     transition: background-color 1s;
 }
-input[id="c_agree"] {
-	transform: scale(1);
-	margin: 0 6px 0 530;
-}
 /* id="footer" */
-#footer {
+#foot {
   background-repeat: repeat-x;
   margin-top: 0;
   padding: 0px;

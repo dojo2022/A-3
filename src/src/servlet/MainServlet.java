@@ -11,9 +11,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import dao.MemoDAO;
 import dao.StockDAO;
 import dao.UserDAO;
 import model.AllBeans;
+import model.Memo;
 import model.User;
 
 /**
@@ -96,6 +98,13 @@ public class MainServlet extends HttpServlet {
 
 		// 検索結果をセッションスコープに格納する
 		session.setAttribute("allList", allList);
+
+		//memoをselect
+		MemoDAO mDao = new MemoDAO();
+		ArrayList<Memo> memoList = mDao.select(pageId);
+		// 検索結果をセッションスコープに格納する
+		session.setAttribute("memoList", memoList);
+
 
 
 		//allListからstockを抽出する
