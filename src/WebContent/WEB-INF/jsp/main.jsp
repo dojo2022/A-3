@@ -44,7 +44,26 @@
 <!-- <hr> 水平に線を引くためのタグ -->
 <div id="nav">
 
-<div class="item1">ham</div>
+	<div class="ham" id="ham">
+		<!-- span 特に意味がないタグ、背景を黒にすることで線にしている -->
+		<span class="ham_line ham_line1"></span>
+		<span class="ham_line ham_line2"></span>
+		<span class="ham_line ham_line3"></span>
+	</div>
+		<!-- ハンバーガーメニューの中身 -->
+		<div class="menu_wrapper" id="menu_wrapper">
+	            <div class="menu">
+	                <ul>
+		                <c:forEach var="page" items="${phList}" varStatus = "status">
+			                <form method="GET" action="/syokuzaikanri/MainServlet" >
+			                    <li><input type="hidden"name="pageId" value="${page.pageId}"><input type="submit" value="${page.pageTitle}"></li>
+							</form>
+		                </c:forEach>
+	                </ul>
+	            </div>
+	        </div>
+
+
 <div class="item2"><img src="img/pokezo_logo.png"></div>
 <div class="item3">日付</div>
 <div class="item4">ヘルプ</div>
@@ -148,6 +167,7 @@ window.onload = function(){
 }
 </script>
 </body>
-
+<!-- メインページ共通のjsファイルを読み込んでみた -->
+<script src="javaScript/main.js" charset="utf-8"></script>
 
 </html>

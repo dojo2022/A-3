@@ -90,7 +90,14 @@ public class MainServlet extends HttpServlet {
 		AllBeans aB1 = pList.get(0);
 		String pageId= aB1.getPageId();
 
+		System.out.println(request.getParameter("pageId"));
+		if (request.getParameter("pageId") != null) {
+			pageId = request.getParameter("pageId");
+			System.out.println("今のページIDは"+pageId);
+		}
+
 		session.setAttribute("pageId", pageId);
+
 
 		//一覧に表示するリストをselect
 		StockDAO sDao = new StockDAO();

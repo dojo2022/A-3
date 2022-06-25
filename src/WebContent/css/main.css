@@ -37,6 +37,63 @@ img {
 	height: 75px;
 }
 
+/*ハンバーガーメニューのボタンの背景*/
+.ham {
+	position: relative;
+	width: 300px;
+	height: 40px;
+	cursor: pointer;  /*カーソルを上に置いた時のカーソルの形状の指定*/
+	background-color: aqua;
+}
+
+/*ハンバーガーメニューの中身の横線三本*/
+.ham_line {
+	position: absolute;
+	left: 10px;
+	width: 20px;
+	height: 1px;
+	background-color: #333333;
+    /*ハンバーガーメニューがクリックされた時の動きの時間*/
+    transition: all 0.3s;
+}
+
+/*三本線の位置関係*/
+.ham_line1 {
+	top: 10px;
+}
+.ham_line2 {
+	top: 18px;
+}
+.ham_line3 {
+	top: 26px;
+}
+
+/* ハンバーガーメニューがクリックされて時に×に動く */
+.clicked .ham_line1 {
+	transform: rotate(45deg);
+	top: 20px;
+}
+.clicked .ham_line2 {
+	width: 0px; /*消える*/
+}
+.clicked .ham_line3 {
+	transform: rotate(-45deg);
+	top: 20px;
+}
+
+/* ハンバーがメニューの中身 */
+.menu {
+    position: fixed;
+	width: 300px;
+	height: 300px;
+    left: -400px; /*押す前の位置*/
+	background-color: aquamarine;
+    transition: all 0.3s; /*動くスピード*/
+}
+.clicked .menu {
+	left: 8px; /*左からどれくらい離れてるか*/
+}
+
 .item2 img{
  width: 175px;
 }
