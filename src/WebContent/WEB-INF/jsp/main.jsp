@@ -68,7 +68,7 @@
 <div class="item3">日付</div>
 <div class="item4">ヘルプ</div>
 <div class="item5">${user.userName}</div>
-<div class="item6"><a href="/syokuzaikanri/AccountEditServlet"><img src="img/icon.png"></a></div>
+<div class="item6"><a href="/syokuzaikanri/AccountEditServlet"><img src="img/ishii.png"></a></div>
 </div>
 <!-- nav ここまで -->
 
@@ -130,9 +130,21 @@
 
 
     <div class="grid_test-child"><!-- grit 子要素③  -->
-        これは仮の背景だよ
-        ${memoList[0] }
+	        <div class=alertTitle>賞味期限アラート</div>
+	        <div class="stockAlert">
+	        <c:forEach var="e" items="${message}"><br>
+	        ${e.stockMessage}
+	        </c:forEach>
+        </div>
+	         <div class=alertTitle>買い替えアラート</div>
+	    <div class="itemAlert">
+	         <c:forEach var="e" items="${message}"><br>
+	        ${e.itemMessage}
+	        </c:forEach>
+        </div>
     </div>
+
+
     <div class="grid_test-child"><!-- grit 子要素④  -->
 	<div class= memoitem>
 	   <form id = memo method="POST" action="/syokuzaikanri/MemoTestServlet">

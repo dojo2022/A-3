@@ -5,43 +5,41 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
-import dao.StockDAO;
-
 public class AlertSelect {
 
 	public static void main (String[] args){
-		StockDAO sdao = new StockDAO();
-
-		ArrayList<AllBeans> alertList = sdao.selectAlert("1");
-
-		for(AllBeans alert : alertList) {
-			System.out.println(alert.getItemId());
-			System.out.println(alert.getItemAlertday());
-			System.out.println(alert.getStockName());
-			System.out.println(alert.getStockAlertday1());
-			System.out.println(alert.getStockAlertday1());
-			System.out.println(alert.getStockAlertday1());
-			System.out.println(alert.getStockAlertday1());
-			System.out.println("ここまで");
+//		StockDAO sdao = new StockDAO();
+//
+//		ArrayList<AllBeans> alertList = sdao.selectAlert("1");
+//
+//		for(AllBeans alert : alertList) {
+//			System.out.println(alert.getItemId());
+//			System.out.println(alert.getItemAlertday());
+//			System.out.println(alert.getStockName());
+//			System.out.println(alert.getStockAlertday1());
+//			System.out.println(alert.getStockAlertday1());
+//			System.out.println(alert.getStockAlertday1());
+//			System.out.println(alert.getStockAlertday1());
+//			System.out.println("ここまで");
+//		}
+//
+////		AlertSelect a = new AlertSelect();
+//		ArrayList<Message> alertDays = alertDay(alertList);
+//
+//		for(Message message : alertDays) {
+//			System.out.println(message.getStockMessage());
+//			System.out.println(message.getItemMessage());
 		}
 
-//		AlertSelect a = new AlertSelect();
-		ArrayList<Message> alertDays = alertDay(alertList);
-
-		for(Message message : alertDays) {
-			System.out.println(message.getStockMessage());
-			System.out.println(message.getItemMessage());
-		}
 
 
 
-	}
 
 
 
 
 	// 賞味期限アラートを作成
-	public static ArrayList<Message> alertDay(ArrayList<AllBeans> alertList){
+	public ArrayList<Message> alertDay(ArrayList<AllBeans> alertList){
 
 		ArrayList<Message> alertDays = new ArrayList<Message>();//戻り値
 
