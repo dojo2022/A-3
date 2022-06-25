@@ -1,6 +1,7 @@
 package servlet;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -11,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import dao.UserDAO;
+import model.AllBeans;
 import model.User;
 
 /**
@@ -38,18 +40,29 @@ public class LoginServlet extends HttpServlet {
 		String userId = request.getParameter("userId");
 		String userPw = request.getParameter("userPw");
 		// ログイン処理を行う
-				UserDAO iDao = new UserDAO();
-				User user = iDao.Login(userId,userPw);
+				UserDAO uDao = new UserDAO();
+				User user = uDao.Login(userId,userPw);
 				if (user!=null) {	// ログイン成功
 					// セッションスコープにIDを格納する
 					HttpSession session = request.getSession();
 					session.setAttribute("user",user);
 
-					// メニューサーブレットにリダイレクトする
+					//page_idとpage_titleをセッションに保存
+					ArrayList<AllBeans> phList = uDao.upselect(userId);
+					session.setAttribute("phList",phList);
+
+					//user_idが持つ一番小さいpage_idでitemとstockを全件検索
+					AllBeans aB1 = phList.get(0);
+					String pageId= aB1.getPageId();
+
+					// 初期メインページのpage_idをセッションスコープに格納する
+					session.setAttribute("pageId", pageId);
+
+					// メインサーブレットにリダイレクトする
 					response.sendRedirect("/syokuzaikanri/MainServlet");
 				}
 				else {									// ログイン失敗
-					// 結果ページにフォワードする
+					// ログインページにフォワードする
 					RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/login.jsp");
 					dispatcher.forward(request, response);
 				}

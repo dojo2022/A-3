@@ -13,10 +13,8 @@ import javax.servlet.http.HttpSession;
 
 import dao.MemoDAO;
 import dao.StockDAO;
-import dao.UserDAO;
 import model.AllBeans;
 import model.Memo;
-import model.User;
 
 /**
  * Servlet implementation class MainServlet
@@ -73,31 +71,19 @@ public class MainServlet extends HttpServlet {
 			session.removeAttribute("dfMsg");
 		}
 
+//		//user_idが持つ一番小さいpage_idでitemとstockを全件検索
+//		ArrayList<AllBeans> pList = (ArrayList<AllBeans>)session.getAttribute("phList");
+//		AllBeans aB1 = pList.get(0);
+//		String pageId= aB1.getPageId();
 
-
-		//セッションからuserIdを取得
-		User user = (User)session.getAttribute("user");
-		String userId = user.getUserId();
-
-
-		//page_idとpage_titleをセッションに保存
-		UserDAO uDao = new UserDAO();
-		ArrayList<AllBeans> phList = uDao.upselect(userId);
-		session.setAttribute("phList",phList);
-
-		//user_idが持つ一番小さいpage_idでitemとstockを全件検索
-		ArrayList<AllBeans> pList = (ArrayList<AllBeans>)session.getAttribute("phList");
-		AllBeans aB1 = pList.get(0);
-		String pageId= aB1.getPageId();
-
-		System.out.println(request.getParameter("pageId"));
+		//pageIdをセッションから取り出す
+		String pageId = new String();;
+		System.out.println("今のページIDは"+request.getParameter("pageId"));
 		if (request.getParameter("pageId") != null) {
 			pageId = request.getParameter("pageId");
-			System.out.println("今のページIDは"+pageId);
+			session.setAttribute("pageId", pageId);
 		}
-
-		session.setAttribute("pageId", pageId);
-
+		pageId = (String)session.getAttribute("pageId");
 
 		//一覧に表示するリストをselect
 		StockDAO sDao = new StockDAO();
