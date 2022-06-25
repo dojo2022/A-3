@@ -16,11 +16,19 @@
 	<c:if test="${registMsg  != null }">
 		<script>alert("登録しました")</script>
 	</c:if>
-	<c:if test="${errMsg  != null }">
+	<c:if test="${errorMsg  != null }">
 		<script>alert("登録できませんでした")</script>
 	</c:if>
 
-		<!-- 削除完了アラート  -->
+	<!-- 更新完了アラート  -->
+	<c:if test="${updateSuccessMsg  != null }">
+	<script>alert("更新しました")</script>
+	</c:if>
+	<c:if test="${updateFailureMsg  != null }">
+		<script>alert("更新できませんでした")</script>
+	</c:if>
+
+	<!-- 削除完了アラート  -->
 	<c:if test="${deleteSuccessMsg  != null }">
 		<script>alert("削除しました")</script>
 	</c:if>

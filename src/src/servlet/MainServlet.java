@@ -45,8 +45,19 @@ public class MainServlet extends HttpServlet {
 		}
 		//登録失敗のメッセージのセット
 		if(session.getAttribute("errMsg") != null){
-			request.setAttribute("errMsg", session.getAttribute("errMsg"));
+			request.setAttribute("errorMsg", session.getAttribute("errMsg"));
 			session.removeAttribute("errMsg");
+		}
+
+		//更新成功のメッセージのセット
+		if(session.getAttribute("usMsg") != null){
+			request.setAttribute("updateSuccessMsg", session.getAttribute("usMsg"));
+			session.removeAttribute("usMsg");
+		}
+		//更新失敗のメッセージのセット
+		if(session.getAttribute("ufMsg") != null){
+			request.setAttribute("updateFailureMsg", session.getAttribute("ufMsg"));
+			session.removeAttribute("ufMsg");
 		}
 
 		//削除成功のメッセージのセット

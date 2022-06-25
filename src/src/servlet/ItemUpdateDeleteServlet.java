@@ -91,15 +91,19 @@ public class ItemUpdateDeleteServlet extends HttpServlet {
 		if (request.getParameter("regist").equals("編集")) {
 			//update
 			if (iDao.editUpdate(itemName, itemFavorite, categoryId, itemAlert, itemAlertday, itemId)) {
-				System.out.println("編集成功");
+				session.setAttribute("usMsg", ("更新成功"));
+				System.out.println("更新成功");
 			} else {
-				System.out.println("編集失敗");
+				session.setAttribute("ufMsg", ("更新失敗"));
+				System.out.println("更新失敗");
 			}
 		} else {
 			//delete
 			if (iDao.delete(itemId)) {
+				session.setAttribute("dsMsg", ("削除成功"));
 				System.out.println("削除成功");
 			} else {
+				session.setAttribute("dfMsg", ("削除失敗"));
 				System.out.println("削除失敗");
 			}
 		}
