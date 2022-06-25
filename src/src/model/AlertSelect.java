@@ -8,12 +8,16 @@ public class AlertSelect {
 
 	public static void main (String[] args){
 
+		String[] stockAlert  = stockAlert();
 
-	}
+		for(String s : stockAlert) {
+			System.out.println(s);
+		}
+}
 
 		//今日の日付から賞味期限アラートの対象となる日付を計算する
 		public static String[] stockAlert(){
-			//二次元配列を用意
+			//配列を用意
 			String[] stockAlert = new String[8];
 
 			//今日の日付を取得
@@ -92,10 +96,22 @@ public class AlertSelect {
 		  //結果を返す
 		    return stockAlert;
 
-
-
-
-
 		}
 
+
+
+		// 買い替えアラート
+		public static String itemAlert() {
+			//変数を用意
+			String itemAlert = "0";
+
+			//今日の日付を取得
+			Date today = new Date();
+
+			//Date型をString型に変換
+		    itemAlert = new SimpleDateFormat("yyyy-MM-dd").format(today);
+
+			return itemAlert;
+
+			}
 }
