@@ -56,12 +56,22 @@ public class StockAjaxServlet extends HttpServlet {
 //		request.setAttribute("stockUp", stockUp);
 
 
-		//登録出来なかったらアラート？
-		if(stockUp == false) {
+		if (stockUp) {
+			HttpSession session = request.getSession();
+			session.setAttribute("msg", ("登録成功"));
+			System.out.println("登録成功");
+		} else {
 			HttpSession session = request.getSession();
 			session.setAttribute("errMsg", ("登録失敗"));
 			System.out.println("登録失敗");
 		}
+
+//		//登録出来なかったらアラート？
+//		if(stockUp == false) {
+//			HttpSession session = request.getSession();
+//			session.setAttribute("errMsg", ("登録失敗"));
+//			System.out.println("登録失敗");
+//		}
 
 
 

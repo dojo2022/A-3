@@ -132,9 +132,9 @@ public class ItemDAO {
 		return result;
 	}
 
-	//update 一覧タブ用
-	//全部一個のメソッドにする分、残量切れ日を更新する時とそうじゃない時のif文が必要
-	public boolean update(String itemFavorite, String itemRemain, String itemLostday, String itemAlertday, String itemId){
+	//update 一覧タブ用（ItmeAjaxServlet）
+	//残量切れ日に入れる値は条件を分けて計算済み（Alert.java）
+	public boolean ajaxUpdate(String itemFavorite, String itemRemain, String itemLostday, String itemAlertday, String itemId){
 		Connection conn = null;
 		boolean result = false;
 
@@ -150,11 +150,12 @@ public class ItemDAO {
 
 			pStmt.setString(1, itemFavorite);
 			pStmt.setString(2, itemRemain);
-			if (itemRemain == "1") {
-				pStmt.setString(3, itemLostday);
-			} else {
-				pStmt.setString(3, "9999-12-31");
-			}
+//			if (itemRemain == "1") {
+//				pStmt.setString(3, itemLostday);
+//			} else {
+//				pStmt.setString(3, "9999-12-31");
+//			}
+			pStmt.setString(3, itemLostday);
 			pStmt.setString(4, itemAlertday);
 			pStmt.setString(5, itemId);
 
@@ -186,7 +187,7 @@ public class ItemDAO {
 
 	}
 
-	//itemRemainの値が2、3の時のupdateメソッド
+	//itemRemainの値が2、3の時のupdateメソッド（使わないで済みそう）
 	public boolean itemFRupdate(String itemFavorite, String itemRemain, String itemId){
 		Connection conn = null;
 		boolean result = false;
@@ -234,7 +235,7 @@ public class ItemDAO {
 	}
 
 
-	//update 新編集・削除タブ用
+	//update 新編集・削除タブ用（ItemUpdateDeleteServlet）
 	public boolean editUpdate(String itemName, String itemFavorite, String categoryId, String itemAlert, String itemAlertday, String itemId){
 		Connection conn = null;
 		boolean result = false;
@@ -285,7 +286,7 @@ public class ItemDAO {
 	}
 
 
-	//update	旧編集・削除タブ用？
+	//update	旧編集・削除タブ用？(もう使わなそう)
 	public boolean oldUpdate(String itemName, String itemFavorite, String categoryId, String itemAlert, String itemAlertday, String itemId, String stockName, String stockBuy, String stockLimit, String stockAlert, String stockAlertday1, String stockAlertday2, String stockAlertday3, String stockAlertday4, String stockId){
 		Connection conn = null;
 		boolean result = false;
