@@ -188,7 +188,7 @@ public class StockDAO {
 						// データベースに接続する
 						conn = DriverManager.getConnection("jdbc:h2:file:C:/dojo6Data/dojo6Data", "sa", "");
 						// SQL文を準備する
-						String sql = "SELECT item_name, item_alertday, stock_name, stock_alertday1, stock_alertday2, stock_alertday3, stock_alertday4 FROM Item  LEFT JOIN Stock ON Item.item_id = Stock.item_id LEFT JOIN Category ON  Item.category_id = Category.category_id WHERE Item.page_id = ? or stock_alert = 1";
+						String sql = "SELECT item_name, item_alertday, stock_name, stock_alertday1, stock_alertday2, stock_alertday3, stock_alertday4 FROM Item  LEFT JOIN Stock ON Item.item_id = Stock.item_id LEFT JOIN Category ON  Item.category_id = Category.category_id WHERE Item.page_id = ? AND stock_alert = 1";
 						PreparedStatement pStmt = conn.prepareStatement(sql);
 
 						pStmt.setString(1, pageId);
