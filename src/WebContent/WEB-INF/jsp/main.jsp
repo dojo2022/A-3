@@ -156,11 +156,10 @@
 				<!--「name""」の位置は？ "in"${status.index} or "in${status.index}" -->
 			</c:forEach>
 		<div class = memobutton>
-
 			<input type="reset" class=memob name="memoReset" value="リセット">
 			&emsp;
-			<input  type="submit" class=memob name="regist" value="保存"><br>
-
+			<input  type="submit" class=memob name="regist" value="保存">
+			&emsp;
 			<input  type="submit" class=memob name="regist" value="削除">
 		</div>
 		</form>
