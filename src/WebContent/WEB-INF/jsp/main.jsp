@@ -144,23 +144,29 @@
         </div>
     </div>
 
-
     <div class="grid_test-child"><!-- grit 子要素④  -->
 	<div class= memoitem>
 	   <form id = memo method="POST" action="/syokuzaikanri/MemoTestServlet">
+
+<!-- memoListに入っているmemoItemの値を出力する -->
+<%-- 	   <c:forEach var="list" items="${memoList}">
+				<c:out value="${list.memoItem}"/>
+		</c:forEach> --%>
+
 		<div class=memotitle>買い物メモ</div><br>
 			<c:forEach begin="0" end="19" step="1" varStatus="status">
-				●<input type="text" class= memotext size="28" name="in${status.index}" <%-- placeholder="in${status.index}" --%>>
+				●<input type="text" class= memotext size="28" name="in${status.index}" value = "${memoList[status.index].memoItem}"<%-- placeholder="in${status.index}" --%>>
 				<input  type="checkbox" class = memocheck name = memocheck><br>
 				<!-- index：<c:out value="${status.index}"/><br> -->
 				<!--「name""」の位置は？ "in"${status.index} or "in${status.index}" -->
 			</c:forEach>
 		<div class = memobutton>
+			<input  type="submit" class=memob name="regist" value="削除">
+			&emsp;
 			<input type="reset" class=memob name="memoReset" value="リセット">
 			&emsp;
 			<input  type="submit" class=memob name="regist" value="保存">
-			&emsp;
-			<input  type="submit" class=memob name="regist" value="削除">
+
 		</div>
 		</form>
 	</div>

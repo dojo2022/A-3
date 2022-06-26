@@ -77,6 +77,7 @@ public class MemoTestServlet extends HttpServlet {
 
 
 
+
 		//成功
 		if(textList.size()==ans) {
 			System.out.println("成功");
@@ -98,7 +99,8 @@ public class MemoTestServlet extends HttpServlet {
 //		RequestDispatcher dispatcher = request.getRequestDispatcher("/syokuzaikanri/MainServlet");
 //		dispatcher.forward(request, response);
 
-
+		//MainServletにリダイレクト
+		response.sendRedirect("/syokuzaikanri/MainServlet");
 
 
 	}

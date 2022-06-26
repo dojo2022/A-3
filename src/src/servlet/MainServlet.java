@@ -78,7 +78,7 @@ public class MainServlet extends HttpServlet {
 
 		//pageIdをセッションから取り出す
 		String pageId = new String();;
-		System.out.println("今のページIDは"+request.getParameter("pageId"));
+		System.out.println("今のページIDは"+request.getParameter(pageId));
 		if (request.getParameter("pageId") != null) {
 			pageId = request.getParameter("pageId");
 			session.setAttribute("pageId", pageId);
@@ -97,6 +97,8 @@ public class MainServlet extends HttpServlet {
 		ArrayList<Memo> memoList = mDao.select(pageId);
 		// 検索結果をセッションスコープに格納する
 		session.setAttribute("memoList", memoList);
+
+
 
 
 
