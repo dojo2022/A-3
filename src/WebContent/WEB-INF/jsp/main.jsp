@@ -67,8 +67,10 @@
 <div class="item2"><img src="img/pokezo_logo.png"></div>
 <div id="clock" class="item3" >日付</div>
 <div class="item4">ヘルプ</div>
+<div class="item4"><a href="/syokuzaikanri/LogoutServlet" class="logout">ログアウト</a></div>
 <div class="item5">${user.userName}</div>
 <div class="item6"><a href="/syokuzaikanri/AccountEditServlet"><img src="img/ishii.png"></a></div>
+
 </div>
 <!-- nav ここまで -->
 

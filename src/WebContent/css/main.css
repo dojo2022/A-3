@@ -124,6 +124,11 @@ img {
   text-align:center;
 
 }
+.logout{
+	text-decoration: none;
+	color: white;
+}
+
 
 .item5{
   flex-basis:10%;
