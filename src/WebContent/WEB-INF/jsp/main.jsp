@@ -199,7 +199,7 @@ function recalc(){
 
 
     document.getElementById('clock').textContent
-    =year+'年'+month+'/'+date+''+'('+dayOfWeek[now.getDay()]+')';
+    =year+'年'+' '+month+'月'+date+'日'+' '+'('+dayOfWeek[now.getDay()]+')';
 
     refresh();
 }
