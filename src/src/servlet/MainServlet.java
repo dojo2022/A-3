@@ -90,8 +90,16 @@ public class MainServlet extends HttpServlet {
 		StockDAO sDao = new StockDAO();
 		ArrayList<AllBeans> allList = sDao.select(pageId);
 
+
 		// 検索結果をセッションスコープに格納する
 		session.setAttribute("allList", allList);
+
+		//お気に入りタブに表示するリストをselect
+		StockDAO sDAO = new StockDAO();
+		ArrayList<AllBeans> favoriteList = sDAO.favoriteselect(pageId);
+
+		// 検索結果をセッションスコープに格納する
+		session.setAttribute("favoriteList", favoriteList);
 
 		//memoをselect
 		MemoDAO mDao = new MemoDAO();
