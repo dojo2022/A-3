@@ -14,7 +14,7 @@
 <form method="POST" action="/syokuzaikanri/ItemRegistServlet">
 				<input type="hidden" name="pageId" value="${pageId}">
 				${pageId}
-	 <p>項目名<input type="text" name="itemName"></p>
+	 <p>項目名<input type="text" required name="itemName"></p>
 	 <p>分類名<select name="categoryId">
 			    <option value="1">野菜</option>
 			    <option value="2">肉類</option>
