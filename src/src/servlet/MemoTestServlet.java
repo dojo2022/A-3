@@ -86,7 +86,7 @@ public class MemoTestServlet extends HttpServlet {
 			System.out.println("失敗");
 		}
 
-		System.out.println(textList);
+		//System.out.println(textList);
 		//登録の判定をするかも？
 
 

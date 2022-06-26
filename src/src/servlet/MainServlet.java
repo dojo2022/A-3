@@ -78,12 +78,13 @@ public class MainServlet extends HttpServlet {
 
 		//pageIdをセッションから取り出す
 		String pageId = new String();;
-		System.out.println("今のページIDは"+request.getParameter(pageId));
+
 		if (request.getParameter("pageId") != null) {
 			pageId = request.getParameter("pageId");
 			session.setAttribute("pageId", pageId);
 		}
 		pageId = (String)session.getAttribute("pageId");
+		System.out.println("今のページIDは"+ pageId);
 
 		//一覧に表示するリストをselect
 		StockDAO sDao = new StockDAO();

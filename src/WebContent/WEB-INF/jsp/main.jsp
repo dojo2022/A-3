@@ -65,7 +65,7 @@
 
 
 <div class="item2"><img src="img/pokezo_logo.png"></div>
-<div class="item3">日付</div>
+<div id="clock" class="item3" >日付</div>
 <div class="item4">ヘルプ</div>
 <div class="item5">${user.userName}</div>
 <div class="item6"><a href="/syokuzaikanri/AccountEditServlet"><img src="img/ishii.png"></a></div>
@@ -186,9 +186,32 @@ window.onload = function(){
 		document.getElementById("edit").click();
 	}
 }
+
+function recalc(){
+    const now = new Date
+
+    let dayOfWeek=['日','月','火','水','木','金','土']
+    const year = now.getFullYear();
+    const month = now.getMonth()+1;
+    const date = now.getDate();
+    const hour = now.getHours();
+    const min = now.getMinutes();
+
+
+    document.getElementById('clock').textContent
+    =year+'年'+month+'/'+date+''+'('+dayOfWeek[now.getDay()]+')';
+
+    refresh();
+}
+    function refresh(){
+   setTimeout(recalc,1000);
+    }
+
+recalc();
+
 </script>
 </body>
 <!-- メインページ共通のjsファイルを読み込んでみた -->
-<script src="javaScript/main.js" charset="utf-8"></script>
+<script type="text/javascript" src="javaScript/main.js" charset="utf-8"></script>
 
 </html>
