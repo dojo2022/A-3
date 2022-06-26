@@ -76,7 +76,7 @@
  							  <tr>
 							  	  <td colspan="7">
 							  	  	<input id="stockAdd${status.index}" class="stockAdd" type="checkbox">
-									<label class="stockAdd-label" for="stockAdd">
+									<label class="stockAdd-label" for="stockAdd${status.index}">
 										<img src="/syokuzaikanri/img/stockadd_plus.png" width="30" height="35" id="stockAddButton${status.index}" onclick="stockAddButton(${status.index})">
 									</label>
 									<div class="stockAdd-content">
