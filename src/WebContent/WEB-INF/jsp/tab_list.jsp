@@ -164,7 +164,7 @@
 							  <!-- 小項目----------------------------------- -->
 							  <tr>
 								  <td>
-								  	・
+								  	・${status.index}
 								  </td>
 								  <td>
 								  	<input type="text" value="${e.stockName}" name="stockName" id="stockName${status.index}" size="0" maxlength="20" onclick="changeStockName(${status.index})">
@@ -181,7 +181,7 @@
 									  <c:if test="${e.stockAlert == true}" >
 									    <div class="alertlBottun"><!-- オン→オフ場合 -->
 									        <label for="alertOff${status.index}" class="alertlLabel">
-									            <img src="/syokuzaikanri/img/alert_on.png" width="25" height="25" id="alertlImage${status.index}" onclick="alertlImage(${status.index})">
+									            <img src="/syokuzaikanri/img/alert_on.png" width="25" height="25" id="alertOff${status.index}" onclick="alertlOff('${status.index}')">
 									        </label>
 									        <input type="hidden" name="stockId" class="stockId" value="${e.stockId}" id="stockId${status.index}">
 									        <input type="checkbox" name="bell" class="alertl"  id="alertOff${status.index}" onclick="alertlOff('${status.index}')">
@@ -190,7 +190,7 @@
 									  <c:if test="${e.stockAlert == false}" >
 									    <div class="alertlBottun"><!-- オフ→オン場合 -->
 									        <label for="alertOn${status.index}" class="alertlLabel">
-									            <img src="/syokuzaikanri/img/alert_off.png" width="25" height="25" id="alertlImage${status.index}" onclick="alertlImage(${status.index})">
+									            <img src="/syokuzaikanri/img/alert_off.png" width="25" height="25" id="alertOn${status.index}" onclick="alertlOn('${status.index}')">
 									        </label>
 									        <input type="hidden" name="stockId" class="stockId" value="${e.stockId}" id="stockId${status.index}">
 									        <input type="checkbox" name="bell" class="alertl"  id="alertOn${status.index}" onclick="alertlOn('${status.index}')">
