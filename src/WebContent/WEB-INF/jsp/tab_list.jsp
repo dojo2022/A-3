@@ -34,31 +34,31 @@
 						  	・
 						  </td>
 						  <td>
-						  	<input type="text" value="${e.stockName}" name="stockName" id="stockName${status.index}" size="0" maxlength="20" onclick="changeStockName(${status.index})">
+						  	<input type="text" value="${e.stockName}" name="stockName" id="stockName${status.index}" size="0" maxlength="20" onclick="updateStock('${status.index}')">
 						  </td>
 						  <td>
 						  	<label for="stockBuy${status.index}">購入日</label>
-						  	<input type="date" value="${e.stockBuy}" name="stockBuy" id="stockBuy${status.index}" onclick="changeStockBuy(${status.index})">
+						  	<input type="date" value="${e.stockBuy}" name="stockBuy" id="stockBuy${status.index}" onclick="updateStock('${status.index}')">
 						  </td>
 						  <td>
 						  	<label for="stockLimit${status.index}">期限日</label>
-						  	<input type="date" value="${e.stockLimit}" name="stockLimit" id="stockLimit${status.index}" onclick="changeStockLimit(${status.index})">
+						  	<input type="date" value="${e.stockLimit}" name="stockLimit" id="stockLimit${status.index}" onclick="updateStock('${status.index}')">
 						  </td>
 						  <td>
 							  <c:if test="${e.stockAlert == true}" >
 							    <div class="alertlBottun"><!-- オン→オフ場合 -->
 							        <label for="alertlOff${status.index}" class="alertlLabel">
-							            <img src="/syokuzaikanri/img/alert_on.png" width="25" height="25" id="alertlImage${status.index}" onclick="alertlImage(${status.index})">
+							            <img src="/syokuzaikanri/img/alert_on.png" width="25" height="25" id="alertlOff${status.index}" onclick="alertlOff('${status.index}')">
 							        </label>
-							        <input type="checkbox" name="bell" class="alertl"  id="alertlOff${status.index}" onclick="alertlOff(${status.index})">
+							        <input type="checkbox" name="bell" class="alertl"  id="alertlOff${status.index}" onclick="alertlOff('${status.index}')">
 							    </div>
 								  </c:if>
 							  <c:if test="${e.stockAlert == false}" >
 							    <div class="alertlBottun"><!-- オフ→オン場合 -->
-							        <label for="alertOn${status.index}" class="alertlLabel">
-							            <img src="/syokuzaikanri/img/alert_off.png" width="25" height="25" id="alertlImage${status.index}" onclick="alertlImage(${status.index})">
+							        <label for="alertlOn${status.index}" class="alertlLabel">
+							            <img src="/syokuzaikanri/img/alert_off.png" width="25" height="25" id="alertlOn${status.index}" onclick="alertlOn('${status.index}')">
 							        </label>
-							        <input type="checkbox" name="bell" class="alertl"  id="alertOn${status.index}" onclick="alertlOn(${status.index})">
+							        <input type="checkbox" name="bell" class="alertl"  id="alertlOn${status.index}" onclick="alertlOn('${status.index}')">
 							    </div>
 							  </c:if>
 						  </td>
@@ -77,7 +77,7 @@
 							  	  <td colspan="7">
 							  	  	<input id="stockAdd${status.index}" class="stockAdd" type="checkbox">
 									<label class="stockAdd-label" for="stockAdd${status.index}">
-										<img src="/syokuzaikanri/img/stockadd_plus.png" width="30" height="35" id="stockAddButton${status.index}" onclick="stockAddButton(${status.index})">
+										<img src="/syokuzaikanri/img/stockadd_plus.png" width="30" height="35" id="stockAddButton${status.index}" onclick="stockAddButton('${status.index}')">
 									</label>
 									<div class="stockAdd-content">
 										<table>
@@ -108,21 +108,21 @@
 								<!-- 大項目------------------------------------------------------ -->
 							 <tr>
 						 		<td>
-
-							 		<c:if test="${e.itemFavorite == true}" ><!-- おきに入り→お気に入りじゃないの場合 -->
+								<input type="hidden" name="nowRemain" id="nowRemain${status.index}" value="${e.itemRemain}">
+							 	<c:if test="${e.itemFavorite == true}" ><!-- おきに入り→お気に入りじゃないの場合 -->
 								    <div class="favoriteBottun">
 									        <label for="favoriteOff${status.index}" class="favoriteLabel">
-									            <img src="/syokuzaikanri/img/favorite_on.png" width="25" height="25" id="favoriteImage${status.index}" onclick="favoriteImage(${status.index})">
+									            <img src="/syokuzaikanri/img/favorite_on.png" width="25" height="25" id="favoriteOff${status.index}" onclick="favoriteOff('${status.index}')">
 									        </label>
-									        <input type="checkbox" name="itemFavorite" class="itemFavorite" value="false" id="favoriteOff${status.index}" onclick="favoriteOff(${status.index})">
+									        <input type="checkbox" name="itemFavorite" class="itemFavorite"  id="favoriteOff${status.index}" onclick="favoriteOff('${status.index}')">
 									    </div>
 								</c:if>
 								<c:if test="${e.itemFavorite == false}" ><!-- おきに入りじゃない→お気に入り場合 -->
 								    <div class="favoriteBottun">
 								        <label for="favoriteOn${status.index}" class="favoriteLabel">
-								            <img src="/syokuzaikanri/img/favorite_off.png" width="25" height="25" id="favoriteImage${status.index}" onclick="favoriteImage(${status.index})">
+								            <img src="/syokuzaikanri/img/favorite_off.png" width="25" height="25" id="favoriteOn${status.index}" onclick="favoriteOn('${status.index}')">
 								        </label>
-								        <input type="checkbox" name="itemFavorite" class="itemFavorite" value="ture" id="favoriteOn${status.index}" onclick="favoriteOn(${status.index})">
+								        <input type="checkbox" name="itemFavorite" class="itemFavorite" id="favoriteOn${status.index}" onclick="favoriteOn('${status.index}')">
 								    </div>
 								</c:if>
 								</td>
@@ -130,24 +130,66 @@
 						 			${e.itemName}
 						 		</td>
 							 		<td>
+							 		<c:if test="${e.itemRemain == 3}" >
 									    <div class="remainBottun">
 									        <label for="remainFull${status.index}" class="remainLabel">
 									            <img src="/syokuzaikanri/img/remain_full.png" width="25" height="25" class="remainImage" >
 									        </label>
-									        <input type="radio" name="remain" class="remain" value="3" id="remainFull${status.index}" onclick="remain(${status.index})">
+									        <input type="radio" name="remain" class="remain" value="3" checked id="remainFull${status.index}" onclick="remainFull('${status.index}')">
 									    </div>
 									    <div class="remainBottun">
 									        <label for="remainLittle${status.index}" class="remainLabel">
 									            <img src="/syokuzaikanri/img/remain_little.png" width="25" height="25" class="remainImage">
 									        </label>
-									        <input type="radio" name="remain" class="remain" value="2" id="remainLittle${status.index}" onclick="remain(${status.index})">
+									        <input type="radio" name="remain" class="remain" value="2" id="remainLittle${status.index}" onclick="remainLittle('${status.index}')">
 									    </div>
 									    <div class="remainBottun">
 									        <label for="remainNone${status.index}" class="remainLabel">
 									            <img src="/syokuzaikanri/img/remain_none.png" width="25" height="25" class="remainImage">
 									        </label>
-									        <input type="radio" name="remain" class="remain" value="1" id="remainNone${status.index}" onclick="remain(${status.index})">
+									        <input type="radio" name="remain" class="remain" value="1" id="remainNone${status.index}" onclick="remainNone('${status.index}')">
 									    </div>
+									</c:if>
+									<c:if test="${e.itemRemain == 2}" >
+									    <div class="remainBottun">
+									        <label for="remainFull${status.index}" class="remainLabel">
+									            <img src="/syokuzaikanri/img/remain_full.png" width="25" height="25" class="remainImage" >
+									        </label>
+									        <input type="radio" name="remain" class="remain" value="3" id="remainFull${status.index}" onclick="remainFull('${status.index}')">
+									    </div>
+									    <div class="remainBottun">
+									        <label for="remainLittle${status.index}" class="remainLabel">
+									            <img src="/syokuzaikanri/img/remain_little.png" width="25" height="25" class="remainImage">
+									        </label>
+									        <input type="radio" name="remain" class="remain" value="2" checked id="remainLittle${status.index}" onclick="remainLittle('${status.index}')">
+									    </div>
+									    <div class="remainBottun">
+									        <label for="remainNone${status.index}" class="remainLabel">
+									            <img src="/syokuzaikanri/img/remain_none.png" width="25" height="25" class="remainImage">
+									        </label>
+									        <input type="radio" name="remain" class="remain" value="1" id="remainNone${status.index}" onclick="remainNone('${status.index}')">
+									    </div>
+									</c:if>
+									<c:if test="${e.itemRemain == 1}" >
+									    <div class="remainBottun">
+									        <label for="remainFull${status.index}" class="remainLabel">
+									            <img src="/syokuzaikanri/img/remain_full.png" width="25" height="25" class="remainImage" >
+									        </label>
+									        <input type="radio" name="remain" class="remain" value="3" id="remainFull${status.index}" onclick="remainFull('${status.index}')">
+									    </div>
+									    <div class="remainBottun">
+									        <label for="remainLittle${status.index}" class="remainLabel">
+									            <img src="/syokuzaikanri/img/remain_little.png" width="25" height="25" class="remainImage">
+									        </label>
+									        <input type="radio" name="remain" class="remain" value="2" id="remainLittle${status.index}" onclick="remainLittle('${status.index}')">
+									    </div>
+									    <div class="remainBottun">
+									        <label for="remainNone${status.index}" class="remainLabel">
+									            <img src="/syokuzaikanri/img/remain_none.png" width="25" height="25" class="remainImage">
+									        </label>
+									        <input type="radio" name="remain" class="remain" value="1" checked id="remainNone${status.index}" onclick="remainNone('${status.index}')">
+									    </div>
+									</c:if>
 									</td>
 							 		<td>
 							 		</td>
@@ -167,33 +209,33 @@
 								  	・${status.index}
 								  </td>
 								  <td>
-								  	<input type="text" value="${e.stockName}" name="stockName" id="stockName${status.index}" size="0" maxlength="20" onclick="changeStockName(${status.index})">
+								  	<input type="text" value="${e.stockName}" name="stockName" id="stockName${status.index}" size="0" maxlength="20" onclick="updateStock('${status.index}')">
 								  </td>
 								  <td>
 								  	<label for="stockBuy">購入日</label>
-								  	<input type="date" value="${e.stockBuy}" name="stockBuy" id="stockBuy${status.index}" onclick="changeStockBuy(${status.index})">
+								  	<input type="date" value="${e.stockBuy}" name="stockBuy" id="stockBuy${status.index}" onclick="updateStock('${status.index}')">
 								  </td>
 								  <td>
 								  	<label for="stockLimit">期限日</label>
-								  	<input type="date" value="${e.stockLimit}" name="stockLimit" id="stockLimit${status.index}" onclick="changeStockLimit(${status.index})">
+								  	<input type="date" value="${e.stockLimit}" name="stockLimit" id="stockLimit${status.index}" onclick="updateStock('${status.index}')">
 								  </td>
 								  <td>
 									  <c:if test="${e.stockAlert == true}" >
 									    <div class="alertlBottun"><!-- オン→オフ場合 -->
-									        <label for="alertOff${status.index}" class="alertlLabel">
-									            <img src="/syokuzaikanri/img/alert_on.png" width="25" height="25" id="alertOff${status.index}" onclick="alertlOff('${status.index}')">
+									        <label for="alertlOff${status.index}" class="alertlLabel">
+									            <img src="/syokuzaikanri/img/alert_on.png" width="25" height="25" id="alertlOff${status.index}" onclick="alertlOff('${status.index}')">
 									        </label>
 									        <input type="hidden" name="stockId" class="stockId" value="${e.stockId}" id="stockId${status.index}">
-									        <input type="checkbox" name="bell" class="alertl"  id="alertOff${status.index}" onclick="alertlOff('${status.index}')">
+									        <input type="checkbox" name="bell" class="alertl"  id="alertlOff${status.index}" onclick="alertlOff('${status.index}')">
 									    </div>
-										  </c:if>
+									  </c:if>
 									  <c:if test="${e.stockAlert == false}" >
 									    <div class="alertlBottun"><!-- オフ→オン場合 -->
-									        <label for="alertOn${status.index}" class="alertlLabel">
-									            <img src="/syokuzaikanri/img/alert_off.png" width="25" height="25" id="alertOn${status.index}" onclick="alertlOn('${status.index}')">
+									        <label for="alertlOn${status.index}" class="alertlLabel">
+									            <img src="/syokuzaikanri/img/alert_off.png" width="25" height="25" id="alertlOn${status.index}" onclick="alertlOn('${status.index}')">
 									        </label>
 									        <input type="hidden" name="stockId" class="stockId" value="${e.stockId}" id="stockId${status.index}">
-									        <input type="checkbox" name="bell" class="alertl"  id="alertOn${status.index}" onclick="alertlOn('${status.index}')">
+									        <input type="checkbox" name="bell" class="alertl"  id="alertlOn${status.index}" onclick="alertlOn('${status.index}')">
 									    </div>
 									  </c:if>
 								  </td>
@@ -203,16 +245,16 @@
 							 	  <td>
 							 	  </td>
 							  </tr>
-						</c:if>
+					</c:if>
 					<c:set var="taihi" value="${e.itemId}" />
 				</c:forEach>
 					<tr>
 				  	  <td colspan="7">
-				  	  	<input id="stockAdd" class="stockAdd" type="checkbox">
-						<label class="stockAdd-label" for="stockAdd">
-							<img src="/syokuzaikanri/img/stockadd_plus.png" width="30" height="35" id="stockAddButton" onclick="stockAddButton()">
+				  	  	<input id="stockAddOut" class="stockAddOut" type="checkbox">
+						<label class="stockAddOut-label" for="stockAddOutButton">
+							<img src="/syokuzaikanri/img/stockadd_plus.png" width="30" height="35" id="stockAddOutButton" onclick="stockAddOutButton()">
 						</label>
-						<div class="stockAdd-content">
+						<div class="stockAddOut-content">
 							<table>
 							  <tr>
 								  <td>

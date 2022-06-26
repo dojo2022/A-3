@@ -23,7 +23,7 @@
     border-bottom-color: #000000;
 }
 
-/*在庫追加アコーディオンのデザイン*/
+/*ループでの在庫追加アコーディオンのデザイン*/
 .stockAdd{
     display: none;
 }
@@ -56,6 +56,41 @@
     visibility: visible;
 }
 
+/*ループ外在庫追加アコーディオンのデザイン*/
+.stockAddOut{
+    display: none;
+}
+.stockAddOut-label{
+    color: #fff;
+    display: block;
+    height: 30px;
+    position: relative;
+}
+.stockAddOut-label:after{
+    background: #c0c0c0;
+    box-sizing: border-box;
+    display: block;
+    height: 30px;
+    position: absolute;
+}
+.stockAddOut-content{
+	margin-left: 30px;
+    background: #c0c0c0;
+    height: 0;
+    opacity: 0;
+    padding: 0 10px;
+    transition: .5s;
+    visibility: hidden;
+}
+.stockAddOut:checked + .stockAddOut-label + .stockAddOut-content{
+    height: 40px;
+    opacity: 1;
+    padding: 10px;
+    visibility: visible;
+}
+
+
+/*全体のデザイン*/
 #all_content{
 	height: auto;
 }
