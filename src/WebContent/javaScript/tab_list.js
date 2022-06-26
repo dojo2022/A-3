@@ -26,14 +26,13 @@ function favoriteImage0(){
 
 
 //賞味期限アラートのAjax
-function alertlOff(id){
+function alertlOff(indexNo){
 	alert("functionはいったよ！");
-	let stockId = id;
-	let stockName = document.addEventListener('DOMContentLoaded', () => { document.getElementById('stockName').value; });
-	let stockBuy = document.addEventListener('DOMContentLoaded', () => { document.getElementById('stockBuy').value; });
-	let stockLimit = document.addEventListener('DOMContentLoaded', () => { document.getElementById('stockLimit').value; });
-	let bell = document.addEventListener('DOMContentLoaded', () => { document.getElementById(id + "alertlOff").value; });
-	bell = "false";
+	var stockId = document.getElementById('stockId' + indexNo).value ;
+	var stockName = document.getElementById('stockName' + indexNo).value ;
+	var stockBuy = document.getElementById('stockBuy' + indexNo).value ;
+	var stockLimit = document.getElementById('stockLimit' + indexNo).value ;
+	var bell = false ;
 
 	console.log(stockId);
 	console.log(stockName);
@@ -41,10 +40,11 @@ function alertlOff(id){
 	console.log(stockLimit);
 	console.log(bell);
 
-	let date = {stockId:stockId,stockName:stockName,stockBuy:stockBuy,stockLimit:stockLimit,bell:bell}
-	alert(date);
+	let postData = {stockId:stockId,stockName:stockName,stockBuy:stockBuy,stockLimit:stockLimit,bell:bell}
+	console.log(postData);
 
 				//非同期通信始めるよ
+			$.ajaxSetup({scriptCharset:'utf-8'});
 			$.ajax({
 				//どのサーブレットに送るか
 				//ajaxSampleのところは自分のプロジェクト名に変更する必要あり。
@@ -52,7 +52,7 @@ function alertlOff(id){
 				//どのメソッドを使用するか
 				type:"POST",
 				//何をサーブレットに飛ばすか（変数を記述）
-				data: date,
+				data: postData,
 				//この下の２行はとりあえず書いてる（書かなくても大丈夫？）
 				processDate:false,
 				timeStamp: new Date().getTime()

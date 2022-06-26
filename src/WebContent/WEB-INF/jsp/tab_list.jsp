@@ -50,7 +50,7 @@
 							        <label for="alertlOff${status.index}" class="alertlLabel">
 							            <img src="/syokuzaikanri/img/alert_on.png" width="25" height="25" id="alertlImage${status.index}" onclick="alertlImage(${status.index})">
 							        </label>
-							        <input type="checkbox" name="bell" class="alertl" value="false" id="alertlOff${status.index}" onclick="alertlOff(${status.index})">
+							        <input type="checkbox" name="bell" class="alertl"  id="alertlOff${status.index}" onclick="alertlOff(${status.index})">
 							    </div>
 								  </c:if>
 							  <c:if test="${e.stockAlert == false}" >
@@ -58,7 +58,7 @@
 							        <label for="alertOn${status.index}" class="alertlLabel">
 							            <img src="/syokuzaikanri/img/alert_off.png" width="25" height="25" id="alertlImage${status.index}" onclick="alertlImage(${status.index})">
 							        </label>
-							        <input type="checkbox" name="bell" class="alertl" value="true" id="alertOn${status.index}" onclick="alertlOn(${status.index})">
+							        <input type="checkbox" name="bell" class="alertl"  id="alertOn${status.index}" onclick="alertlOn(${status.index})">
 							    </div>
 							  </c:if>
 						  </td>
@@ -183,7 +183,8 @@
 									        <label for="alertOff${status.index}" class="alertlLabel">
 									            <img src="/syokuzaikanri/img/alert_on.png" width="25" height="25" id="alertlImage${status.index}" onclick="alertlImage(${status.index})">
 									        </label>
-									        <input type="checkbox" name="bell" class="alertl" value="false" id="alertOff${status.index}" onclick="alertlOff(${status.index})">
+									        <input type="hidden" name="stockId" class="stockId" value="${e.stockId}" id="stockId${status.index}">
+									        <input type="checkbox" name="bell" class="alertl"  id="alertOff${status.index}" onclick="alertlOff('${status.index}')">
 									    </div>
 										  </c:if>
 									  <c:if test="${e.stockAlert == false}" >
@@ -191,7 +192,8 @@
 									        <label for="alertOn${status.index}" class="alertlLabel">
 									            <img src="/syokuzaikanri/img/alert_off.png" width="25" height="25" id="alertlImage${status.index}" onclick="alertlImage(${status.index})">
 									        </label>
-									        <input type="checkbox" name="bell" class="alertl" value="true" id="alertOn${status.index}" onclick="alertlOn(${status.index})">
+									        <input type="hidden" name="stockId" class="stockId" value="${e.stockId}" id="stockId${status.index}">
+									        <input type="checkbox" name="bell" class="alertl"  id="alertOn${status.index}" onclick="alertlOn('${status.index}')">
 									    </div>
 									  </c:if>
 								  </td>
