@@ -24,7 +24,7 @@ public class Alert {
 	public String[] stockAlert(String stockLimit) {//期限日（stock_limit）を取得
 		String[] array = new String[4];
 		try {
-			if (stockLimit == "" || stockLimit == "9999-12-31") {
+			if (stockLimit == null || stockLimit == "" || stockLimit == "9999-12-31") {
 				array[0] = "9999-12-31";
 				array[1] = "9999-12-31";
 				array[2] = "9999-12-31";

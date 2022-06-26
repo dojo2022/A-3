@@ -25,7 +25,7 @@ public class StockDAO {
 			//一覧の在庫追加のフォームの中に<input type="hidden" name="itemId" value=""${e.itemId}$>で値を引き渡す
 
 			// SQL文を準備する
-			String sql = "INSERT INTO Stock (stock_name, stock_buy, stock_limit,item_id, stock_alertday1, stock_alertday2, stock_alertday3, stock_alertday4) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+			String sql = "INSERT INTO Stock (stock_name, stock_buy, stock_limit, item_id, stock_alertday1, stock_alertday2, stock_alertday3, stock_alertday4) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 
 			// SQL文を完成させる

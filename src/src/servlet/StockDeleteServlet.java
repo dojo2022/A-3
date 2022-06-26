@@ -48,6 +48,9 @@ public class StockDeleteServlet extends HttpServlet {
 			System.out.println("削除失敗");
 		}
 
+		// メインサーブレットにリダイレクトする
+		response.sendRedirect("/syokuzaikanri/MainServlet");
+
 	}
 
 }
