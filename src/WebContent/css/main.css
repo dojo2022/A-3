@@ -327,7 +327,7 @@ input[name="tab_item"] {
 }
 
 .memoitem::-webkit-scrollbar-thumb {
-  background-color:#386ce1;/* スクロールバーの色変えたいかも！ */
+  background-color:#2f4f4f;/* スクロールバーの色変えたいかも！ */
   border-radius: 5px;
 }
 /* id="footer" */
