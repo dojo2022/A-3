@@ -53,10 +53,10 @@
 		<!-- ハンバーガーメニューの中身 -->
 		<div class="menu_wrapper" id="menu_wrapper">
 	            <div class="menu">
-	                <ul>
+	                <ul  class="pageList">
 		                <c:forEach var="page" items="${phList}" varStatus = "status">
 			                <form method="GET" action="/syokuzaikanri/MainServlet" >
-			                    <li><input type="hidden"name="pageId" value="${page.pageId}"><input type="submit" value="${page.pageTitle}"></li>
+			                    <li><input type="hidden"name="pageId" value="${page.pageId}"><input type="submit" value="${page.pageTitle}" class="pageButton"></li>
 							</form>
 		                </c:forEach>
 	                </ul>

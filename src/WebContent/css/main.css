@@ -40,8 +40,8 @@ img {
 /*ハンバーガーメニューのボタンの背景*/
 .ham {
 	position: relative;
-	width: 300px;
-	height: 40px;
+	width: 250px;
+	height: 80px;
 	cursor: pointer;  /*カーソルを上に置いた時のカーソルの形状の指定*/
 	/*background-color: aqua;*/
 }
@@ -50,8 +50,8 @@ img {
 .ham_line {
 	position: absolute;
 	left: 10px;
-	width: 20px;
-	height: 1px;
+	width: 40px;
+	height: 3px;
 	background-color: #333333;
     /*ハンバーガーメニューがクリックされた時の動きの時間*/
     transition: all 0.3s;
@@ -84,8 +84,8 @@ img {
 /* ハンバーがメニューの中身 */
 .menu {
     position: fixed;
-	width: 300px;
-	height: 300px;
+	width: 250px;
+	height: 540px;
     left: -400px; /*押す前の位置*/
 	/*background-color: aquamarine;*/
 	background-color:rgba(255,255,255,0.8);
@@ -94,6 +94,25 @@ img {
 .clicked .menu {
 	left: 8px; /*左からどれくらい離れてるか*/
 }
+.pageList{
+  list-style: none;
+  padding-left: 0;
+}
+.pageButton{
+  list-style: none;
+  display       : inline-block;
+  font-size     : 1.2em;        /* 文字サイズ */
+  cursor        : pointer;     /* カーソル   */
+  padding-top   : 15px;   /* 余白       */
+  padding-bottom: 15px;
+  padding-left  : 10px;   /* 余白       */
+  margin        : 10px 25px;   /* 余白       */
+  width: 200px;
+  background    : rgba(255, 127, 0, 0.8);     /* 背景色 */
+  color         : #000000;     /* 文字色     */
+  line-height   : 1em;         /* 1行の高さ  */
+}
+
 
 .item2 img{
  width: 175px;
