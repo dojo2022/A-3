@@ -47,6 +47,10 @@ public class LoginServlet extends HttpServlet {
 					HttpSession session = request.getSession();
 					session.setAttribute("user",user);
 
+					//userが持つアイコン情報を保存
+					AllBeans ui = uDao.uiselect(userId);
+					session.setAttribute("uiBeans",ui);
+
 					//page_idとpage_titleをセッションに保存
 					ArrayList<AllBeans> phList = uDao.upselect(userId);
 					session.setAttribute("phList",phList);

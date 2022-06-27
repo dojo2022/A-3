@@ -17,12 +17,22 @@
 	 <p>項目名<input type="text" required name="itemName"></p>
 	 <p>分類名<select name="categoryId">
 			    <option value="1">野菜</option>
-			    <option value="2">肉類</option>
-			    <option value="3">魚類</option>
-			    <option value="4">炭水化物</option>
-			    <option value="5">調味料</option>
-			    <option value="6">飲み物</option>
-			    <option value="7">その他</option>
+			    <option value="2">肉</option>
+			    <option value="3">魚</option>
+			    <option value="4">卵</option>
+			    <option value="5">炭水化物</option>
+			    <option value="6">乳製品</option>
+			    <option value="7">大豆製品</option>
+			    <option value="8">乾物</option>
+			    <option value="9">調味料</option>
+			    <option value="10">粉もの</option>
+			    <option value="11">飲み物</option>
+			    <option value="12">果物</option>
+			    <option value="13">菓子</option>
+			    <option value="14">レトルト食品</option>
+			    <option value="15">インスタント食品</option>
+			    <option value="16">冷凍食品</option>
+			    <option value="17">その他</option>
 		  </select>
 	 お気に入り<input type="checkbox" name="itemFavorite" value="1"></p>
 	 <p>買い替えアラート<select name="itemAlert">

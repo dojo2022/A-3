@@ -157,9 +157,9 @@ public class UserDAO {
 
 	//select  アカウント編集系
 	//（ハンバーガーメニューにも使えるのでは？）
-	public ArrayList<AllBeans> select(String userId) {
+	public AllBeans uiselect(String userId) {
+		AllBeans ui = new AllBeans();
 		Connection conn = null;
-		ArrayList<AllBeans> userList = new ArrayList<AllBeans>();//ArrayListの名前変えないと？
 
 		try {
 			// JDBCドライバを読み込む
@@ -182,22 +182,19 @@ public class UserDAO {
 			//まだ未完成 変更をしていないところ
 			// 結果表をコレクションにコピーする あとで改造
 			while (rs.next()) { //rsインスタンスの内容を全て取り出す
-				AllBeans all = new AllBeans();
-				all.setUserId(rs.getString("user_id"));
-				all.setUserPw(rs.getString("user_pw"));
-				all.setUserName(rs.getString("user_name"));
-				all.setIconId(rs.getString("icon_id"));
-				all.setIconPath(rs.getString("icon_path"));
-
-				userList.add(all);
+				ui.setUserId(rs.getString("user_id"));
+				ui.setUserPw(rs.getString("user_pw"));
+				ui.setUserName(rs.getString("user_name"));
+				ui.setIconId(rs.getString("icon_id"));
+				ui.setIconPath(rs.getString("icon_path"));
 			}
 
 		} catch (SQLException e) {
 			e.printStackTrace();
-			userList = null;
+			ui = null;
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
-			userList = null;
+			ui = null;
 
 		} finally {
 			// データベースを切断
@@ -206,13 +203,13 @@ public class UserDAO {
 					conn.close();
 				} catch (SQLException e) {
 					e.printStackTrace();
-					userList = null;
+					ui = null;
 				}
 			}
 		}
 
 		// 結果を返す
-		return userList;
+		return ui;
 	}
 
 	//ページ用ハンバーガーに使うデータを取ってくる
