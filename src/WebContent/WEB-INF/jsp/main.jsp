@@ -165,8 +165,6 @@
 		<div class = memobutton>
 			<input  type="submit" class=memob name="regist" value="削除">
 			&emsp;
-			<input type="reset" class=memob name="memoReset" value="リセット">
-			&emsp;
 			<input  type="submit" class=memob name="regist" value="保存">
 
 		</div>

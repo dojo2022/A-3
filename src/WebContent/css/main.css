@@ -307,11 +307,11 @@ input[name="tab_item"] {
 	position: absolute;
     top: 164px;
     bottom: 20px;
-    right: 48px;
+    right: 60px;
 }
 
 .memob{
-	width: 64px;
+	width: 90px;
 	border-radius: 10px;
 	 border: 1px solid;
 }
