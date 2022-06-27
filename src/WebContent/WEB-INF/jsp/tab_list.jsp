@@ -12,6 +12,7 @@
 </head>
 	<body>
 		<div class="tab">
+			<div class="list_search">
 			 	<form id="searchbox" method="POST" action="/syokuzaikanri/MainServlet">
 					 <table>
 					 	<tr>
@@ -22,9 +23,12 @@
 					 			<!-- 検索ボタンを押したらjsで調べたものの表示だけにする -->
 								<input type="button" value="検索" onclick="search()">
 					 		</td>
+							<td>
+			 					<input type="submit" name="returnList" value="一覧に戻す">
+					 		</td>
 					 </table>
-			 		<input type="submit" name="returnList" value="一覧に戻す">
 			 	</form>
+			</div>
 			<div class="tab_list">
 				<table class="item_list">
  				<c:forEach var="e" items="${allList}" varStatus = "status">
@@ -34,15 +38,15 @@
 								  	・
 								  </td>
 								  <td>
-								  	<input type="text" value="${e.stockName}" name="stockName" id="stockName${status.index}" size="0" maxlength="20" onclick="updateStock('${status.index}')">
+								  	<input type="text" value="${e.stockName}" name="stockName" id="stockName${status.index}" size="0" maxlength="20">
 								  </td>
 								  <td>
 								  	<label for="stockBuy">購入日</label>
-								  	<input type="date" value="${e.stockBuy}" name="stockBuy" id="stockBuy${status.index}" onclick="updateStock('${status.index}')">
+								  	<input type="date" value="${e.stockBuy}" name="stockBuy" id="stockBuy${status.index}">
 								  </td>
 								  <td>
 								  	<label for="stockLimit">期限日</label>
-								  	<input type="date" value="${e.stockLimit}" name="stockLimit" id="stockLimit${status.index}" onclick="updateStock('${status.index}')">
+								  	<input type="date" value="${e.stockLimit}" name="stockLimit" id="stockLimit${status.index}">
 								  </td>
 								  <td>
 									  <c:if test="${e.stockAlert == true}" >
@@ -97,7 +101,7 @@
 											  </td>
 											  <div class="stockRegistButton">
 										    	<form method="POST" action="/syokuzaikanri/StockRegistServlet" id="stockRegist${status.index}">
-										    	<input type="hidden" name="itemId" value="${e.itemId-1}">
+										    	<input type="hidden" name="itemId" value="${e.itemId}">
 												<td><input type="submit" name="stockRegist" value="登録"></td></form>
 											  </div>
 										  </tr>
@@ -235,15 +239,15 @@
 								  	・
 								  </td>
 								  <td>
-								  	<input type="text" value="${e.stockName}" name="stockName" id="stockName${status.index}" size="0" maxlength="20" onclick="updateStock('${status.index}')">
+								  	<input type="text" value="${e.stockName}" name="stockName" id="stockName${status.index}" size="0" maxlength="20">
 								  </td>
 								  <td>
 								  	<label for="stockBuy">購入日</label>
-								  	<input type="date" value="${e.stockBuy}" name="stockBuy" id="stockBuy${status.index}" onclick="updateStock('${status.index}')">
+								  	<input type="date" value="${e.stockBuy}" name="stockBuy" id="stockBuy${status.index}">
 								  </td>
 								  <td>
 								  	<label for="stockLimit">期限日</label>
-								  	<input type="date" value="${e.stockLimit}" name="stockLimit" id="stockLimit${status.index}" onclick="updateStock('${status.index}')">
+								  	<input type="date" value="${e.stockLimit}" name="stockLimit" id="stockLimit${status.index}">
 								  </td>
 								  <td>
 									  <c:if test="${e.stockAlert == true}" >
