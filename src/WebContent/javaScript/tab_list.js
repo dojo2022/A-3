@@ -60,11 +60,11 @@ function favoriteOn(favoriteOnIndexNo){
 
 
 //残量の更新
-function favoriteOff(favoriteOffIndexNo){
+function remainFull(remainFullIndexNo){
 	alert("functionはいったよ！");
-	var itemFavorite = false;
-	var itemRemain = document.getElementById('nowRemain' + favoriteOffIndexNo).value ;
-	var itemId = document.getElementById('itemName' + favoriteOffIndexNo).value ;
+	var itemFavorite = document.getElementById('nowFavorite' + remainFullIndexNo).value ;
+	var itemRemain = document.getElementById('remainFull' + remainFullIndexNo).value ;
+	var itemId = document.getElementById('itemName' + remainFullIndexNo).value ;
 
 	console.log(itemFavorite);
 	console.log(itemRemain);
@@ -73,7 +73,7 @@ function favoriteOff(favoriteOffIndexNo){
 	let postData = {itemFavorite:itemFavorite,remain:itemRemain,itemName:itemId}
 	console.log(postData);
 
-/*		//非同期通信始めるよ
+		//非同期通信始めるよ
 	$.ajaxSetup({scriptCharset:'utf-8'});
 	$.ajax({
 		//どのサーブレットに送るか
@@ -86,11 +86,64 @@ function favoriteOff(favoriteOffIndexNo){
 		//この下の２行はとりあえず書いてる（書かなくても大丈夫？）
 		processDate:false,
 		timeStamp: new Date().getTime()
-	})*/
-    document.getElementById('favoriteOff' + favoriteOffIndexNo).src = "/syokuzaikanri/img/favorite_off.png";
+	})
 }
+function remainLittle(remainLittleIndexNo){
+	alert("functionはいったよ！");
+	var itemFavorite = document.getElementById('nowFavorite' + remainLittleIndexNo).value ;
+	var itemRemain = document.getElementById('remainLittle' + remainLittleIndexNo).value ;
+	var itemId = document.getElementById('itemName' + remainLittleIndexNo).value ;
 
+	console.log(itemFavorite);
+	console.log(itemRemain);
+	console.log(itemId);
 
+	let postData = {itemFavorite:itemFavorite,remain:itemRemain,itemName:itemId}
+	console.log(postData);
+
+		//非同期通信始めるよ
+	$.ajaxSetup({scriptCharset:'utf-8'});
+	$.ajax({
+		//どのサーブレットに送るか
+		//ajaxSampleのところは自分のプロジェクト名に変更する必要あり。
+		url: '/syokuzaikanri/ItemAjaxServlet',
+		//どのメソッドを使用するか
+		type:"POST",
+		//何をサーブレットに飛ばすか（変数を記述）
+		data: postData,
+		//この下の２行はとりあえず書いてる（書かなくても大丈夫？）
+		processDate:false,
+		timeStamp: new Date().getTime()
+	})
+}
+function remainNone(remainNoneIndexNo){
+	alert("functionはいったよ！");
+	var itemFavorite = document.getElementById('nowFavorite' + remainNoneIndexNo).value ;
+	var itemRemain = document.getElementById('remainNone' + remainNoneIndexNo).value ;
+	var itemId = document.getElementById('itemName' + remainNoneIndexNo).value ;
+
+	console.log(itemFavorite);
+	console.log(itemRemain);
+	console.log(itemId);
+
+	let postData = {itemFavorite:itemFavorite,remain:itemRemain,itemName:itemId}
+	console.log(postData);
+
+		//非同期通信始めるよ
+	$.ajaxSetup({scriptCharset:'utf-8'});
+	$.ajax({
+		//どのサーブレットに送るか
+		//ajaxSampleのところは自分のプロジェクト名に変更する必要あり。
+		url: '/syokuzaikanri/ItemAjaxServlet',
+		//どのメソッドを使用するか
+		type:"POST",
+		//何をサーブレットに飛ばすか（変数を記述）
+		data: postData,
+		//この下の２行はとりあえず書いてる（書かなくても大丈夫？）
+		processDate:false,
+		timeStamp: new Date().getTime()
+	})
+}
 
 
 //在庫の更新

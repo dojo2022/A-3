@@ -132,6 +132,7 @@
 						 			${e.itemName}
 						 		</td>
 							 		<td>
+									<input type="hidden" name="nowFavorite" id="nowFavorite${status.index}" value="${e.itemFavorite}">
  							 		<c:if test="${e.itemRemain == 3}" >
 									    <div class="remainBottun">
 									        <label for="remainFull${status.index}" class="remainLabel">
