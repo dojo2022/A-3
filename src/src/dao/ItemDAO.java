@@ -132,6 +132,94 @@ public class ItemDAO {
 		return result;
 	}
 
+	//dataInsert（データを入れるためだけのメソッド）
+	public boolean dataInsert(String itemName, String itemFavorite, String itemRemain, String itemLostday, String categoryId, String pageId, String itemAlert, String itemAlertday, String stockName, String stockBuy, String stockLimit, String stockAlert, String stockAlertday1, String stockAlertday2, String stockAlertday3, String stockAlertday4){
+		Connection conn = null;
+		boolean result = false;
+
+		try {
+			// JDBCドライバを読み込む
+			Class.forName("org.h2.Driver");
+
+			// データベースに接続する
+			conn = DriverManager.getConnection("jdbc:h2:file:C:/dojo6Data/dojo6Data", "sa", "");
+			// ItemテーブルのINSERT文を準備する
+			String sql1 = "INSERT INTO item (item_name, item_favorite, item_remain, item_lostday, category_id, page_id, item_alert, item_alertday) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";//INSERT INTO テーブル名（列名A,列名B,…） VALUES（値A,値B,…）
+			PreparedStatement pStmt1 = conn.prepareStatement(sql1);
+
+			// SQL文を完成させる
+			pStmt1.setString(1, itemName);
+			pStmt1.setString(2, itemFavorite);
+			pStmt1.setString(3, itemRemain);
+			pStmt1.setString(4, itemLostday);
+			pStmt1.setString(5, categoryId);
+			pStmt1.setString(6, pageId);
+			pStmt1.setString(7, itemAlert);
+			pStmt1.setString(8, itemAlertday);
+
+			// Itemテーブルでitem_idが一番大きいものをSELECTするSQL文
+			String sql2 = "SELECT MAX(item_id) FROM Item";
+			PreparedStatement pStmt2 = conn.prepareStatement(sql2);
+
+			// StockテーブルのINSERT文を準備する（賞味期限アラートを追加する（別クラスで計算したものを持ってくる））
+			String sql3 = "INSERT INTO Stock (stock_name, stock_buy, stock_limit, stock_alert, stock_alertday1, stock_alertday2, stock_alertday3, stock_alertday4, item_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";//INSERT INTO テーブル名（列名A,列名B,…） VALUES（値A,値B,…）
+			PreparedStatement pStmt3 = conn.prepareStatement(sql3);
+
+			// SQL文を完成させる
+			pStmt3.setString(1, stockName);
+			pStmt3.setString(2, stockBuy);
+			pStmt3.setString(3, stockLimit);
+			pStmt3.setString(4, stockAlert);
+			pStmt3.setString(5, stockAlertday1);
+			pStmt3.setString(6, stockAlertday2);
+			pStmt3.setString(7, stockAlertday3);
+			pStmt3.setString(8, stockAlertday4);
+
+			int ans = 0;
+			conn.setAutoCommit(false);//＝オートコミットを切る
+			ans += pStmt1.executeUpdate();
+
+			//ItemのINSERT後にSQL文を実行し、結果表を取得する
+			ResultSet rs = pStmt2.executeQuery();
+			rs.next();
+			String itemId = rs.getString("MAX(item_id)");
+
+			//取得したitemIdをsql3にセット
+			pStmt3.setString(9, itemId);
+
+			//StockテーブルへのINSERT文を実行する
+			ans += pStmt3.executeUpdate();
+
+			if (ans == 2) {
+				conn.commit(); //全部のsql文ができていれば成功
+				result = true;
+			}
+		} catch (SQLException e) {
+
+			//try catch 文を書く
+			try {
+				conn.rollback();//sql文が一つでもできていなければロールバックする
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
+
+		} catch (ClassNotFoundException e) {
+				e.printStackTrace();
+		} finally {
+			// データベースを切断
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+
+		// 結果を返す
+		return result;
+	}
+
 	//update 一覧タブ用（ItmeAjaxServlet）
 	//残量切れ日に入れる値は条件を分けて計算済み（Alert.java）
 	public boolean ajaxUpdate(String itemFavorite, String itemRemain, String itemLostday, String itemAlertday, String itemId){

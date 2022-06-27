@@ -102,6 +102,68 @@ public class StockDAO {
 
 	}
 
+	//dataInsert（データを入れるためだけのメソッド）
+	public boolean dataInsert(String stockName, String stockBuy, String stockLimit, String stockAlert, String stockAlertday1, String stockAlertday2, String stockAlertday3, String stockAlertday4, String itemId){
+		Connection conn = null;
+		boolean result = false;
+		try {
+			// JDBCドライバを読み込む
+			Class.forName("org.h2.Driver");
+
+			// データベースに接続する
+			conn = DriverManager.getConnection("jdbc:h2:file:C:/dojo6Data/dojo6Data", "sa", "");
+
+			//項目IDをselect ⇒　在庫をinsertする？
+			//一覧の在庫追加のフォームの中に<input type="hidden" name="itemId" value=""${e.itemId}$>で値を引き渡す
+
+			// SQL文を準備する
+			String sql = "INSERT INTO Stock (stock_name, stock_buy, stock_limit, stock_alert, stock_alertday1, stock_alertday2, stock_alertday3, stock_alertday4, item_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+			PreparedStatement pStmt = conn.prepareStatement(sql);
+
+			// SQL文を完成させる
+			pStmt.setString(1, stockName);
+			pStmt.setString(2, stockBuy);
+			pStmt.setString(3, stockLimit);
+			pStmt.setString(4, stockAlert);
+			pStmt.setString(5, stockAlertday1);
+			pStmt.setString(6, stockAlertday2);
+			pStmt.setString(7, stockAlertday3);
+			pStmt.setString(8, stockAlertday4);
+			pStmt.setString(9, itemId);
+
+			// SQL文を実行する
+			if (pStmt.executeUpdate() == 1) {
+				result = true;
+			}
+
+
+			}
+			catch (SQLException e) {
+				e.printStackTrace();
+
+			}
+			catch (ClassNotFoundException e) {
+				e.printStackTrace();
+
+			}
+			finally {
+				// データベースを切断
+				if (conn != null) {
+					try {
+						conn.close();
+					}
+					catch (SQLException e) {
+						e.printStackTrace();
+
+					}
+				}
+			}
+
+			// 結果を返す
+			return result;
+
+	}
+
 	// select
 		public ArrayList<AllBeans> select(String pageId){
 			Connection conn = null;
