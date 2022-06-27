@@ -35,7 +35,13 @@
 			    <option value="6">飲み物</option>
 			    <option value="7">その他</option>
 		  </select>
-	 お気に入り<input type="checkbox" name="itemFavorite" value="${e.itemFavorite}"></p>
+<c:if test="${e.itemFavorite == true}" >
+	 お気に入り<input type="checkbox" name="itemFavorite" value="${e.itemFavorite}" checked>
+</c:if>
+<c:if test="${e.itemFavorite == false}" >
+	 お気に入り<input type="checkbox" name="itemFavorite" value="${e.itemFavorite}">
+</c:if>
+	</p>
 	 <p>買い替えアラート<select name="itemAlert">
 	 			<option value="${e.itemAlert}">${e.itemAlert}</option>
 			    <option value="1">なし</option>
