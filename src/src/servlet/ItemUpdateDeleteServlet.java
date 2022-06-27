@@ -75,6 +75,7 @@ public class ItemUpdateDeleteServlet extends HttpServlet {
 		String itemName = request.getParameter("itemName");
 		String categoryId = request.getParameter("categoryId");
 		String itemFavorite = request.getParameter("itemFavorite");
+
 		String itemAlert = request.getParameter("itemAlert");
 //		String pageId = request.getParameter("pageId");
 //		String itemRemain = request.getParameter("itemRemain");
@@ -85,6 +86,13 @@ public class ItemUpdateDeleteServlet extends HttpServlet {
 		Alert alert = new Alert();
 		//期限日が計算されている前提（エラー未想定）
 		String itemAlertday = alert.itemAlertEdit(itemLostday, itemAlert);
+
+		if(itemFavorite == null) {
+			itemFavorite = String.valueOf(0);
+		}
+//		if(itemFavorite.equals("0")) {
+//			itemFavorite = String.valueOf(1);
+//		}
 
 		// 編集または削除を行う
 		ItemDAO iDao = new ItemDAO();

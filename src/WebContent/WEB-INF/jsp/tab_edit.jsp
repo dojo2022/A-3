@@ -36,10 +36,10 @@
 			    <option value="7">その他</option>
 		  </select>
 <c:if test="${e.itemFavorite == true}" >
-	 お気に入り<input type="checkbox" name="itemFavorite" value="${e.itemFavorite}" checked>
+	 お気に入り<input type="checkbox" name="itemFavorite" id="itemFavorite"value="1" checked onclick="clickBtn5()">
 </c:if>
 <c:if test="${e.itemFavorite == false}" >
-	 お気に入り<input type="checkbox" name="itemFavorite" value="${e.itemFavorite}">
+	 お気に入り<input type="checkbox" name="itemFavorite" id="itemFavorite" value="0" onclick="clickBtn5()">
 </c:if>
 	</p>
 	 <p>買い替えアラート<select name="itemAlert">
@@ -57,7 +57,17 @@
 	</form>
 </c:forEach>
 
+<script>
+  function clickBtn5() {
+    const chk3 = document.getElementById("itemFavorite");
 
+    if (chk3.checked) { //(chk3[i].checked === true)と同じ
+      document.getElementById("itemFavorite").value = 1;
+    } else {
+      document.getElementById("itemFavorite").value = 0;
+    }
+  }
+</script>
 
 </body>
 </html>
