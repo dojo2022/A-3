@@ -12,7 +12,7 @@ function favoriteOff(favoriteOffIndexNo){
 	let postData = {itemFavorite:itemFavorite,remain:itemRemain,itemName:itemId}
 	console.log(postData);
 
-		//非同期通信始めるよ
+/*		//非同期通信始めるよ
 	$.ajaxSetup({scriptCharset:'utf-8'});
 	$.ajax({
 		//どのサーブレットに送るか
@@ -25,7 +25,7 @@ function favoriteOff(favoriteOffIndexNo){
 		//この下の２行はとりあえず書いてる（書かなくても大丈夫？）
 		processDate:false,
 		timeStamp: new Date().getTime()
-	})
+	})*/
     document.getElementById('favoriteOff' + favoriteOffIndexNo).src = "/syokuzaikanri/img/favorite_off.png";
 }
 function favoriteOn(favoriteOnIndexNo){
@@ -41,7 +41,7 @@ function favoriteOn(favoriteOnIndexNo){
 	let postData = {itemFavorite:itemFavorite,remain:itemRemain,itemName:itemId}
 	console.log(postData);
 
-		//非同期通信始めるよ
+/*		//非同期通信始めるよ
 	$.ajaxSetup({scriptCharset:'utf-8'});
 	$.ajax({
 		//どのサーブレットに送るか
@@ -54,12 +54,90 @@ function favoriteOn(favoriteOnIndexNo){
 		//この下の２行はとりあえず書いてる（書かなくても大丈夫？）
 		processDate:false,
 		timeStamp: new Date().getTime()
-	})
+	})*/
     document.getElementById('favoriteOn' + favoriteOnIndexNo).src = "/syokuzaikanri/img/favorite_on.png";
 }
 
 
+//残量の更新
+function favoriteOff(favoriteOffIndexNo){
+	alert("functionはいったよ！");
+	var itemFavorite = false;
+	var itemRemain = document.getElementById('nowRemain' + favoriteOffIndexNo).value ;
+	var itemId = document.getElementById('itemName' + favoriteOffIndexNo).value ;
 
+	console.log(itemFavorite);
+	console.log(itemRemain);
+	console.log(itemId);
+
+	let postData = {itemFavorite:itemFavorite,remain:itemRemain,itemName:itemId}
+	console.log(postData);
+
+/*		//非同期通信始めるよ
+	$.ajaxSetup({scriptCharset:'utf-8'});
+	$.ajax({
+		//どのサーブレットに送るか
+		//ajaxSampleのところは自分のプロジェクト名に変更する必要あり。
+		url: '/syokuzaikanri/ItemAjaxServlet',
+		//どのメソッドを使用するか
+		type:"POST",
+		//何をサーブレットに飛ばすか（変数を記述）
+		data: postData,
+		//この下の２行はとりあえず書いてる（書かなくても大丈夫？）
+		processDate:false,
+		timeStamp: new Date().getTime()
+	})*/
+    document.getElementById('favoriteOff' + favoriteOffIndexNo).src = "/syokuzaikanri/img/favorite_off.png";
+}
+
+
+
+
+//在庫の更新
+function updateStock(stockIndexNo){
+	alert("functionはいったよ！");
+	var stockId = document.getElementById('stockId' + stockIndexNo).value ;
+	var stockName = document.getElementById('stockName' + stockIndexNo).value ;
+	var stockBuy = document.getElementById('stockBuy' + stockIndexNo).value ;
+	var stockLimit = document.getElementById('stockLimit' + stockIndexNo).value ;
+	var bell = document.getElementById('alertlOff' + stockIndexNo);
+
+	console.log(stockId);
+	console.log(stockName);
+	console.log(stockBuy);
+	console.log(stockLimit);
+	console.log(bell);
+
+/*	if (document.getElementById('alertlOff' + stockIndexNo) == true) {
+      var bell = true;
+    } else {
+      l ++;
+    }
+
+	console.log(stockId);
+	console.log(stockName);
+	console.log(stockBuy);
+	console.log(stockLimit);
+	console.log(bell);
+
+	let postData = {stockId:stockId,stockName:stockName,stockBuy:stockBuy,stockLimit:stockLimit,bell:bell}
+	console.log(postData);
+
+		//非同期通信始めるよ
+	$.ajaxSetup({scriptCharset:'utf-8'});
+	$.ajax({
+		//どのサーブレットに送るか
+		//ajaxSampleのところは自分のプロジェクト名に変更する必要あり。
+		url: '/syokuzaikanri/StockAjaxServlet',
+		//どのメソッドを使用するか
+		type:"POST",
+		//何をサーブレットに飛ばすか（変数を記述）
+		data: postData,
+		//この下の２行はとりあえず書いてる（書かなくても大丈夫？）
+		processDate:false,
+		timeStamp: new Date().getTime()
+	})*/
+}
 
 
 //賞味期限アラート
@@ -80,7 +158,7 @@ function alertlOff(alertlOffIndexNo){
 	let postData = {stockId:stockId,stockName:stockName,stockBuy:stockBuy,stockLimit:stockLimit,bell:bell}
 	console.log(postData);
 
-		//非同期通信始めるよ
+/*		//非同期通信始めるよ
 	$.ajaxSetup({scriptCharset:'utf-8'});
 	$.ajax({
 		//どのサーブレットに送るか
@@ -93,7 +171,7 @@ function alertlOff(alertlOffIndexNo){
 		//この下の２行はとりあえず書いてる（書かなくても大丈夫？）
 		processDate:false,
 		timeStamp: new Date().getTime()
-	})
+	})*/
     document.getElementById('alertlOff' + alertlOffIndexNo).src = "/syokuzaikanri/img/alert_off.png";
 }
 function alertlOn(alertlOnIndexNo){
@@ -113,7 +191,7 @@ function alertlOn(alertlOnIndexNo){
 	let postData = {stockId:stockId,stockName:stockName,stockBuy:stockBuy,stockLimit:stockLimit,bell:bell}
 	console.log(postData);
 
-		//非同期通信始めるよ
+/*		//非同期通信始めるよ
 	$.ajaxSetup({scriptCharset:'utf-8'});
 	$.ajax({
 		//どのサーブレットに送るか
@@ -126,7 +204,7 @@ function alertlOn(alertlOnIndexNo){
 		//この下の２行はとりあえず書いてる（書かなくても大丈夫？）
 		processDate:false,
 		timeStamp: new Date().getTime()
-	})
+	})*/
 	document.getElementById('alertlOn' + alertlOnIndexNo).src = "/syokuzaikanri/img/alert_on.png";
 }
 

@@ -31,7 +31,7 @@
  					<c:if test="${e.itemId == taihi}">
  						<tr>
 						  <td>
-						  	・
+						  	・${status.index}
 						  </td>
 						  <td>
 						  	<input type="text" value="${e.stockName}" name="stockName" id="stockName${status.index}" size="0" maxlength="20" onclick="updateStock('${status.index}')">
@@ -127,7 +127,7 @@
 								</c:if>
 								</td>
 						 		<td colspan="2">
-						 			${e.itemName}
+						 			${e.itemName}${e.itemRemain}
 						 		</td>
 							 		<td>
 							 		<c:if test="${e.itemRemain == 3}" >
