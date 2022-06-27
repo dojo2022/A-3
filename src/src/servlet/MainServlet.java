@@ -14,8 +14,10 @@ import javax.servlet.http.HttpSession;
 import dao.MemoDAO;
 import dao.PageDAO;
 import dao.StockDAO;
+import model.AlertSelect;
 import model.AllBeans;
 import model.Memo;
+import model.Message;
 
 /**
  * Servlet implementation class MainServlet
@@ -90,18 +92,16 @@ public class MainServlet extends HttpServlet {
 		//一覧に表示するリストをselect
 		StockDAO sDao = new StockDAO();
 		ArrayList<AllBeans> allList = sDao.select(pageId);
-
-
 		// 検索結果をセッションスコープに格納する
 		session.setAttribute("allList", allList);
 
-//		//アラート日時をselect
-//		ArrayList<AllBeans> alertList = sDao.selectAlert(pageId);
-//		//アラート内容を取得
-//		AlertSelect selectMessage = new AlertSelect();
-//		ArrayList<Message> message = selectMessage.alertDay(alertList);
-//		//結果をセッションに保存する
-//		session.setAttribute("message", message);
+		//アラート日時をselect
+		ArrayList<AllBeans> alertList = sDao.selectAlert(pageId);
+		//アラート内容を取得
+		AlertSelect selectMessage = new AlertSelect();
+		ArrayList<Message> message = selectMessage.alertDay(alertList);
+		//結果をセッションに保存する
+		session.setAttribute("message", message);
 
 		//お気に入りタブに表示するリストをselect
 		StockDAO sDAO = new StockDAO();

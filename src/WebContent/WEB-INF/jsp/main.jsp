@@ -135,13 +135,13 @@
 	        <div class=alertTitle>賞味期限アラート</div>
 	        <div class="stockAlert">
 	        <c:forEach var="e" items="${message}"><br>
-	        ${e.stockMessage}
+	        	<c:if test="${e.stockMessage != null}">${e.stockMessage}</c:if>
 	        </c:forEach>
         </div>
 	         <div class=alertTitle>買い替えアラート</div>
 	    <div class="itemAlert">
 	         <c:forEach var="e" items="${message}"><br>
-	        ${e.itemMessage}
+	        	<c:if test="${e.itemMessage != null}">${e.itemMessage}</c:if>
 	        </c:forEach>
         </div>
     </div>
