@@ -130,24 +130,24 @@
 						 			${e.itemName}${e.itemRemain}
 						 		</td>
 							 		<td>
-							 		<c:if test="${e.itemRemain == 3}" >
+ 							 		<c:if test="${e.itemRemain == 3}" >
 									    <div class="remainBottun">
 									        <label for="remainFull${status.index}" class="remainLabel">
 									            <img src="/syokuzaikanri/img/remain_full.png" width="25" height="25" class="remainImage" >
 									        </label>
-									        <input type="radio" name="remain" class="remain" value="3" checked id="remainFull${status.index}" onclick="remainFull('${status.index}')">
+									        <input type="radio" name="remain${status.index}" class="remain" value="3" checked id="remainFull${status.index}" onclick="remainFull('${status.index}')">
 									    </div>
 									    <div class="remainBottun">
 									        <label for="remainLittle${status.index}" class="remainLabel">
 									            <img src="/syokuzaikanri/img/remain_little.png" width="25" height="25" class="remainImage">
 									        </label>
-									        <input type="radio" name="remain" class="remain" value="2" id="remainLittle${status.index}" onclick="remainLittle('${status.index}')">
+									        <input type="radio" name="remain${status.index}" class="remain" value="2" id="remainLittle${status.index}" onclick="remainLittle('${status.index}')">
 									    </div>
 									    <div class="remainBottun">
 									        <label for="remainNone${status.index}" class="remainLabel">
 									            <img src="/syokuzaikanri/img/remain_none.png" width="25" height="25" class="remainImage">
 									        </label>
-									        <input type="radio" name="remain" class="remain" value="1" id="remainNone${status.index}" onclick="remainNone('${status.index}')">
+									        <input type="radio" name="remain${status.index}" class="remain" value="1" id="remainNone${status.index}" onclick="remainNone('${status.index}')">
 									    </div>
 									</c:if>
 									<c:if test="${e.itemRemain == 2}" >
@@ -155,19 +155,19 @@
 									        <label for="remainFull${status.index}" class="remainLabel">
 									            <img src="/syokuzaikanri/img/remain_full.png" width="25" height="25" class="remainImage" >
 									        </label>
-									        <input type="radio" name="remain" class="remain" value="3" id="remainFull${status.index}" onclick="remainFull('${status.index}')">
+									        <input type="radio" name="remain${status.index}" class="remain${status.index}" value="3" id="remainFull${status.index}" onclick="remainFull('${status.index}')">
 									    </div>
 									    <div class="remainBottun">
 									        <label for="remainLittle${status.index}" class="remainLabel">
 									            <img src="/syokuzaikanri/img/remain_little.png" width="25" height="25" class="remainImage">
 									        </label>
-									        <input type="radio" name="remain" class="remain" value="2" checked id="remainLittle${status.index}" onclick="remainLittle('${status.index}')">
+									        <input type="radio" name="remain${status.index}" class="remain${status.index}" value="2" checked id="remainLittle${status.index}" onclick="remainLittle('${status.index}')">
 									    </div>
 									    <div class="remainBottun">
 									        <label for="remainNone${status.index}" class="remainLabel">
 									            <img src="/syokuzaikanri/img/remain_none.png" width="25" height="25" class="remainImage">
 									        </label>
-									        <input type="radio" name="remain" class="remain" value="1" id="remainNone${status.index}" onclick="remainNone('${status.index}')">
+									        <input type="radio" name="remain${status.index}" class="remain${status.index}" value="1" id="remainNone${status.index}" onclick="remainNone('${status.index}')">
 									    </div>
 									</c:if>
 									<c:if test="${e.itemRemain == 1}" >
@@ -175,22 +175,22 @@
 									        <label for="remainFull${status.index}" class="remainLabel">
 									            <img src="/syokuzaikanri/img/remain_full.png" width="25" height="25" class="remainImage" >
 									        </label>
-									        <input type="radio" name="remain" class="remain" value="3" id="remainFull${status.index}" onclick="remainFull('${status.index}')">
+									        <input type="radio" name="remain${status.index}" class="remain${status.index}" value="3" id="remainFull${status.index}" onclick="remainFull('${status.index}')">
 									    </div>
 									    <div class="remainBottun">
 									        <label for="remainLittle${status.index}" class="remainLabel">
 									            <img src="/syokuzaikanri/img/remain_little.png" width="25" height="25" class="remainImage">
 									        </label>
-									        <input type="radio" name="remain" class="remain" value="2" id="remainLittle${status.index}" onclick="remainLittle('${status.index}')">
+									        <input type="radio" name="remain${status.index}" class="remain${status.index}" value="2" id="remainLittle${status.index}" onclick="remainLittle('${status.index}')">
 									    </div>
 									    <div class="remainBottun">
 									        <label for="remainNone${status.index}" class="remainLabel">
 									            <img src="/syokuzaikanri/img/remain_none.png" width="25" height="25" class="remainImage">
 									        </label>
-									        <input type="radio" name="remain" class="remain" value="1" checked id="remainNone${status.index}" onclick="remainNone('${status.index}')">
+									        <input type="radio" name="remain${status.index}" class="remain${status.index}" value="1" checked id="remainNone${status.index}" onclick="remainNone('${status.index}')">
 									    </div>
 									</c:if>
-									</td>
+ 									</td>
 							 		<td>
 							 		</td>
 							 		<td>
