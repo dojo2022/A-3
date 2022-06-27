@@ -133,7 +133,30 @@
 						 		</td>
 							 		<td>
 									<input type="hidden" name="nowFavorite" id="nowFavorite${status.index}" value="${e.itemFavorite}">
- 							 		<c:if test="${e.itemRemain == 3}" >
+									  <div class="remainBottun">
+									        <label for="remainFull${status.index}" class="remainLabel">
+									            <img src="/syokuzaikanri/img/remain_full.png" width="25" height="25" class="remainImage" >
+									        </label>
+									        <input type="radio" name="remain${status.index}"  class="remain" value="3"  id="remainFull${status.index}" onclick="remainFull('${status.index}')" <c:if test="${e.itemRemain==3}">checked</c:if>   >
+									    </div>
+									    <div class="remainBottun">
+									        <label for="remainLittle${status.index}" class="remainLabel">
+									            <img src="/syokuzaikanri/img/remain_little.png" width="25" height="25" class="remainImage">
+									        </label>
+									        <input type="radio" name="remain${status.index}"  class="remain" value="2" id="remainLittle${status.index}" onclick="remainLittle('${status.index}')" <c:if test="${e.itemRemain==2}">checked</c:if>>
+									    </div>
+									    <div class="remainBottun">
+									        <label for="remainNone${status.index}" class="remainLabel">
+									            <img src="/syokuzaikanri/img/remain_none.png" width="25" height="25" class="remainImage">
+									        </label>
+									        <input type="radio" name="remain${status.index}"   class="remain" value="1" id="remainNone${status.index}" onclick="remainNone('${status.index}')" <c:if test="${e.itemRemain==1}">checked</c:if>>
+									    </div>
+
+
+
+
+
+ 						<%-- 	 		<c:if test="${e.itemRemain == 3}" >
 									    <div class="remainBottun">
 									        <label for="remainFull${status.index}" class="remainLabel">
 									            <img src="/syokuzaikanri/img/remain_full.png" width="25" height="25" class="remainImage" >
@@ -192,7 +215,7 @@
 									        </label>
 									        <input type="radio" name="remain${status.index}" class="remain${status.index}" value="1" checked id="remainNone${status.index}" onclick="remainNone('${status.index}')">
 									    </div>
-									</c:if>
+									</c:if> --%>
  									</td>
 							 		<td>
 							 		</td>
