@@ -29,45 +29,47 @@
 				<table class="item_list">
  				<c:forEach var="e" items="${allList}" varStatus = "status">
  					<c:if test="${e.itemId == taihi}">
- 						<tr>
-						  <td>
-						  	・${status.index}
-						  </td>
-						  <td>
-						  	<input type="text" value="${e.stockName}" name="stockName" id="stockName${status.index}" size="0" maxlength="20" onclick="updateStock('${status.index}')">
-						  </td>
-						  <td>
-						  	<label for="stockBuy${status.index}">購入日</label>
-						  	<input type="date" value="${e.stockBuy}" name="stockBuy" id="stockBuy${status.index}" onclick="updateStock('${status.index}')">
-						  </td>
-						  <td>
-						  	<label for="stockLimit${status.index}">期限日</label>
-						  	<input type="date" value="${e.stockLimit}" name="stockLimit" id="stockLimit${status.index}" onclick="updateStock('${status.index}')">
-						  </td>
-						  <td>
-							  <c:if test="${e.stockAlert == true}" >
-							    <div class="alertlBottun"><!-- オン→オフ場合 -->
-							        <label for="alertlOff${status.index}" class="alertlLabel">
-							            <img src="/syokuzaikanri/img/alert_on.png" width="25" height="25" id="alertlOff${status.index}" onclick="alertlOff('${status.index}')">
-							        </label>
-							        <input type="checkbox" name="bell" class="alertl"  id="alertlOff${status.index}" onclick="alertlOff('${status.index}')">
-							    </div>
-								  </c:if>
-							  <c:if test="${e.stockAlert == false}" >
-							    <div class="alertlBottun"><!-- オフ→オン場合 -->
-							        <label for="alertlOn${status.index}" class="alertlLabel">
-							            <img src="/syokuzaikanri/img/alert_off.png" width="25" height="25" id="alertlOn${status.index}" onclick="alertlOn('${status.index}')">
-							        </label>
-							        <input type="checkbox" name="bell" class="alertl"  id="alertlOn${status.index}" onclick="alertlOn('${status.index}')">
-							    </div>
-							  </c:if>
-						  </td>
-							<form method="POST" action="/syokuzaikanri/StockDeleteServlet" id="stockDelete${status.index}">
-					    	<input type="hidden" name="stockId" value="${e.stockId}">
-							<td><input type="submit" name="stockDelete" value="-"></td></form>
-					 	  <td>
-					 	  </td>
-					  </tr>
+							  <tr>
+								  <td>
+								  	・
+								  </td>
+								  <td>
+								  	<input type="text" value="${e.stockName}" name="stockName" id="stockName${status.index}" size="0" maxlength="20" onclick="updateStock('${status.index}')">
+								  </td>
+								  <td>
+								  	<label for="stockBuy">購入日</label>
+								  	<input type="date" value="${e.stockBuy}" name="stockBuy" id="stockBuy${status.index}" onclick="updateStock('${status.index}')">
+								  </td>
+								  <td>
+								  	<label for="stockLimit">期限日</label>
+								  	<input type="date" value="${e.stockLimit}" name="stockLimit" id="stockLimit${status.index}" onclick="updateStock('${status.index}')">
+								  </td>
+								  <td>
+									  <c:if test="${e.stockAlert == true}" >
+									    <div class="alertlBottun"><!-- オン→オフ場合 -->
+									        <label for="alertlOff${status.index}" class="alertlLabel">
+									            <img src="/syokuzaikanri/img/alert_on.png" width="25" height="25" id="alertlOff${status.index}" onclick="alertlOff('${status.index}')">
+									        </label>
+									        <input type="hidden" name="stockId" class="stockId" value="${e.stockId}" id="stockId${status.index}">
+									        <input type="checkbox" name="bell" class="alertl"  id="alertlOff${status.index}" onclick="alertlOff('${status.index}')">
+									    </div>
+									  </c:if>
+									  <c:if test="${e.stockAlert == false}" >
+									    <div class="alertlBottun"><!-- オフ→オン場合 -->
+									        <label for="alertlOn${status.index}" class="alertlLabel">
+									            <img src="/syokuzaikanri/img/alert_off.png" width="25" height="25" id="alertlOn${status.index}" onclick="alertlOn('${status.index}')">
+									        </label>
+									        <input type="hidden" name="stockId" class="stockId" value="${e.stockId}" id="stockId${status.index}">
+									        <input type="checkbox" name="bell" class="alertl"  id="alertlOn${status.index}" onclick="alertlOn('${status.index}')">
+									    </div>
+									  </c:if>
+								  </td>
+									<form method="POST" action="/syokuzaikanri/StockDeleteServlet" id="stockDelete${status.index}">
+							    	<input type="hidden" name="stockId" id="stockId${status.index}" value="${e.stockId}">
+									<td><input type="submit" class="stockDelete" name="stockDelete" value="-"></td></form>
+							 	  <td>
+							 	  </td>
+							  </tr>
  					</c:if>
  					<c:if test="${e.itemId !=taihi}" >
 							<!-- 一回目のプラスボタンは見せないようにする -->
@@ -127,7 +129,7 @@
 								</c:if>
 								</td>
 						 		<td colspan="2">
-						 			${e.itemName}${e.itemRemain}
+						 			${e.itemName}
 						 		</td>
 							 		<td>
  							 		<c:if test="${e.itemRemain == 3}" >
@@ -206,7 +208,7 @@
 							  <!-- 小項目----------------------------------- -->
 							  <tr>
 								  <td>
-								  	・${status.index}
+								  	・
 								  </td>
 								  <td>
 								  	<input type="text" value="${e.stockName}" name="stockName" id="stockName${status.index}" size="0" maxlength="20" onclick="updateStock('${status.index}')">
@@ -241,7 +243,7 @@
 								  </td>
 									<form method="POST" action="/syokuzaikanri/StockDeleteServlet" id="stockDelete${status.index}">
 							    	<input type="hidden" name="stockId" id="stockId${status.index}" value="${e.stockId}">
-									<td><input type="submit" name="stockDelete" value="-"></td></form>
+									<td><input type="submit" class="stockDelete" name="stockDelete" value="-"></td></form>
 							 	  <td>
 							 	  </td>
 							  </tr>

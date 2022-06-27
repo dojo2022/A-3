@@ -89,6 +89,20 @@
     visibility: visible;
 }
 
+/*アラートのチェックボックスを消す*/
+.alertl{
+    display: none;
+}
+
+/*お気に入りのチェックボックスを消す*/
+.itemFavorite{
+    display: none;
+}
+
+/*在庫削除ボタンをマルク*/
+.stockDelete{
+	border-radius: 50%;          /* 角丸       */
+}
 
 /*全体のデザイン*/
 #all_content{
