@@ -3,6 +3,7 @@ package dao;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class PageDAO {
@@ -174,6 +175,63 @@ public class PageDAO {
 			return PageList;
 		}
 	*/
+
+	//select
+	public String titleSelect(String pageId) {
+		Connection conn = null;
+		String pageTitle = new String();//ArrayList <インスタンスの型名> 変数名 = new ArrayList<インスタンスの型名>;
+
+		try {
+			// JDBCドライバを読み込む
+			Class.forName("org.h2.Driver");
+
+			// データベースに接続する
+			conn = DriverManager.getConnection("jdbc:h2:file:C:/dojo6Data/dojo6Data", "sa", "");
+
+			// page_titleを取得するSQLを準備する
+			String sql = "SELECT page_title FROM Page WHERE page_id=?";
+			PreparedStatement pStmt = conn.prepareStatement(sql);
+
+			pStmt.setString(1,pageId);
+
+			// SQL文を実行し、結果表を取得する
+			ResultSet rs = pStmt.executeQuery();
+
+			// 結果表をコレクションにコピーする
+
+			while (rs.next()) { //rsインスタンスの内容を全て取り出す
+
+
+				pageTitle = rs.getString("page_title");
+
+				}
+
+
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+			pageTitle = null;
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+			pageTitle = null;
+		} finally {
+			// データベースを切断
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+					pageTitle = null;
+				}
+			}
+		}
+
+		// 結果を返す
+		return pageTitle;
+	}
+
+
+
 	//deleteFlagでupdateしてデータを持ってこさせないようにする
 	public boolean deleteFlag(String pageId) {
 		Connection conn = null;

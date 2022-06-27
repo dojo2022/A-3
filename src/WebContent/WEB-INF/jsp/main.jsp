@@ -76,7 +76,7 @@
 
 <div class="grid_test"><!-- grit 親要素  -->
     <div class="grid_test-child"><!-- grit 子要素①  -->
-        メインページ
+	${pageTitle}
     </div>
 
 
