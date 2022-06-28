@@ -12,10 +12,7 @@
 </head>
 <body>
 <div class="tab">
-			 	<form id="searchbox" method="POST" action="/syokuzaikanri/MainServlet">
-
-			 		<input type="submit" name="returnList" value="一覧に戻す">
-			 	</form>
+			<h3>お気に入り</h3>
 			<div class="tab_list">
 				<table class="item_list">
  				<c:forEach var="e" items="${favoriteList}" varStatus = "status">

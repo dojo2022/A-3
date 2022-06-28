@@ -10,7 +10,7 @@
 /*検索のセンタリング*/
 .list_search {
     margin-left: auto;
-    margin-right: auto;
+    margin-right: 30px;
 }
 
 .tab_list{

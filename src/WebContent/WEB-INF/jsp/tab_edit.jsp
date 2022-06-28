@@ -24,9 +24,8 @@
 						 </table>
 	</form>
 
-	<c:forEach var="e" items="${itemList}">
-
-
+	<c:forEach var="e" items="${itemList}" varStatus = "status">
+ 	<c:if test="${e.itemId !=taihi}" >
 	<form method="POST" action="/syokuzaikanri/ItemUpdateDeleteServlet">
 
 		 <input type="hidden" name="pageId" value="${e.pageId}">
@@ -72,10 +71,11 @@
 				    <option value="5">２週間後</option>
 				    <option value="6">１か月後</option>
 				  </select><br></p>
-
 	 			<p><input type="submit" name="regist" value="削除">
 	 			<input type="submit" name="regist" value="編集"></p>
 		</form>
+	</c:if>
+	<c:set var="taihi" value="${e.itemId}" />
 	</c:forEach>
 </div>
 

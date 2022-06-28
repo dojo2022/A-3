@@ -23,6 +23,8 @@
 					 			<!-- 検索ボタンを押したらjsで調べたものの表示だけにする -->
 								<input type="button" value="検索" onclick="search()">
 					 		</td>
+					 		<td>　　　　　　　　　
+					 		</td>
 							<td>
 			 					<input type="submit" name="returnList" value="一覧に戻す">
 					 		</td>
