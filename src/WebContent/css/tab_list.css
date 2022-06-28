@@ -27,7 +27,7 @@
 }
 
 .tab_list::-webkit-scrollbar-thumb {
-  background-color:#228b22;/* スクロールバーの色変えたいかも！ */
+  background-color:#99cc33;/* スクロールバーの色変えたいかも！ */
   border-radius: 5px;
 }
 
