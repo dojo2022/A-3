@@ -108,10 +108,10 @@ public class AlertSelect {
 					stockMessage = alert.getStockAlertday1() + "　" + stockName + "の賞味期限は明後日です。";
 					message.setStockMessage(stockMessage);
 				}
-//				else {
-//					stockMessage = null;
-//					message.setStockMessage(stockMessage);
-//				}
+				else {
+					stockMessage = null;
+					message.setStockMessage(stockMessage);
+				}
 
 				//ここまで賞味期限アラート
 
@@ -126,10 +126,10 @@ public class AlertSelect {
 					itemMessage = alert.getItemAlertday() + "　" + itemName + "の買い替え時期です。" ;
 					message.setItemMessage(itemMessage);
 				}
-//				else {
-//					itemMessage = null;
-//					message.setItemMessage(itemMessage);
-//				}
+				else {
+					itemMessage = null;
+					message.setItemMessage(itemMessage);
+				}
 
 				alertDays.add(message);
 			}

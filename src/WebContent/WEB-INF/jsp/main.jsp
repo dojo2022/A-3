@@ -134,14 +134,14 @@
     <div class="grid_test-child"><!-- grit 子要素③  -->
 	        <div class=alertTitle>賞味期限アラート</div>
 	        <div class="stockAlert">
-	        <c:forEach var="e" items="${message}"><br>
-	        	<c:if test="${e.stockMessage != null}">${e.stockMessage}</c:if>
+	        <c:forEach var="e" items="${message}">
+	        	<c:if test="${e.stockMessage != null}">${e.stockMessage}<br></c:if>
 	        </c:forEach>
         </div>
 	         <div class=alertTitle>買い替えアラート</div>
 	    <div class="itemAlert">
-	         <c:forEach var="e" items="${message}"><br>
-	        	<c:if test="${e.itemMessage != null}">${e.itemMessage}</c:if>
+	         <c:forEach var="e" items="${message}">
+	        	<c:if test="${e.itemMessage != null}">${e.itemMessage}<br></c:if>
 	        </c:forEach>
         </div>
     </div>
