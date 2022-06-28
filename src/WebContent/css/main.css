@@ -301,6 +301,32 @@ input[name="tab_item"] {
   overflow-y:scroll;
 }
 
+.stockAlert::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+  background-color: mintcream;
+  border-radius: 5px;
+}
+
+.stockAlert::-webkit-scrollbar-thumb {
+  background-color:#e15583;/* スクロールバーの色変えたいかも！ */
+  border-radius: 5px;
+}
+
+.itemAlert::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+  background-color: mintcream;
+  border-radius: 5px;
+}
+
+.itemAlert::-webkit-scrollbar-thumb {
+  background-color:#e15583;/* スクロールバーの色変えたいかも！ */
+  border-radius: 5px;
+}
+
+
+
 
 
 /*メモ部分*/

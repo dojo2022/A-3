@@ -18,6 +18,19 @@
 	height: 320px;
 	overflow: auto;
 }
+
+.tab_list::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+  background-color: #dcdcdc;
+  border-radius: 5px;
+}
+
+.tab_list::-webkit-scrollbar-thumb {
+  background-color:#228b22;/* スクロールバーの色変えたいかも！ */
+  border-radius: 5px;
+}
+
 /*一覧の線*/
 .item_list{
 	border: 2px #000000 solid;
