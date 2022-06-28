@@ -52,7 +52,7 @@ img {
 	left: 10px;
 	width: 40px;
 	height: 3px;
-	background-color: #333333;
+	background-color: #534340;
     /*ハンバーガーメニューがクリックされた時の動きの時間*/
     transition: all 0.3s;
 }
@@ -108,9 +108,13 @@ img {
   padding-left  : 0px;   /* 余白       */
   margin        : 0px 25px 10px 25px;   /* 余白       */
   width: 210px;
-  background    : rgba(255, 127, 0, 0.8);     /* 背景色 */
-  color         : #000000;     /* 文字色     */
+  /*background    : rgba(255, 127, 0, 0.8);     /* 背景色 */
+  background: #fbc264;
+  color         : #534340;     /* 文字色     */
   line-height   : 1em;         /* 1行の高さ  */
+  font-weight: bold; /*太字*/
+   border: solid 2px #fbc264;
+   border-radius: 10px;
 }
 
 
@@ -203,6 +207,13 @@ img {
     overflow: auto;
     position: relative;
 }
+
+#title {
+	    font-weight: bold;
+		font-size: 20px;
+        writing-mode: vertical-rl;
+        vertical-align: center;
+    }
 /*ここまで　grid */
 
 /*タブ切り替え全体のスタイル*/
