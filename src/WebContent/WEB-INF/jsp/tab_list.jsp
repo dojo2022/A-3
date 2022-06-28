@@ -14,7 +14,7 @@
 		<div class="tab">
 			<div class="list_search">
 			 	<form id="searchbox" method="POST" action="/syokuzaikanri/MainServlet">
-					 <table>
+					 <table class="list_search">
 					 	<tr>
 					 		<td>
 								<input type="search" id="search" name="search" placeholder="検索">
