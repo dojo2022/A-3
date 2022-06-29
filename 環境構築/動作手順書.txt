@@ -1,0 +1,23 @@
+【ログイン可能ID・PW】
+『ID・メールアドレス』
+・ishii-takahiro@kanransha.jp　★
+・kimura-yuuna@kanransha.jp
+・saitou-akane@kanransha.jp　★
+・tanaka-saya@kanransha.jp
+・terui-takayuki@kanransha.jp
+・miyashita-hiroto@kanransha.jp
+・test@kanransha.jp
+
+『パスワード』
+・kanransha
+
+※パスワードは全ユーザID共通です。
+※★付きのアカウントにメインとなるテストデータが入っています。
+
+
+【動作手順】
+①「LoginServlet.java」を実行
+②上記「ID・メールアドレス」、「パスワード」を入力する
+③メインページに遷移しますので各機能をお試しください
+
+※実装が間に合わず、クリックしても白紙のページに飛ばされるボタンが存在します。
